@@ -1,97 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Keranjang Belanja - GamerTech</title>
   <meta name="description" content="Lihat dan kelola item di keranjang belanja Anda">
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Header styling similar to catalog.html */
+    :root {
+      --primary-color: #6f5bd6;
+      --dark-color: #151922;
+      --darker-color: #1a1f2a;
+      --light-color: #e0e0e0;
+      --gray-color: #a0a0a0;
+      --transition: all 0.3s ease;
+    }
+
     .cart-header {
-      background: linear-gradient(rgba(21, 25, 34, 0.9), rgba(21, 25, 34, 0.95)), 
-                  url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5') no-repeat center center/cover;
+      background: linear-gradient(rgba(21, 25, 34, 0.9), rgba(21, 25, 34, 0.95)),
+        url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5') no-repeat center center/cover;
       padding: 6rem 0 3rem;
       text-align: center;
     }
-    
+
     .cart-title {
       font-size: 2.5rem;
       margin-bottom: 1rem;
       color: var(--light-color);
     }
-    
-    /* Cart content layout */
+
     .cart-content {
       display: grid;
       grid-template-columns: 1fr 350px;
       gap: 2rem;
       padding: 3rem 0;
     }
-    
-    /* Cart items table */
+
     .cart-items {
       background-color: var(--dark-color);
       border-radius: 1rem;
       padding: 1.5rem;
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
-    
+
     .cart-table {
       width: 100%;
       border-collapse: collapse;
       color: var(--light-color);
     }
-    
+
     .cart-table th,
     .cart-table td {
       padding: 1rem;
       text-align: left;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-    
+
     .cart-table th {
       font-weight: 600;
       color: var(--primary-color);
     }
-    
+
     .cart-table img {
       width: 80px;
       height: 80px;
       object-fit: cover;
       border-radius: 0.5rem;
     }
-    
+
     .cart-item-name {
       font-size: 1.1rem;
       color: var(--light-color);
     }
-    
+
     .cart-item-price {
       color: #a68bff;
       font-weight: 500;
     }
-    
+
     .quantity-control {
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-    
+
     .quantity-control input {
       width: 60px;
       padding: 0.5rem;
       background-color: var(--darker-color);
       border: 1px solid rgba(255, 255, 255, 0.1);
-     
-
- border-radius: 0.3rem;
+      border-radius: 0.3rem;
       color: var(--light-color);
       text-align: center;
     }
-    
+
     .quantity-control button {
       background-color: var(--primary-color);
       border: none;
@@ -101,11 +107,11 @@
       cursor: pointer;
       transition: var(--transition);
     }
-    
+
     .quantity-control button:hover {
       background-color: #8472d9;
     }
-    
+
     .remove-btn {
       background: none;
       border: none;
@@ -113,8 +119,7 @@
       cursor: pointer;
       font-size: 1.2rem;
     }
-    
-    /* Cart summary */
+
     .cart-summary {
       background-color: var(--dark-color);
       border-radius: 1rem;
@@ -124,7 +129,7 @@
       top: 100px;
       height: fit-content;
     }
-    
+
     .cart-summary h3 {
       font-size: 1.3rem;
       margin-bottom: 1.5rem;
@@ -132,27 +137,27 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       color: var(--light-color);
     }
-    
+
     .summary-item {
       display: flex;
       justify-content: space-between;
       margin-bottom: 1rem;
       color: var(--light-color);
     }
-    
+
     .summary-total {
       font-weight: 600;
       font-size: 1.2rem;
       color: #a68bff;
     }
-    
+
     .cart-actions {
       display: flex;
       flex-direction: column;
       gap: 1rem;
       margin-top: 2rem;
     }
-    
+
     .btn {
       padding: 0.8rem;
       border-radius: 0.5rem;
@@ -160,27 +165,27 @@
       cursor: pointer;
       transition: var(--transition);
     }
-    
+
     .btn-primary {
       background-color: var(--primary-color);
       color: white;
       border: none;
     }
-    
+
     .btn-primary:hover {
       background-color: #8472d9;
     }
-    
+
     .btn-secondary {
       background-color: var(--darker-color);
       color: var(--light-color);
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
-    
+
     .btn-secondary:hover {
       background-color: rgba(255, 255, 255, 0.05);
     }
-    
+
     .empty-cart {
       text-align: center;
       padding: 2rem;
@@ -189,7 +194,7 @@
       border-radius: 1rem;
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
-    
+
     .clear-cart-btn {
       background: none;
       border: none;
@@ -199,39 +204,40 @@
       margin-top: 1rem;
       text-decoration: underline;
     }
-    
+
     @media (max-width: 991px) {
       .cart-content {
         grid-template-columns: 1fr;
       }
-      
+
       .cart-summary {
         position: static;
       }
     }
-    
+
     @media (max-width: 576px) {
       .cart-table th:not(:first-child),
       .cart-table td:not(:first-child) {
         display: none;
       }
-      
+
       .cart-table td:first-child {
         display: block;
         padding: 1rem;
       }
-      
+
       .cart-table img {
         width: 60px;
         height: 60px;
       }
-      
+
       .cart-title {
         font-size: 2rem;
       }
     }
   </style>
 </head>
+
 <body>
   <header>
     <nav class="navbar">
@@ -247,7 +253,7 @@
           <li><a href="catalog.html">Katalog</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="cart.html" class="active">Keranjang</a></li>
-             <li><a href="history.html">Riwayat</a></li>
+          <li><a href="history.html">Riwayat</a></li>
           <li><a href="login.html" class="nav-button">Login / Register</a></li>
         </ul>
       </div>
@@ -260,7 +266,7 @@
       <p>Kelola item yang ingin Anda beli</p>
     </div>
   </div>
-  
+
   <div class="container">
     <div class="cart-content">
       <div class="cart-items">
@@ -283,7 +289,7 @@
         </div>
         <button id="clear-cart" class="clear-cart-btn" style="display: none;">Hapus Semua Item</button>
       </div>
-      
+
       <div class="cart-summary">
         <h3>Ringkasan Belanja</h3>
         <div class="summary-item">
@@ -305,7 +311,7 @@
       </div>
     </div>
   </div>
-  
+
   <footer>
     <div class="container">
       <div class="footer-content">
@@ -364,6 +370,7 @@
     const checkoutBtn = document.getElementById('checkout-btn');
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
+    const cartBadge = document.getElementById('cart-badge'); // Added for badge sync
 
     // Navigation Toggle
     navToggle.addEventListener('click', () => {
@@ -381,13 +388,19 @@
 
     // Load cart from localStorage
     function loadCart() {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      return cart;
+      return JSON.parse(localStorage.getItem('cart')) || [];
     }
 
     // Save cart to localStorage
     function saveCart(cart) {
       localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    // Update cart badge (sync with navbar)
+    function updateCartBadge() {
+      const cart = loadCart();
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      cartBadge.textContent = totalItems || '0';
     }
 
     // Display cart items
@@ -461,6 +474,7 @@
       // Update summary
       const subtotal = cart.reduce((sum, item) => sum + item.discountPrice * item.quantity, 0);
       updateSummary(subtotal);
+      updateCartBadge(); // Sync badge with cart changes
     }
 
     // Update quantity
@@ -505,4 +519,5 @@
     });
   </script>
 </body>
+
 </html>

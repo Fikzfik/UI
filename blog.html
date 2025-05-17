@@ -10,84 +10,437 @@
     href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/styles.css">
   <style>
-    :root {
-      --primary-color: #9b87f5;
-      --secondary-color: #0EA5E9;
-      --accent-color: #D946EF;
-      --dark-color: #1A1F2C;
-      --darker-color: #151922;
-      --light-color: #F1F0FB;
-      --gray-color: #8E9196;
-      --success-color: #10B981;
-      --danger-color: #EF4444;
+    
+
+    /* Blog Header */
+    .blog-header {
+      position: relative;
+      background-image: linear-gradient(to bottom, rgba(21, 25, 34, 0.9), rgba(21, 25, 34, 0.95)), url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6');
+      background-size: cover;
+      background-position: center;
+      padding: 6rem 0 4rem;
+      text-align: center;
+      margin-top: 70px;
     }
 
-    /* Blog filter active state */
-    .blog-filter.active {
-      background-color: var(--primary-color);
+    .blog-header h1 {
+      font-size: 2rem;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .blog-header p {
+      color: var(--gray-color);
+      font-size: 1.125rem;
+    }
+
+    /* Blog Search & Filters */
+    .blog-search {
+      max-width: 36rem;
+      margin: 0 auto 3rem;
+      display: flex;
+    }
+
+    .blog-search input {
+      flex: 1;
+      padding: 0.75rem;
+      background: var(--darker-color);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.5rem 0 0 0.5rem;
+      color: var(--light-color);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .blog-search input:focus {
       border-color: var(--primary-color);
-      color: #ffffff;
+      box-shadow: 0 0 0 2px rgba(155, 135, 245, 0.2);
     }
 
-    /* Mobile nav menu active state */
-    .nav-menu.active {
+    .blog-search button {
+      padding: 0.75rem;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 0 0.5rem 0.5rem 0;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .blog-search button:hover {
+      background: var(--primary-hover);
+    }
+
+    .blog-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .blog-filter {
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .blog-filter.active {
+      background: var(--primary-color);
+      border: 1px solid var(--primary-color);
+      color: white;
+    }
+
+    .blog-filter:not(.active) {
+      background: var(--dark-color);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--light-color);
+    }
+
+    .blog-filter:not(.active):hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Blog Grid */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .blog-post {
+      background: var(--dark-color);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: var(--transition);
       display: flex;
       flex-direction: column;
-      position: absolute;
-      top: 70px;
-      left: 0;
-      width: 100%;
-      background: var(--darker-color);
-      padding: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
     }
 
-    .nav-menu.active li {
-      margin: 0.5rem 0;
+    .blog-post:hover {
+      transform: translateY(-0.5rem);
+      border-color: var(--primary-color);
+    }
+
+    .blog-post-image {
+      height: 12rem;
+      overflow: hidden;
+    }
+
+    .blog-post-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .blog-post:hover .blog-post-image img {
+      transform: scale(1.1);
+    }
+
+    .blog-post-content {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--gray-color);
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+    }
+
+    .blog-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .blog-post h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .blog-post-excerpt {
+      color: var(--gray-color);
+      margin-bottom: 1.5rem;
+      flex: 1;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    .blog-post-link {
+      padding: 0.5rem 1rem;
+      background: var(--secondary-color);
+      color: white;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      text-align: center;
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .blog-post-link:hover {
+      background: #0c93d0;
+    }
+
+    .news-badge {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      background: var(--danger-color);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.5rem;
+      border-radius: 9999px;
+    }
+
+    /* Article Detail */
+    .article-content {
+      background: var(--dark-color);
+      border-radius: 0.75rem;
+      padding: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .article-header {
+      margin-bottom: 2rem;
+    }
+
+    .article-header h1 {
+      font-size: 2rem;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .article-content img {
+      width: 100%;
+      height: 16rem;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .prose {
+      color: var(--light-color);
+    }
+
+    .prose h2 {
+      font-size: 1.5rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .prose p {
+      margin-bottom: 1rem;
+    }
+
+    .prose ul, .prose ol {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+
+    .prose ul {
+      list-style-type: disc;
+    }
+
+    .prose ol {
+      list-style-type: decimal;
+    }
+
+    .prose li {
+      margin-bottom: 0.5rem;
+    }
+
+    .article-actions {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-link {
+      padding: 0.5rem 1rem;
+      background: var(--secondary-color);
+      color: white;
+      border-radius: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .back-link:hover {
+      background: #0c93d0;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--darker-color);
+      padding-top: 5rem;
+      padding-bottom: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: 3rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-heading {
+      font-size: 1.125rem;
+      font-family: var(--font-primary);
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-heading::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 4rem;
+      height: 3px;
+      background: var(--primary-color);
+      border-radius: 0.25rem;
+    }
+
+    .footer-text {
+      color: var(--gray-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 9999px;
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background: var(--primary-color);
+      transform: translateY(-0.25rem);
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-color);
+      padding-left: 0.25rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .contact-icon {
+      margin-right: 1rem;
+      color: var(--primary-color);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 1.5rem;
+      text-align: center;
+    }
+
+    /* Responsive */
+    @media (min-width: 640px) {
+      .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .blog-header h1 {
+        font-size: 2.5rem;
+      }
+
+      .nav-toggle {
+        display: none;
+      }
+
+      .nav-menu {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .blog-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
   </style>
 </head>
 
-<body class="font-barlow bg-[#151922] text-[#F1F0FB] overflow-x-hidden">
+<body>
   <header>
-    <nav class="fixed top-0 left-0 w-full z-50 bg-[#151922]/90 backdrop-blur-md shadow-md transition-all duration-300">
-      <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
-        <a href="index.html" class="text-2xl font-bold font-rajdhani">
-          <span class="text-[#9b87f5]">Gamer</span>Tech
+    <nav class="navbar">
+      <div class="container">
+        <a href="index.html" class="logo">
+          <span>Gamer</span>Tech
         </a>
-        <div class="nav-toggle md:hidden text-xl cursor-pointer">
+        <div class="nav-toggle">
           <i class="fas fa-bars"></i>
         </div>
-        <ul class="nav-menu hidden md:flex items-center space-x-4">
-          <li><a href="index.html" class="font-medium px-2 hover:text-[#9b87f5] relative">Beranda</a></li>
-          <li><a href="catalog.html" class="font-medium px-2 hover:text-[#9b87f5] relative">Katalog</a></li>
-          <li><a href="blog.html"
-              class="font-medium px-2 text-[#9b87f5] relative after:content-[''] after:absolute after:bottom-[-3px] after:left-0 after:w-full after:h-[3px] after:bg-gradient-to-r after:from-[#9b87f5] after:to-[#D946EF] after:rounded">Blog</a>
-          </li>
-          <li><a href="cart.html" class="font-medium px-2 hover:text-[#9b87f5] relative">Keranjang</a></li>
-          <li><a href="history.html" class="font-medium px-2 hover:text-[#9b87f5] relative">Riwayat</a></li>
-          <li><a href="login.html"
-              class="font-medium px-4 py-2 bg-[#9b87f5] text-white rounded-md hover:bg-[#8472d9] transition-all">Login</a>
-          </li>
-          <li><a href="register.html"
-              class="font-medium px-4 py-2 bg-[#0EA5E9] text-white rounded-md hover:bg-[#0c93d0] transition-all">Register</a>
-          </li>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Beranda</a></li>
+          <li><a href="catalog.html" class="nav-link">Katalog</a></li>
+          <li><a href="blog.html" class="nav-link active">Blog</a></li>
+          <li><a href="cart.html" class="nav-link">Keranjang</a></li>
+          <li><a href="history.html" class="nav-link">Riwayat</a></li>
+          <li><a href="login.html" class="nav-button">Login / Register</a></li>
           <li>
-            <div class="cart-icon relative">
+            <div class="cart-icon">
               <i class="fas fa-shopping-cart"></i>
-              <span
-                class="cart-badge absolute -top-2 -right-2 bg-[#EF4444] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
-                id="cart-badge">0</span>
-              <div
-                class="cart-dropdown hidden absolute top-8 right-0 bg-[#1A1F2C] border border-white/10 rounded-lg shadow-lg w-64 p-4"
-                id="cart-dropdown">
+              <span class="cart-badge" id="cart-badge">0</span>
+              <div class="cart-dropdown" id="cart-dropdown">
                 <div class="cart-dropdown-content" id="cart-items"></div>
-                <div class="cart-actions mt-4">
-                  <a href="cart.html"
-                    class="block text-center py-2 bg-[#9b87f5] text-white rounded-lg hover:bg-[#8472d9] transition-all">Lihat
-                    Keranjang</a>
+                <div class="cart-actions">
+                  <a href="cart.html" class="btn-primary">Lihat Keranjang</a>
                 </div>
               </div>
             </div>
@@ -97,38 +450,25 @@
     </nav>
   </header>
 
-  <div
-    class="blog-header relative bg-gradient-to-b from-[#151922]/90 to-[#151922]/95 bg-[url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6')] bg-cover bg-center py-24 text-center">
-    <div class="max-w-7xl mx-auto px-4">
-      <h1 class="text-3xl md:text-4xl font-rajdhani font-bold mb-4">Blog Gaming</h1>
-      <p class="text-[#8E9196] text-lg">Tips, trik, dan berita terbaru tentang dunia gaming</p>
+  <div class="blog-header">
+    <div class="container">
+      <h1>Blog Gaming</h1>
+      <p>Tips, trik, dan berita terbaru tentang dunia gaming</p>
     </div>
   </div>
 
-  <div class="max-w-7xl mx-auto px-4 py-12">
-    <div class="blog-search max-w-xl mx-auto mb-12 flex">
-      <input type="text" id="blog-search-input" placeholder="Cari artikel..."
-        class="flex-1 p-3 bg-[#151922] border border-white/10 rounded-l-lg text-[#F1F0FB] focus:outline-none focus:border-[#9b87f5] focus:ring-2 focus:ring-[#9b87f5]/20 transition-all">
-      <button id="blog-search-btn" class="p-3 bg-[#9b87f5] text-white rounded-r-lg hover:bg-[#8472d9] transition-all"><i
-          class="fas fa-search"></i></button>
+  <div class="container">
+    <div class="blog-search">
+      <input type="text" id="blog-search-input" placeholder="Cari artikel...">
+      <button id="blog-search-btn"><i class="fas fa-search"></i></button>
     </div>
 
-    <div class="blog-filters flex flex-wrap gap-2 mb-8">
-      <div
-        class="blog-filter px-4 py-2 bg-[#9b87f5] border border-[#9b87f5] text-white rounded-full cursor-pointer transition-all active"
-        data-category="all">Semua</div>
-      <div
-        class="blog-filter px-4 py-2 bg-[#1A1F2C] border border-white/10 text-[#F1F0FB] rounded-full cursor-pointer hover:bg-white/5 transition-all"
-        data-category="tips">Tips & Trik</div>
-      <div
-        class="blog-filter px-4 py-2 bg-[#1A1F2C] border border-white/10 text-[#F1F0FB] rounded-full cursor-pointer hover:bg-white/5 transition-all"
-        data-category="reviews">Reviews</div>
-      <div
-        class="blog-filter px-4 py-2 bg-[#1A1F2C] border border-white/10 text-[#F1F0FB] rounded-full cursor-pointer hover:bg-white/5 transition-all"
-        data-category="news">Berita</div>
-      <div
-        class="blog-filter px-4 py-2 bg-[#1A1F2C] border border-white/10 text-[#F1F0FB] rounded-full cursor-pointer hover:bg-white/5 transition-all"
-        data-category="guides">Panduan</div>
+    <div class="blog-filters">
+      <div class="blog-filter active" data-category="all">Semua</div>
+      <div class="blog-filter" data-category="tips">Tips & Trik</div>
+      <div class="blog-filter" data-category="reviews">Reviews</div>
+      <div class="blog-filter" data-category="news">Berita</div>
+      <div class="blog-filter" data-category="guides">Panduan</div>
     </div>
 
     <div class="blog-content" id="blog-content">
@@ -136,70 +476,48 @@
     </div>
   </div>
 
-  <footer class="bg-[#151922] pt-20 pb-6 border-t border-white/5">
-    <div class="max-w-7xl mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
         <div>
-          <h3
-            class="text-lg font-rajdhani font-semibold relative pb-4 mb-6 after:content enrolling-[''] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-[3px] after:bg-[#9b87f5] after:rounded">
-            GamerTech</h3>
-          <p class="text-[#8E9196] mb-6">Premium gaming gear, PC components, and custom builds for gamers and
-            enthusiasts.</p>
-          <div class="flex gap-4">
-            <a href="#"
-              class="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full hover:bg-[#9b87f5] hover:-translate-y-1 transition-all"><i
-                class="fab fa-facebook"></i></a>
-            <a href="#"
-              class="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full hover:bg-[#9b87f5] hover:-translate-y-1 transition-all"><i
-                class="fab fa-twitter"></i></a>
-            <a href="#"
-              class="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full hover:bg-[#9b87f5] hover:-translate-y-1 transition-all"><i
-                class="fab fa-instagram"></i></a>
-            <a href="#"
-              class="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full hover:bg-[#9b87f5] hover:-translate-y-1 transition-all"><i
-                class="fab fa-youtube"></i></a>
+          <h3 class="footer-heading">GamerTech</h3>
+          <p class="footer-text">Premium gaming gear, PC components, and custom builds for gamers and enthusiasts.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
           </div>
         </div>
         <div>
-          <h3
-            class="text-lg font-rajdhani font-semibold relative pb-4 mb-6 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-[3px] after:bg-[#9b87f5] after:rounded">
-            Links</h3>
-          <ul class="space-y-2">
-            <li><a href="index.html" class="hover:text-[#9b87f5] hover:pl-1 transition-all">Beranda</a></li>
-            <li><a href="catalog.html" class="hover:text-[#9b87f5] hover:pl-1 transition-all">Katalog</a></li>
-            <li><a href="blog.html" class="hover:text-[#9b87f5] hover:pl-1 transition-all">Blog</a></li>
-            <li><a href="about.html" class="hover:text-[#9b87f5] hover:pl-1 transition-all">Tentang Kami</a></li>
-            <li><a href="contact.html" class="hover:text-[#9b87f5] hover:pl-1 transition-all">Kontak</a></li>
+          <h3 class="footer-heading">Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="catalog.html">Katalog</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="about.html">Tentang Kami</a></li>
+            <li><a href="contact.html">Kontak</a></li>
           </ul>
         </div>
         <div>
-          <h3
-            class="text-lg font-rajdhani font-semibold relative pb-4 mb-6 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-[3px] after:bg-[#9b87f5] after:rounded">
-            Kategori</h3>
-          <ul class="space-y-2">
-            <li><a href="catalog.html?category=gaming-gear"
-                class="hover:text-[#9b87f5] hover:pl-1 transition-all">Gaming Gear</a></li>
-            <li><a href="catalog.html?category=peripherals"
-                class="hover:text-[#9b87f5] hover:pl-1 transition-all">Peripheral</a></li>
-            <li><a href="catalog.html?category=pc-builds" class="hover:text-[#9b87f5] hover:pl-1 transition-all">PC
-                Rakitan</a></li>
-            <li><a href="catalog.html?category=components"
-                class="hover:text-[#9b87f5] hover:pl-1 transition-all">Komponen</a></li>
+          <h3 class="footer-heading">Kategori</h3>
+          <ul class="footer-links">
+            <li><a href="catalog.html?category=gaming-gear">Gaming Gear</a></li>
+            <li><a href="catalog.html?category=peripherals">Peripheral</a></li>
+            <li><a href="catalog.html?category=pc-builds">PC Rakitan</a></li>
+            <li><a href="catalog.html?category=components">Komponen</a></li>
           </ul>
         </div>
         <div>
-          <h3
-            class="text-lg font-rajdhani font-semibold relative pb-4 mb-6 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-[3px] after:bg-[#9b87f5] after:rounded">
-            Kontak</h3>
-          <ul class="space-y-4">
-            <li class="flex items-center"><i class="fas fa-map-marker-alt mr-4 text-[#9b87f5]"></i> Jl. Gaming No. 123,
-              Jakarta</li>
-            <li class="flex items-center"><i class="fas fa-phone mr-4 text-[#9b87f5]"></i> +62 123 456 7890</li>
-            <li class="flex items-center"><i class="fas fa-envelope mr-4 text-[#9b87f5]"></i> info@gamertech.com</li>
+          <h3 class="footer-heading">Kontak</h3>
+          <ul>
+            <li class="contact-item"><i class="fas fa-map-marker-alt contact-icon"></i> Jl. Gaming No. 123, Jakarta</li>
+            <li class="contact-item"><i class="fas fa-phone contact-icon"></i> +62 123 456 7890</li>
+            <li class="contact-item"><i class="fas fa-envelope contact-icon"></i> info@gamertech.com</li>
           </ul>
         </div>
       </div>
-      <div class="border-t border-white/5 pt-6 text-center">
+      <div class="footer-bottom">
         <p>© 2025 GamerTech. All Rights Reserved.</p>
       </div>
     </div>
@@ -476,32 +794,32 @@
     function displayContent() {
       const articleId = getQueryParam('id');
       if (articleId) {
-        // Display article detail (unchanged, as per request focus on filters)
+        // Display article detail
         const article = blogPosts.find(post => post.id === parseInt(articleId));
         if (article) {
           blogContent.innerHTML = `
-            <div class="article-content bg-[#1A1F2C] rounded-xl p-8 border border-white/5 shadow-lg">
-              <div class="article-header mb-8">
-                <div class="blog-meta flex justify-center items-center gap-4 text-[#8E9196] mb-4">
-                  <div class="flex items-center gap-1"><i class="far fa-calendar-alt"></i> ${article.date}</div>
-                  <div class="flex items-center gap-1"><i class="far fa-folder"></i> ${getCategoryName(article.category)}</div>
+            <div class="article-content">
+              <div class="article-header">
+                <div class="blog-meta">
+                  <span class="blog-meta-item"><i class="far fa-calendar-alt"></i> ${article.date}</span>
+                  <span class="blog-meta-item"><i class="far fa-folder"></i> ${getCategoryName(article.category)}</span>
                 </div>
-                <h1 class="text-3xl md:text-4xl font-rajdhani font-bold mb-6">${article.title}</h1>
+                <h1>${article.title}</h1>
               </div>
-              <img src="${article.image}" alt="${article.title}" class="w-full h-64 object-cover rounded-lg mb-8" onerror="this.src='https://via.placeholder.com/300x200?text=Gambar+Tidak+Tersedia';">
-              <div class="prose prose-invert max-w-none">${article.content}</div>
-              <div class="article-actions mt-8 flex justify-between items-center">
-                <a href="blog.html" class="py-2 px-4 bg-[#0EA5E9] text-white rounded-lg hover:bg-[#0c93d0] transition-all"><i class="fas fa-arrow-left mr-2"></i> Kembali ke Blog</a>
+              <img src="${article.image}" alt="${article.title}" onerror="this.src='https://via.placeholder.com/300x200?text=Gambar+Tidak+Tersedia';">
+              <div class="prose">${article.content}</div>
+              <div class="article-actions">
+                <a href="blog.html" class="back-link"><i class="fas fa-arrow-left"></i> Kembali ke Blog</a>
               </div>
             </div>
           `;
         } else {
-          blogContent.innerHTML = '<p class="text-center text-[#8E9196]">Artikel tidak ditemukan.</p>';
+          blogContent.innerHTML = '<p class="text-center" style="color: var(--gray-color);">Artikel tidak ditemukan.</p>';
         }
       } else {
         // Display blog posts
         const blogContainer = document.createElement('div');
-        blogContainer.className = 'blog-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6';
+        blogContainer.className = 'blog-grid';
         blogContent.innerHTML = '';
         blogContent.appendChild(blogContainer);
 
@@ -518,26 +836,26 @@
         }
 
         if (filteredPosts.length === 0) {
-          blogContainer.innerHTML = '<p class="text-center text-[#8E9196]">Tidak ada artikel yang ditemukan.</p>';
+          blogContainer.innerHTML = '<p class="text-center" style="color: var(--gray-color);">Tidak ada artikel yang ditemukan.</p>';
           return;
         }
 
         filteredPosts.forEach(post => {
           const postCard = document.createElement('div');
-          postCard.className = 'bg-[#1A1F2C] rounded-xl overflow-hidden border border-white/5 hover:-translate-y-2 hover:border-[#9b87f5] transition-all flex flex-col relative';
+          postCard.className = 'blog-post';
           postCard.innerHTML = `
-            ${post.category === 'news' ? '<span class="absolute top-3 left-3 bg-[#EF4444] text-white text-xs font-bold px-2 py-1 rounded-full">Berita Populer</span>' : ''}
-            <div class="h-48 overflow-hidden">
-              <img src="${post.image}" alt="${post.title}" class="w-full h-full object-cover hover:scale-110 transition-transform duration-300" onerror="this.src='https://via.placeholder.com/300x200?text=Gambar+Tidak+Tersedia';">
+            ${post.category === 'news' ? '<span class="news-badge">Berita Populer</span>' : ''}
+            <div class="blog-post-image">
+              <img src="${post.image}" alt="${post.title}" onerror="this.src='https://via.placeholder.com/300x200?text=Gambar+Tidak+Tersedia';">
             </div>
-            <div class="p-6 flex flex-col flex-1">
-              <div class="blog-meta flex items-center gap-4 text-[#8E9196] mb-4">
-                <div class="flex items-center gap-1"><i class="far fa-calendar-alt"></i> ${post.date}</div>
-                <div class="flex items-center gap-1"><i class="far fa-folder"></i> ${getCategoryName(post.category)}</div>
+            <div class="blog-post-content">
+              <div class="blog-meta">
+                <span class="blog-meta-item"><i class="far fa-calendar-alt"></i> ${post.date}</span>
+                <span class="blog-meta-item"><i class="far fa-folder"></i> ${getCategoryName(post.category)}</span>
               </div>
-              <h3 class="text-xl font-semibold mb-4">${post.title}</h3>
-              <p class="text-[#8E9196] mb-6 flex-1 line-clamp-3">${post.excerpt}</p>
-              <a href="detailblog.html?id=${post.id}" class="py-2 px-4 bg-[#0EA5E9] text-white rounded-lg hover:bg-[#0c93d0] transition-all text-center">Baca Selengkapnya</a>
+              <h3>${post.title}</h3>
+              <p class="blog-post-excerpt">${post.excerpt}</p>
+              <a href="detailblog.html?id=${post.id}" class="blog-post-link">Baca Selengkapnya</a>
             </div>
           `;
           blogContainer.appendChild(postCard);
@@ -561,12 +879,8 @@
       filter.addEventListener('click', function () {
         blogFilters.forEach(f => {
           f.classList.remove('active');
-          f.classList.add('bg-[#1A1F2C]', 'border-white/10', 'text-[#F1F0FB]', 'hover:bg-white/5');
-          f.classList.remove('bg-[#9b87f5]', 'border-[#9b87f5]', 'text-white');
         });
         this.classList.add('active');
-        this.classList.remove('bg-[#1A1F2C]', 'border-white/10', 'text-[#F1F0FB]', 'hover:bg-white/5');
-        this.classList.add('bg-[#9b87f5]', 'border-[#9b87f5]', 'text-white');
         displayContent();
       });
     });
