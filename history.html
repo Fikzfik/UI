@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riwayat Transaksi - GamerTech</title>
+  <meta name="description" content="Lihat riwayat transaksi Anda di GamerTech">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #6f5bd6;
+      --dark-color: #151922;
+      --darker-color: #1a1f2a;
+      --light-color: #e0e0e0;
+      --gray-color: #a0a0a0;
+      --transition: all 0.3s ease;
+    }
+
+    .history-header {
+      background: linear-gradient(rgba(21, 25, 34, 0.9), rgba(21, 25, 34, 0.95)),
+        url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5') no-repeat center center/cover;
+      padding: 6rem 0 3rem;
+      text-align: center;
+      color: var(--light-color);
+    }
+
+    .history-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .history-subtitle {
+      font-family: 'Barlow', sans-serif;
+      font-size: 1.2rem;
+      color: var(--gray-color);
+    }
+
+    .history-container {
+      padding: 3rem 0;
+    }
+
+    .history-filter {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .search-bar {
+      display: flex;
+      max-width: 400px;
+      flex: 1;
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 0.5rem 0 0 0.5rem;
+      background-color: var(--darker-color);
+      color: var(--light-color);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-family: 'Barlow', sans-serif;
+    }
+
+    .search-bar button {
+      padding: 0.8rem 1.5rem;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 0 0.5rem 0.5rem 0;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .search-bar button:hover {
+      background-color: #8472d9;
+    }
+
+    .filter-dropdown {
+      position: relative;
+    }
+
+    .filter-btn {
+      padding: 0.8rem 1.5rem;
+      background-color: var(--darker-color);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.5rem;
+      color: var(--light-color);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Barlow', sans-serif;
+    }
+
+    .filter-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: var(--darker-color);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.5rem;
+      width: 200px;
+      z-index: 10;
+      display: none;
+      margin-top: 0.5rem;
+    }
+
+    .filter-menu.active {
+      display: block;
+    }
+
+    .filter-option {
+      padding: 0.7rem 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: 'Barlow', sans-serif;
+      color: var(--light-color);
+    }
+
+    .filter-option:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--primary-color);
+    }
+
+    .transaction-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .transaction-card {
+      background-color: var mesa(--darker-color);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .transaction-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .transaction-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      background-color: var(--dark-color);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .transaction-id {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--light-color);
+    }
+
+    .transaction-status {
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    .status-completed {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .status-pending {
+      background-color: #ffc107;
+      color: #333;
+    }
+
+    .status-cancelled {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .transaction-body {
+      padding: 1.5rem;
+    }
+
+    .transaction-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .detail-item {
+      font-family: 'Barlow', sans-serif;
+      color: var(--gray-color);
+    }
+
+    .detail-item span {
+      color: var(--light-color);
+      font-weight: 500;
+    }
+
+    .transaction-items {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .transaction-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background-color: rgba(255, 255, 255, 0.03);
+      border-radius: 0.5rem;
+    }
+
+    .transaction-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 0.3rem;
+    }
+
+    .item-info {
+      flex: 1;
+      font-family: 'Barlow', sans-serif;
+      color: var(--light-color);
+    }
+
+    .item-info h4 {
+      font-size: 1rem;
+      margin: 0 0 0.3rem;
+      font-weight: 500;
+    }
+
+    .item-info p {
+      margin: 0;
+      color: var(--gray-color);
+      font-size: 0.9rem;
+    }
+
+    .transaction-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .transaction-total {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--light-color);
+    }
+
+    .transaction-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .action-btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 0.3rem;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .view-details-btn {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .view-details-btn:hover {
+      background-color: #8472d9;
+    }
+
+    .reorder-btn {
+      background-color: var(--darker-color);
+      color: var(--light-color);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .reorder-btn:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .no-transactions {
+      text-align: center;
+      padding: 3rem;
+      color: var(--gray-color);
+      font-family: 'Barlow', sans-serif;
+      font-size: 1.2rem;
+      background-color: var(--darker-color);
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .history-filter {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .search-bar {
+        width: 100%;
+        max-width: none;
+      }
+
+      .transaction-details {
+        grid-template-columns: 1fr;
+      }
+
+      .transaction-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .transaction-item img {
+        width: 80px;
+        height: 80px;
+      }
+
+      .transaction-footer {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .history-title {
+        font-size: 2rem;
+      }
+
+      .transaction-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .transaction-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .action-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="container">
+        <a href="index.html" class="logo">
+          <span>Gamer</span>Tech
+        </a>
+        <div class="nav-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="catalog.html">Katalog</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="cart.html">Keranjang</a></li>
+          <li><a href="history.html" class="active">Riwayat</a></li>
+          <li><a href="login.html" class="nav-button">Login / Register</a></li>
+          <li>
+            <div class="cart-icon">
+              <i class="fas fa-shopping-cart"></i>
+              <span class="cart-badge" id="cart-badge">0</span>
+              <div class="cart-dropdown" id="cart-dropdown">
+                <div class="cart-dropdown-content" id="cart-items"></div>
+                <div class="cart-actions">
+                  <a href="cart.html" class="btn btn-primary">Lihat Keranjang</a>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div class="history-header">
+    <div class="container">
+      <h1 class="history-title">Riwayat Transaksi</h1>
+      <p class="history-subtitle">Lacak semua pembelian Anda di GamerTech</p>
+    </div>
+  </div>
+
+  <div class="container history-container">
+    <div class="history-filter">
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Cari ID transaksi...">
+        <button id="search-btn"><i class="fas fa-search"></i></button>
+      </div>
+      <div class="filter-dropdown">
+        <button class="filter-btn" id="filter-btn">
+          <span>Filter: <span id="current-filter">Semua</span></span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="filter-menu" id="filter-menu">
+          <div class="filter-option" data-filter="all">Semua</div>
+          <div class="filter-option" data-filter="completed">Selesai</div>
+          <div class="filter-option" data-filter="pending">Menunggu</div>
+          <div class="filter-option" data-filter="cancelled">Dibatalkan</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="transaction-list" id="transaction-list">
+      <!-- Transactions will be loaded dynamically with JavaScript -->
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>GamerTech</h3>
+          <p>Premium gaming gear, PC components, and custom builds for gamers and enthusiasts.</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Links</h3>
+          <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="catalog.html">Katalog</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="about.html">Tentang Kami</a></li>
+            <li><a href="contact.html">Kontak</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Kategori</h3>
+          <ul>
+            <li><a href="catalog.html?category=gaming-gear">Gaming Gear</a></li>
+            <li><a href="catalog.html?category=peripherals">Peripheral</a></li>
+            <li><a href="catalog.html?category=pc-builds">PC Rakitan</a></li>
+            <li><a href="catalog.html?category=components">Komponen</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Kontak</h3>
+          <ul class="contact-info">
+            <li><i class="fas fa-map-marker-alt"></i> Jl. Gaming No. 123, Jakarta</li>
+            <li><i class="fas fa-phone"></i> +62 123 456 7890</li>
+            <li><i class="fas fa-envelope"></i> info@gamertech.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 GamerTech. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Sample Transaction Data
+    const transactions = [
+      {
+        id: 'GTX-001',
+        date: '2025-05-10',
+        status: 'completed',
+        items: [
+          { id: 1, name: 'Logitech G Pro X Superlight', image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b', quantity: 1, price: 1299000 },
+          { id: 2, name: 'ROG Strix Gaming Keyboard', image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e', quantity: 1, price: 1680000 }
+        ],
+        total: 2979000
+      },
+      {
+        id: 'GTX-002',
+        date: '2025-05-05',
+        status: 'pending',
+        items: [
+          { id: 3, name: 'HyperX Cloud II Headset', image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5', quantity: 2, price: 1350000 }
+        ],
+        total: 2700000
+      },
+      {
+        id: 'GTX-003',
+        date: '2025-04-20',
+        status: 'cancelled',
+        items: [
+          { id: 4, name: 'Razer Viper Ultimate Mouse', image: 'https://images.unsplash.com/photo-1519045944858-ee933876bc48', quantity: 1, price: 1560000 }
+        ],
+        total: 1560000
+      },
+      {
+        id: 'GTX-004',
+        date: '2025-04-15',
+        status: 'completed',
+        items: [
+          { id: 7, name: 'ASUS ROG Swift 27" Monitor', image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1', quantity: 1, price: 6750000 },
+          { id: 12, name: 'Logitech G502 HERO', image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b', quantity: 1, price: 1080000 }
+        ],
+        total: 7830000
+      }
+    ];
+
+    // DOM Elements
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    const filterBtn = document.getElementById('filter-btn');
+    const filterMenu = document.getElementById('filter-menu');
+    const currentFilter = document.getElementById('current-filter');
+    const filterOptions = document.querySelectorAll('.filter-option');
+    const transactionList = document.getElementById('transaction-list');
+    const searchInput = document.getElementById('search-input');
+    const searchBtn = document.getElementById('search-btn');
+
+    // Navigation Toggle
+    navToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Filter Dropdown Toggle
+    filterBtn.addEventListener('click', () => {
+      filterMenu.classList.toggle('active');
+    });
+
+    // Close the dropdown when clicking outside
+    window.addEventListener('click', (event) => {
+      if (!event.target.closest('.filter-dropdown')) {
+        filterMenu.classList.remove('active');
+      }
+    });
+
+    // Filter Options Click Handler
+    filterOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        currentFilter.innerText = option.innerText;
+        filterMenu.classList.remove('active');
+        const filterValue = option.getAttribute('data-filter');
+        filterTransactions(filterValue);
+      });
+    });
+
+    // Format price to IDR
+    function formatPrice(price) {
+      return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0
+      }).format(price);
+    }
+
+    // Format date to DD MMMM YYYY
+    function formatDate(dateStr) {
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('id-ID', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+      });
+    }
+
+    // Display transactions
+    function displayTransactions(transactionsToDisplay) {
+      transactionList.innerHTML = '';
+
+      if (transactionsToDisplay.length === 0) {
+        transactionList.innerHTML = `
+          <div class="no-transactions">
+            Tidak ada transaksi yang ditemukan.
+          </div>
+        `;
+        return;
+      }
+
+      transactionsToDisplay.forEach(transaction => {
+        const transactionCard = document.createElement('div');
+        transactionCard.classList.add('transaction-card');
+
+        const statusClass = {
+          completed: 'status-completed',
+          pending: 'status-pending',
+          cancelled: 'status-cancelled'
+        }[transaction.status];
+
+        transactionCard.innerHTML = `
+          <div class="transaction-header">
+            <div class="transaction-id">Order #${transaction.id}</div>
+            <div class="transaction-status ${statusClass}">${transaction.status === 'completed' ? 'Selesai' : transaction.status === 'pending' ? 'Menunggu' : 'Dibatalkan'}</div>
+          </div>
+          <div class="transaction-body">
+            <div class="transaction-details">
+              <div class="detail-item">Tanggal: <span>${formatDate(transaction.date)}</span></div>
+              <div class="detail-item">Jumlah Item: <span>${transaction.items.length}</span></div>
+            </div>
+            <div class="transaction-items">
+              ${transaction.items.map(item => `
+                <div class="transaction-item">
+                  <img src="${item.image}" alt="${item.name}">
+                  <div class="item-info">
+                    <h4>${item.name}</h4>
+                    <p>${formatPrice(item.price)} x ${item.quantity}</p>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          <div class="transaction-footer">
+            <div class="transaction-total">Total: ${formatPrice(transaction.total)}</div>
+            <div class="transaction-actions">
+              <button class="action-btn view-details-btn" data-id="${transaction.id}">Lihat Detail</button>
+              ${transaction.status === 'completed' ? `<button class="action-btn reorder-btn" data-id="${transaction.id}">Beli Lagi</button>` : ''}
+            </div>
+          </div>
+        `;
+
+        transactionList.appendChild(transactionCard);
+      });
+
+      // Add event listeners for action buttons
+      document.querySelectorAll('.view-details-btn').forEach(button => {
+        button.addEventListener('click', function () {
+          const transactionId = this.getAttribute('data-id');
+          alert(`Melihat detail untuk transaksi ${transactionId}`);
+          // In a real app, this would navigate to a transaction detail page
+        });
+      });
+
+      document.querySelectorAll('.reorder-btn').forEach(button => {
+        button.addEventListener('click', function () {
+          const transactionId = this.getAttribute('data-id');
+          const transaction = transactions.find(t => t.id === transactionId);
+          transaction.items.forEach(item => addToCart(item.id));
+          alert('Produk dari transaksi ini telah ditambahkan ke keranjang!');
+        });
+      });
+    }
+
+    // Filter transactions
+    function filterTransactions(filterBy) {
+      let filteredTransactions = [...transactions];
+      if (filterBy !== 'all') {
+        filteredTransactions = transactions.filter(t => t.status === filterBy);
+      }
+      displayTransactions(filteredTransactions);
+    }
+
+    // Search functionality
+    searchBtn.addEventListener('click', performSearch);
+    searchInput.addEventListener('keyup', function (event) {
+      if (event.key === 'Enter') {
+        performSearch();
+      }
+    });
+
+    function performSearch() {
+      const searchTerm = searchInput.value.trim().toLowerCase();
+      if (!searchTerm) {
+        displayTransactions(transactions);
+        return;
+      }
+
+      const searchResults = transactions.filter(t => t.id.toLowerCase().includes(searchTerm));
+      displayTransactions(searchResults);
+    }
+
+    // Add to cart function (same as catalog page)
+    function addToCart(productId) {
+      const products = [
+        { id: 1, name: 'Logitech G Pro X Superlight', image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b', discountPrice: 1299000 },
+        { id: 2, name: 'ROG Strix Gaming Keyboard', image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e', discountPrice: 1680000 },
+        { id: 3, name: 'HyperX Cloud II Headset', image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5', discountPrice: 1350000 },
+        { id: 4, name: 'Razer Viper Ultimate Mouse', image: 'https://images.unsplash.com/photo-1519045944858-ee933876bc48', discountPrice: 1560000 },
+        { id: 7, name: 'ASUS ROG Swift 27" Monitor', image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1', discountPrice: 6750000 },
+        { id: 12, name: 'Logitech G502 HERO', image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b', discountPrice: 1080000 }
+      ];
+
+      const product = products.find(p => p.id === parseInt(productId));
+      if (!product) return;
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existingItem = cart.find(item => item.id === product.id);
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          image: product.image,
+          discountPrice: product.discountPrice,
+          quantity: 1
+        });
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    // Initialize the history page
+    document.addEventListener('DOMContentLoaded', () => {
+      displayTransactions(transactions);
+    });
+  </script>
+</body>
+</html>

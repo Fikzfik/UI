@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Produk - GamerTech</title>
+  <meta name="description" content="Detail produk gaming premium">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .product-container {
+      padding: 8rem 0 5rem;
+    }
+    
+    .product-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    
+    .product-gallery {
+      position: sticky;
+      top: 100px;
+    }
+    
+    .product-main-img {
+      width: 100%;
+      height: 400px;
+      border-radius: 1rem;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .product-main-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .product-thumbnails {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    
+    .product-thumbnail {
+      height: 80px;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      opacity: 0.7;
+      transition: var(--transition);
+    }
+    
+    .product-thumbnail.active {
+      border-color: var(--primary-color);
+      opacity: 1;
+    }
+    
+    .product-thumbnail:hover {
+      opacity: 1;
+    }
+    
+    .product-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .product-info {
+      padding: 1rem 0;
+    }
+    
+    .product-title {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .product-meta {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .product-rating i {
+      color: #FFD700;
+    }
+    
+    .product-category, .product-brand, .product-sku {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--gray-color);
+    }
+    
+    .product-price {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .product-original-price {
+      font-size: 1.2rem;
+      color: var(--gray-color);
+      text-decoration: line-through;
+      margin-right: 1rem;
+    }
+    
+    .product-discount-price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-color);
+    }
+    
+    .product-discount {
+      display: inline-block;
+      background-color: var(--danger-color);
+      color: white;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.3rem;
+      margin-left: 1rem;
+      font-weight: 700;
+    }
+    
+    .product-stock {
+      margin-bottom: 1.5rem;
+    }
+    
+    .in-stock {
+      color: var(--success-color);
+      font-weight: 500;
+    }
+    
+    .out-of-stock {
+      color: var(--danger-color);
+      font-weight: 500;
+    }
+    
+    .product-quantity {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .product-quantity label {
+      margin-right: 1rem;
+      font-weight: 500;
+    }
+    
+    .quantity-input {
+      display: flex;
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.3rem;
+      overflow: hidden;
+    }
+    
+    .quantity-input button {
+      width: 40px;
+      height: 40px;
+      background-color: var(--darker-color);
+      border: none;
+      color: var(--light-color);
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+    
+    .quantity-input button:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    .quantity-input input {
+      width: 60px;
+      height: 40px;
+      text-align: center;
+      border: none;
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: var(--dark-color);
+      color: var(--light-color);
+    }
+    
+    .product-actions {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .product-actions .btn {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+    }
+    
+    .wishlist-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 0.3rem;
+      background-color: var(--darker-color);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--light-color);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .wishlist-btn:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--primary-color);
+    }
+    
+    .product-description {
+      margin-top: 3rem;
+    }
+    
+    .product-description h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .product-tabs {
+      margin-top: 3rem;
+    }
+    
+    .tab-buttons {
+      display: flex;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 1.5rem;
+    }
+    
+    .tab-button {
+      padding: 1rem 2rem;
+      cursor: pointer;
+      font-weight: 500;
+      position: relative;
+    }
+    
+    .tab-button.active {
+      color: var(--primary-color);
+    }
+    
+    .tab-button.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background-color: var(--primary-color);
+    }
+    
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .specs-table tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    .specs-table th, .specs-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .specs-table th {
+      width: 30%;
+      font-weight: 500;
+    }
+    
+    .related-products {
+      margin-top: 5rem;
+    }
+    
+    .related-products h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    @media (max-width: 991px) {
+      .product-detail {
+        grid-template-columns: 1fr;
+      }
+      
+      .product-gallery {
+        position: static;
+      }
+      
+      .product-title {
+        font-size: 2rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .product-meta {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      
+      .product-actions {
+        flex-direction: column;
+      }
+      
+      .tab-buttons {
+        overflow-x: auto;
+      }
+      
+      .tab-button {
+        padding: 1rem;
+        white-space: nowrap;
+      }
+      
+      .product-title {
+        font-size: 1.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="container">
+        <a href="index.html" class="logo">
+          <span>Gamer</span>Tech
+        </a>
+        <div class="nav-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="catalog.html" class="active">Katalog</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="login.html" class="nav-button">Login / Register</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container product-container">
+    <div class="product-detail" id="product-detail-container">
+      <!-- Product details will be loaded dynamically with JavaScript -->
+    </div>
+    
+    <div class="product-tabs">
+      <div class="tab-buttons">
+        <div class="tab-button active" data-tab="description">Deskripsi</div>
+        <div class="tab-button" data-tab="specifications">Spesifikasi</div>
+        <div class="tab-button" data-tab="reviews">Ulasan</div>
+      </div>
+      
+      <div class="tab-content active" id="description">
+        <h3>Deskripsi Produk</h3>
+        <div id="product-description-content">
+          <!-- Description will be loaded dynamically -->
+        </div>
+      </div>
+      
+      <div class="tab-content" id="specifications">
+        <h3>Spesifikasi Teknis</h3>
+        <table class="specs-table" id="specs-table">
+          <!-- Specs will be loaded dynamically -->
+        </table>
+      </div>
+      
+      <div class="tab-content" id="reviews">
+        <h3>Ulasan Pembeli</h3>
+        <div id="reviews-container">
+          <!-- Reviews will be loaded dynamically -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="related-products">
+      <h2>Produk Terkait</h2>
+      <div class="products-grid" id="related-products-container">
+        <!-- Related products will be loaded dynamically -->
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>GamerTech</h3>
+          <p>Premium gaming gear, PC components, and custom builds for gamers and enthusiasts.</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Links</h3>
+          <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="catalog.html">Katalog</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="about.html">Tentang Kami</a></li>
+            <li><a href="contact.html">Kontak</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Kategori</h3>
+          <ul>
+            <li><a href="catalog.html?category=gaming-gear">Gaming Gear</a></li>
+            <li><a href="catalog.html?category=peripherals">Peripheral</a></li>
+            <li><a href="catalog.html?category=pc-builds">PC Rakitan</a></li>
+            <li><a href="catalog.html?category=components">Komponen</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Kontak</h3>
+          <ul class="contact-info">
+            <li><i class="fas fa-map-marker-alt"></i> Jl. Gaming No. 123, Jakarta</li>
+            <li><i class="fas fa-phone"></i> +62 123 456 7890</li>
+            <li><i class="fas fa-envelope"></i> info@gamertech.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 GamerTech. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // DOM Elements
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const productDetailContainer = document.getElementById('product-detail-container');
+    const productDescriptionContent = document.getElementById('product-description-content');
+    const specsTable = document.getElementById('specs-table');
+    const reviewsContainer = document.getElementById('reviews-container');
+    const relatedProductsContainer = document.getElementById('related-products-container');
+    
+    // Sample Products Data
+    const products = [
+      {
+        id: 1,
+        name: 'Logitech G Pro X Superlight',
+        images: [
+          'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b',
+          'https://images.unsplash.com/photo-1485827404703-89b55fcc595e',
+          'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5',
+          'https://images.unsplash.com/photo-1519045944858-ee933876bc48'
+        ],
+        category: 'gaming-gear',
+        brand: 'Logitech',
+        price: 1599000,
+        discountPrice: 1299000,
+        discount: 19,
+        rating: 4.8,
+        ratingCount: 156,
+        sku: 'LGT-G-PRO-X',
+        inStock: true,
+        description: `<p>Logitech G PRO X SUPERLIGHT adalah mouse gaming nirkabel ultra-ringan yang dirancang bersama dengan para profesional esports tingkat elit. Dengan berat kurang dari 63 gram, PRO X SUPERLIGHT menghadirkan pengalaman bermain game yang hampir tidak terasa namun sangat responsif.</p>
+        <p>Dilengkapi dengan sensor HERO 25K generasi berikutnya, PRO X SUPERLIGHT dapat menangkap gerak mikro dengan presisi yang luar biasa, sehingga memberikan performa pelacakan yang tak tertandingi pada tingkat sub-mikron. PRO X SUPERLIGHT juga menampilkan LIGHTSPEED, teknologi nirkabel kami yang dirancang untuk memberikan koneksi yang ultra-responsif dengan tingkat keandalan yang tinggi.</p>
+        <p>Nikmati hingga 70 jam penggunaan berkelanjutan dengan baterai AA.</p>`,
+        specifications: [
+          {label: 'Sensor', value: 'HERO 25K'},
+          {label: 'DPI', value: '100-25,600'},
+          {label: 'Polling Rate', value: '1000Hz'},
+          {label: 'Buttons', value: '5 tombol yang dapat diprogram'},
+          {label: 'Koneksi', value: 'LIGHTSPEED Wireless'},
+          {label: 'Berat', value: '63 gram'},
+          {label: 'Baterai', value: 'Hingga 70 jam penggunaan'},
+          {label: 'Dimensi', value: '125 x 63.5 x 40 mm'},
+          {label: 'Warna', value: 'Hitam / Putih'}
+        ],
+        reviews: [
+          {
+            name: 'Budi Santoso',
+            rating: 5,
+            date: '10 April 2023',
+            comment: 'Mouse yang sangat ringan dan responsif. Sangat cocok untuk FPS games.'
+          },
+          {
+            name: 'Andi Wijaya',
+            rating: 4,
+            date: '5 April 2023',
+            comment: 'Ringan dan nyaman, tapi harga agak mahal.'
+          },
+          {
+            name: 'Cindy Larasati',
+            rating: 5,
+            date: '2 April 2023',
+            comment: 'Saya suka desain simpelnya dan performa sensor yang sangat akurat.'
+          }
+        ],
+        relatedProducts: [2, 4, 12]
+      },
+      {
+        id: 2,
+        name: 'ROG Strix Gaming Keyboard',
+        images: [
+          'https://images.unsplash.com/photo-1485827404703-89b55fcc595e',
+          'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b',
+          'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5',
+          'https://images.unsplash.com/photo-1519045944858-ee933876bc48'
+        ],
+        category: 'peripherals',
+        brand: 'ASUS',
+        price: 2100000,
+        discountPrice: 1680000,
+        discount: 20,
+        rating: 4.7,
+        ratingCount: 89,
+        sku: 'ROG-STR-KB',
+        inStock: true,
+        description: `<p>ROG Strix Gaming Keyboard adalah keyboard mekanik premium yang dirancang untuk para gamers yang mencari performa dan gaya terbaik. Dengan switch mekanik Cherry MX, keyboard ini menawarkan respons yang cepat dan taktil untuk pengalaman gaming yang superior.</p>
+        <p>Dilengkapi dengan pencahayaan RGB per-tombol yang dapat disesuaikan sepenuhnya, Anda dapat menyesuaikan keyboard Anda sesuai dengan setup gaming Anda. Software Armoury Crate memungkinkan Anda untuk memprogramkan makro, menyesuaikan pencahayaan, dan banyak lagi.</p>
+        <p>Dengan konstruksi aluminium yang kokoh dan dukungan sandaran tangan yang ergonomis, keyboard ini dirancang untuk kenyamanan dalam sesi gaming yang panjang.</p>`,
+        specifications: [
+          {label: 'Switch', value: 'Cherry MX Red/Blue/Brown'},
+          {label: 'Pencahayaan', value: 'RGB Per-tombol'},
+          {label: 'Koneksi', value: 'USB Type-C yang dapat dilepas'},
+          {label: 'Polling Rate', value: '1000Hz'},
+          {label: 'Layout', value: 'Full-size dengan tombol media khusus'},
+          {label: 'Fitur Tambahan', value: 'Sandaran tangan magnetik, pass-through USB'},
+          {label: 'Bahan', value: 'Aluminium dan plastik kualitas tinggi'},
+          {label: 'Software', value: 'ASUS Armoury Crate'}
+        ],
+        reviews: [
+          {
+            name: 'Dedy Cahyadi',
+            rating: 5,
+            date: '15 April 2023',
+            comment: 'Tombolnya sangat responsif dan RGB-nya sangat keren!'
+          },
+          {
+            name: 'Fitri Lestari',
+            rating: 4,
+            date: '12 April 2023',
+            comment: 'Keyboard yang bagus tapi agak berisik untuk switch blue.'
+          }
+        ],
+        relatedProducts: [1, 6, 8]
+      }
+    ];
+    
+    // Navigation Toggle
+    navToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+    
+    // Tab Switching
+    tabButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons and contents
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        
+        // Add active class to clicked button and corresponding content
+        this.classList.add('active');
+        const tabId = this.getAttribute('data-tab');
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+    
+    // Format price to IDR
+    function formatPrice(price) {
+      return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0
+      }).format(price);
+    }
+    
+    // Generate star rating HTML
+    function generateStarRating(rating) {
+      let starsHtml = '';
+      const fullStars = Math.floor(rating);
+      const halfStar = rating % 1 >= 0.5;
+      const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+      
+      for (let i = 0; i < fullStars; i++) {
+        starsHtml += '<i class="fas fa-star"></i>';
+      }
+      
+      if (halfStar) {
+        starsHtml += '<i class="fas fa-star-half-alt"></i>';
+      }
+      
+      for (let i = 0; i < emptyStars; i++) {
+        starsHtml += '<i class="far fa-star"></i>';
+      }
+      
+      return starsHtml;
+    }
+    
+    // Load product details
+    function loadProductDetails() {
+      // Get product ID from URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      let productId = urlParams.get('id');
+      
+      // Default to first product if no ID provided
+      if (!productId) {
+        productId = '1';
+      }
+      
+      // Find product by ID
+      const product = products.find(p => p.id === parseInt(productId));
+      
+      if (!product) {
+        productDetailContainer.innerHTML = '<p>Produk tidak ditemukan.</p>';
+        return;
+      }
+      
+      // Update page title
+      document.title = `${product.name} - GamerTech`;
+      
+      // Generate product detail HTML
+      const productDetailHTML = `
+        <div class="product-gallery">
+          <div class="product-main-img">
+            <img src="${product.images[0]}" alt="${product.name}" id="main-product-img">
+          </div>
+          <div class="product-thumbnails">
+            ${product.images.map((img, index) => `
+              <div class="product-thumbnail ${index === 0 ? 'active' : ''}" data-index="${index}">
+                <img src="${img}" alt="${product.name} - Image ${index + 1}">
+              </div>
+            `).join('')}
+          </div>
+        </div>
+        <div class="product-info">
+          <h1 class="product-title">${product.name}</h1>
+          
+          <div class="product-meta">
+            <div class="product-rating">
+              ${generateStarRating(product.rating)}
+              <span>(${product.ratingCount} ulasan)</span>
+            </div>
+            <div class="product-brand">
+              <i class="fas fa-tag"></i> ${product.brand}
+            </div>
+            <div class="product-category">
+              <i class="fas fa-folder"></i> ${product.category}
+            </div>
+            <div class="product-sku">
+              <i class="fas fa-barcode"></i> SKU: ${product.sku}
+            </div>
+          </div>
+          
+          <div class="product-price">
+            ${product.discount > 0 ? `
+              <span class="product-original-price">${formatPrice(product.price)}</span>
+              <span class="product-discount-price">${formatPrice(product.discountPrice)}</span>
+              <span class="product-discount">-${product.discount}%</span>
+            ` : `
+              <span class="product-discount-price">${formatPrice(product.price)}</span>
+            `}
+          </div>
+          
+          <div class="product-stock">
+            ${product.inStock ? 
+              '<span class="in-stock"><i class="fas fa-check-circle"></i> Stok Tersedia</span>' : 
+              '<span class="out-of-stock"><i class="fas fa-times-circle"></i> Stok Habis</span>'
+            }
+          </div>
+          
+          ${product.inStock ? `
+            <div class="product-quantity">
+              <label for="quantity">Jumlah:</label>
+              <div class="quantity-input">
+                <button id="decrease-qty">-</button>
+                <input type="number" id="quantity" value="1" min="1" max="10">
+                <button id="increase-qty">+</button>
+              </div>
+            </div>
+            
+            <div class="product-actions">
+              <button class="btn btn-primary add-to-cart" data-id="${product.id}">
+                <i class="fas fa-shopping-cart"></i> Tambahkan ke Keranjang
+              </button>
+              <button class="btn btn-secondary buy-now" data-id="${product.id}">
+                Beli Sekarang
+              </button>
+              <button class="wishlist-btn">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+          ` : ''}
+          
+          <div class="product-description">
+            <h3>Deskripsi Singkat</h3>
+            <p>${product.description.split('</p>')[0].replace('<p>', '')}</p>
+          </div>
+        </div>
+      `;
+      
+      productDetailContainer.innerHTML = productDetailHTML;
+      
+      // Load tab content
+      productDescriptionContent.innerHTML = product.description;
+      
+      // Load specifications
+      let specsHTML = '';
+      product.specifications.forEach(spec => {
+        specsHTML += `
+          <tr>
+            <th>${spec.label}</th>
+            <td>${spec.value}</td>
+          </tr>
+        `;
+      });
+      specsTable.innerHTML = specsHTML;
+      
+      // Load reviews
+      let reviewsHTML = '';
+      if (product.reviews && product.reviews.length > 0) {
+        product.reviews.forEach(review => {
+          reviewsHTML += `
+            <div class="review-card">
+              <div class="review-header">
+                <span class="reviewer-name">${review.name}</span>
+                <span class="review-date">${review.date}</span>
+              </div>
+              <div class="review-rating">
+                ${generateStarRating(review.rating)}
+              </div>
+              <div class="review-comment">
+                ${review.comment}
+              </div>
+            </div>
+          `;
+        });
+      } else {
+        reviewsHTML = '<p>Belum ada ulasan untuk produk ini.</p>';
+      }
+      reviewsContainer.innerHTML = reviewsHTML;
+      
+      // Load related products
+      loadRelatedProducts(product.relatedProducts);
+      
+      // Add event listeners for thumbnails
+      const thumbnails = document.querySelectorAll('.product-thumbnail');
+      const mainImg = document.getElementById('main-product-img');
+      
+      thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function() {
+          // Remove active class from all thumbnails
+          thumbnails.forEach(t => t.classList.remove('active'));
+          
+          // Add active class to clicked thumbnail
+          this.classList.add('active');
+          
+          // Update main image
+          const index = parseInt(this.getAttribute('data-index'));
+          mainImg.src = product.images[index];
+        });
+      });
+      
+      // Quantity buttons
+      const decreaseBtn = document.getElementById('decrease-qty');
+      const increaseBtn = document.getElementById('increase-qty');
+      const quantityInput = document.getElementById('quantity');
+      
+      if (decreaseBtn && increaseBtn && quantityInput) {
+        decreaseBtn.addEventListener('click', () => {
+          let currentValue = parseInt(quantityInput.value);
+          if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+          }
+        });
+        
+        increaseBtn.addEventListener('click', () => {
+          let currentValue = parseInt(quantityInput.value);
+          if (currentValue < 10) {
+            quantityInput.value = currentValue + 1;
+          }
+        });
+      }
+      
+      // Add to cart button
+      const addToCartBtn = document.querySelector('.add-to-cart');
+      if (addToCartBtn) {
+        addToCartBtn.addEventListener('click', function() {
+          const productId = this.getAttribute('data-id');
+          const quantity = document.getElementById('quantity').value;
+          addToCart(productId, quantity);
+        });
+      }
+      
+      // Buy now button
+      const buyNowBtn = document.querySelector('.buy-now');
+      if (buyNowBtn) {
+        buyNowBtn.addEventListener('click', function() {
+          const productId = this.getAttribute('data-id');
+          const quantity = document.getElementById('quantity').value;
+          buyNow(productId, quantity);
+        });
+      }
+      
+      // Wishlist button
+      const wishlistBtn = document.querySelector('.wishlist-btn');
+      if (wishlistBtn) {
+        wishlistBtn.addEventListener('click', function() {
+          this.classList.toggle('active');
+          const icon = this.querySelector('i');
+          
+          if (icon.classList.contains('far')) {
+            icon.classList.remove('far');
+            icon.classList.add('fas');
+            alert('Produk ditambahkan ke wishlist!');
+          } else {
+            icon.classList.remove('fas');
+            icon.classList.add('far');
+            alert('Produk dihapus dari wishlist!');
+          }
+        });
+      }
+    }
+    
+    // Load related products
+    function loadRelatedProducts(relatedProductIds) {
+      let relatedProductsHTML = '';
+      
+      relatedProductIds.forEach(id => {
+        const product = products.find(p => p.id === id);
+        
+        if (product) {
+          relatedProductsHTML += `
+            <div class="product-card">
+              <div class="product-img">
+                <img src="${product.images[0]}" alt="${product.name}">
+              </div>
+              ${product.discount > 0 ? `<span class="product-discount">-${product.discount}%</span>` : ''}
+              <div class="product-info">
+                <h3 class="product-title">${product.name}</h3>
+                <div class="product-price">
+                  ${product.discount > 0 ? `
+                    <span class="original-price">${formatPrice(product.price)}</span>
+                    <span class="discount-price">${formatPrice(product.discountPrice)}</span>
+                  ` : `
+                    <span class="discount-price">${formatPrice(product.price)}</span>
+                  `}
+                </div>
+                <div class="product-actions">
+                  <a href="product-detail.html?id=${product.id}" class="btn btn-secondary">Lihat Detail</a>
+                  ${product.inStock ? `
+                    <button class="btn btn-primary add-to-cart" data-id="${product.id}">Keranjang</button>
+                  ` : `
+                    <button class="btn btn-primary" disabled>Stok Habis</button>
+                  `}
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      });
+      
+      relatedProductsContainer.innerHTML = relatedProductsHTML;
+      
+      // Add event listeners for add to cart buttons
+      const addToCartButtons = relatedProductsContainer.querySelectorAll('.add-to-cart');
+      addToCartButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const productId = this.getAttribute('data-id');
+          addToCart(productId, 1);
+        });
+      });
+    }
+    
+    // Add to cart function
+    function addToCart(productId, quantity) {
+      alert(`${quantity} produk dengan ID ${productId} ditambahkan ke keranjang!`);
+      // This would normally store the product in localStorage or send to a backend
+    }
+    
+    // Buy now function
+    function buyNow(productId, quantity) {
+      alert(`Pembelian langsung ${quantity} produk dengan ID ${productId}`);
+      // This would normally redirect to checkout page
+    }
+    
+    // Initialize the product detail page
+    document.addEventListener('DOMContentLoaded', function() {
+      loadProductDetails();
+    });
+  </script>
+</body>
+</html>

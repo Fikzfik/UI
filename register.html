@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - GamerTech</title>
+  <meta name="description" content="Create a new GamerTech account">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --primary-color: #9b87f5;
+      --secondary-color: #0EA5E9;
+      --accent-color: #D946EF;
+      --dark-color: #1A1F2C;
+      --darker-color: #151922;
+      --light-color: #F1F0FB;
+      --gray-color: #8E9196;
+      --success-color: #10B981;
+      --danger-color: #EF4444;
+    }
+  </style>
+</head>
+<body class="font-barlow bg-[#151922] text-[#F1F0FB] overflow-x-hidden">
+  <header>
+    <nav class="fixed top-0 left-0 w-full z-50 bg-[#151922]/90 backdrop-blur-md shadow-md transition-all duration-300">
+      <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
+        <a href="index.html" class="text-2xl font-bold font-rajdhani">
+          <span class="text-[#9b87f5]">Gamer</span>Tech
+        </a>
+        <div class="nav-toggle md:hidden text-xl cursor-pointer">
+          <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-menu hidden md:flex items-center space-x-4">
+          <li><a href="index.html" class="font-medium px-2 hover:text-[#9b87f5] relative">Beranda</a></li>
+          <li><a href="catalog.html" class="font-medium px-2 hover:text-[#9b87f5] relative">Katalog</a></li>
+          <li><a href="blog.html" class="font-medium px-2 hover:text-[#9b87f5] relative">Blog</a></li>
+          <li><a href="login.html" class="font-medium px-4 py-2 bg-[#0EA5E9] text-white rounded-md hover:bg-[#0c93d0] transition-all">Login</a></li>
+          <li><a href="register.html" class="font-medium px-4 py-2 bg-[#9b87f5] text-white rounded-md hover:bg-[#8472d9] transition-all">Register</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="auth-container max-w-md mx-auto mt-32 mb-12 p-8 bg-[#1A1F2C] rounded-xl shadow-2xl border border-white/5">
+      <h2 class="text-2xl font-rajdhani font-bold text-center mb-8">Daftar Akun Baru</h2>
+      
+      <form class="auth-form register-form">
+        <div class="form-group mb-6">
+          <label for="register-name" class="block mb-2 font-medium">Nama Lengkap</label>
+          <input type="text" id="register-name" placeholder="Masukkan nama lengkap" required class="w-full p-3 rounded-lg bg-[#151922] border border-white/10 text-[#F1F0FB] focus:outline-none focus:border-[#9b87f5] focus:ring-2 focus:ring-[#9b87f5]/20 transition-all">
+        </div>
+        
+        <div class="form-group mb-6">
+          <label for="register-email" class="block mb-2 font-medium">Email</label>
+          <input type="email" id="register-email" placeholder="Masukkan email Anda" required class="w-full p-3 rounded-lg bg-[#151922] border border-white/10 text-[#F1F0FB] focus:outline-none focus:border-[#9b87f5] focus:ring-2 focus:ring-[#9b87f5]/20 transition-all">
+        </div>
+        
+        <div class="form-group mb-6">
+          <label for="register-password" class="block mb-2 font-medium">Password</label>
+          <input type="password" id="register-password" placeholder="Minimal 8 karakter" required class="w-full p-3 rounded-lg bg-[#151922] border border-white/10 text-[#F1F0FB] focus:outline-none focus:border-[#9b87f5] focus:ring-2 focus:ring-[#9b87f5]/20 transition-all">
+        </div>
+        
+        <div class="form-group mb-6">
+          <label for="register-confirm-password" class="block mb-2 font-medium">Konfirmasi Password</label>
+          <input type="password" id="register-confirm-password" placeholder="Konfirmasi password" required class="w-full p-3 rounded-lg bg-[#151922] border border-white/10 text-[#F1F0FB] focus:outline-none focus:border-[#9b87f5] focus:ring-2 focus:ring-[#9b87f5]/20 transition-all">
+        </div>
+        
+        <div class="remember-me flex items-center mb-6">
+          <input type="checkbox" id="terms" required class="mr-2">
+          <label for="terms">Saya setuju dengan <a href="#" class="text-[#9b87f5] hover:underline">Syarat dan Ketentuan</a></label>
+        </div>
+        
+        <button type="submit" class="w-full py-3 bg-[#9b87f5] text-white rounded-lg hover:bg-[#8472d9] transition-all">Daftar</button>
+        
+        <div class="divider relative text-center my-8">
+          <span class="bg-[#1A1F2C] px-4 text-[#8E9196] relative z-10">Atau daftar dengan</span>
+          <div class="absolute top-1/2 left-0 right-0 h-[1px] bg-white/10 z-0"></div>
+        </div>
+        
+        <div class="social-auth flex gap-4 mb-6">
+          <button type="button" class="flex-1 flex items-center justify-center p-3 bg-[#151922] border border-white/10 rounded-lg hover:bg-white/5 transition-all">
+            <i class="fab fa-google mr-2"></i> Google
+          </button>
+          <button type="button" class="flex-1 flex items-center justify-center p-3 bg-[#151922] border border-white/10 rounded-lg hover:bg-white/5 transition-all">
+            <i class="fab fa-facebook-f mr-2"></i> Facebook
+          </button>
+        </div>
+        
+        <div class="auth-links text-center">
+          <p>Sudah punya akun? <a href="login.html" class="text-[#9b87f5] hover:underline">Masuk di sini</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <footer class="bg-[#151922] pt-20 pb-6 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div>
+          <h3 class="text-lg font-rajdhani font-semibold relative pb-4 mb-6 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-[3px] after:bg-[#9b87f5] after:rounded">GamerTech</h3>
+          <p class="text-[#8E9196] mb-6">Premium gaming gear, PC components, and custom builds for gamers and enthusiasts.</p>
+          <div class="flex gap-4">
+            <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full hover:bg-[#9b87f5] hover:-translate-y-1 transition-all"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full hover:bg-[#9b87f5] hover:-translate-y-1 transition-all"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full hover:bg-[#9b87f5] hover:-translate-y-1 transition-all"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full hover:bg-[#9b87f5] hover:-translate-y-1 transition-all"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-rajdhani font-semibold relative pb-4 mb-6 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-[3px] after:bg-[#9b87f5] after:rounded">Links</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="hover:text-[#9b87f5] hover:pl-1 transition-all">Beranda</a></li>
+            <li><a href="catalog.html" class="hover:text-[#9b87f5] hover:pl-1 transition-all">Katalog</a></li>
+            <li><a href="blog.html" class="hover:text-[#9b87f5] hover:pl-1 transition-all">Blog</a></li>
+            <li><a href="about.html" class="hover:text-[#9b87f5] hover:pl-1 transition-all">Tentang Kami</a></li>
+            <li><a href="contact.html" class="hover:text-[#9b87f5] hover:pl-1 transition-all">Kontak</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-rajdhani font-semibold relative pb-4 mb-6 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-[3px] after:bg-[#9b87f5] after:rounded">Kategori</h3>
+          <ul class="space-y-2">
+            <li><a href="catalog.html?category=gaming-gear" class="hover:text-[#9b87f5] hover:pl-1 transition-all">Gaming Gear</a></li>
+            <li><a href="catalog.html?category=peripherals" class="hover:text-[#9b87f5] hover:pl-1 transition-all">Peripheral</a></li>
+            <li><a href="catalog.html?category=pc-builds" class="hover:text-[#9b87f5] hover:pl-1 transition-all">PC Rakitan</a></li>
+            <li><a href="catalog.html?category=components" class="hover:text-[#9b87f5] hover:pl-1 transition-all">Komponen</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-rajdhani font-semibold relative pb-4 mb-6 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-[3px] after:bg-[#9b87f5] after:rounded">Kontak</h3>
+          <ul class="space-y-4">
+            <li class="flex items-center"><i class="fas fa-map-marker-alt mr-4 text-[#9b87f5]"></i> Jl. Gaming No. 123, Jakarta</li>
+            <li class="flex items-center"><i class="fas fa-phone mr-4 text-[#9b87f5]"></i> +62 123 456 7890</li>
+            <li class="flex items-center"><i class="fas fa-envelope mr-4 text-[#9b87f5]"></i> info@gamertech.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/5 pt-6 text-center">
+        <p>© 2025 GamerTech. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // DOM Elements
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    const registerForm = document.querySelector('.register-form');
+    
+    // Navigation Toggle
+    if (navToggle) {
+      navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+      });
+    }
+    
+    // Form Submission
+    registerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('register-name').value;
+      const email = document.getElementById('register-email').value;
+      const password = document.getElementById('register-password').value;
+      const confirmPassword = document.getElementById('register-confirm-password').value;
+      
+      if (password !== confirmPassword) {
+        alert('Password dan konfirmasi password tidak cocok!');
+        return;
+      }
+      
+      // Normally, you would send this data to your backend
+      console.log('Register attempt:', { name, email, password });
+      
+      // For demo purposes, simulate successful registration
+      alert('Registrasi berhasil! Silakan login.');
+      
+      // Redirect to login page
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>

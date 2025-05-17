@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - GamerTech</title>
+  <meta name="description" content="Artikel seputar dunia gaming dan teknologi">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --primary-color: #9b87f5;
+      --secondary-color: #0EA5E9;
+      --accent-color: #D946EF;
+      --dark-color: #1A1F2C;
+      --darker-color: #151922;
+      --light-color: #F1F0FB;
+      --gray-color: #8E9196;
+      --success-color: #10B981;
+      --danger-color: #EF4444;
+    }
+
+    /* Blog filter active state */
+    .blog-filter.active {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    /* Mobile nav menu active state */
+    .nav-menu.active {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      background: var(--darker-color);
+      padding: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-menu.active li {
+      margin: 0.5rem 0;
+    }
+  </style>
+</head>
+
+<body class="font-barlow bg-[#151922] text-[#F1F0FB] overflow-x-hidden">
+  <header>
+    <nav class="fixed top-0 left-0 w-full z-50 bg-[#151922]/90 backdrop-blur-md shadow-md transition-all duration-300">
+      <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
+        <a href="index.html" class="text-2xl font-bold font-rajdhani">
+          <span class="text-[#9b87f5]">Gamer</span>Tech
+        </a>
+        <div class="nav-toggle md:hidden text-xl cursor-pointer">
+          <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-menu hidden md:flex items-center space-x-4">
+          <li><a href="index.html" class="font-medium px-2 hover:text-[#9b87f5] relative">Beranda</a></li>
+          <li><a href="catalog.html" class="font-medium px-2 hover:text-[#9b87f5] relative">Katalog</a></li>
+          <li><a href="blog.html"
+              class="font-medium px-2 text-[#9b87f5] relative after:content-[''] after:absolute after:bottom-[-3px] after:left-0 after:w-full after:h-[3px] after:bg-gradient-to-r after:from-[#9b87f5] after:to-[#D946EF] after:rounded">Blog</a>
+          </li>
+          <li><a href="cart.html" class="font-medium px-2 hover:text-[#9b87f5] relative">Keranjang</a></li>
+          <li><a href="history.html" class="font-medium px-2 hover:text-[#9b87f5] relative">Riwayat</a></li>
+          <li><a href="login.html"
+              class="font-medium px-4 py-2 bg-[#9b87f5] text-white rounded-md hover:bg-[#8472d9] transition-all">Login</a>
+          </li>
+          <li><a href="register.html"
+              class="font-medium px-4 py-2 bg-[#0EA5E9] text-white rounded-md hover:bg-[#0c93d0] transition-all">Register</a>
+          </li>
+          <li>
+            <div class="cart-icon relative">
+              <i class="fas fa-shopping-cart"></i>
+              <span
+                class="cart-badge absolute -top-2 -right-2 bg-[#EF4444] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+                id="cart-badge">0</span>
+              <div
+                class="cart-dropdown hidden absolute top-8 right-0 bg-[#1A1F2C] border border-white/10 rounded-lg shadow-lg w-64 p-4"
+                id="cart-dropdown">
+                <div class="cart-dropdown-content" id="cart-items"></div>
+                <div class="cart-actions mt-4">
+                  <a href="cart.html"
+                    class="block text-center py-2 bg-[#9b87f5] text-white rounded-lg hover:bg-[#8472d9] transition-all">Lihat
+                    Keranjang</a>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div
+    class="blog-header relative bg-gradient-to-b from-[#151922]/90 to-[#151922]/95 bg-[url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6')] bg-cover bg-center py-24 text-center">
+    <div class="max-w-7xl mx-auto px-4">
+      <h1 class="text-3xl md:text-4xl font-rajdhani font-bold mb-4">Blog Gaming</h1>
+      <p class="text-[#8E9196] text-lg">Tips, trik, dan berita terbaru tentang dunia gaming</p>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <div class="blog-search max-w-xl mx-auto mb-12 flex">
+      <input type="text" id="blog-search-input" placeholder="Cari artikel..."
+        class="flex-1 p-3 bg-[#151922] border border-white/10 rounded-l-lg text-[#F1F0FB] focus:outline-none focus:border-[#9b87f5] focus:ring-2 focus:ring-[#9b87f5]/20 transition-all">
+      <button id="blog-search-btn" class="p-3 bg-[#9b87f5] text-white rounded-r-lg hover:bg-[#8472d9] transition-all"><i
+          class="fas fa-search"></i></button>
+    </div>
+
+    <div class="blog-filters flex flex-wrap gap-2 mb-8">
+      <div
+        class="blog-filter px-4 py-2 bg-[#9b87f5] border border-[#9b87f5] text-white rounded-full cursor-pointer transition-all active"
+        data-category="all">Semua</div>
+      <div
+        class="blog-filter px-4 py-2 bg-[#1A1F2C] border border-white/10 text-[#F1F0FB] rounded-full cursor-pointer hover:bg-white/5 transition-all"
+        data-category="tips">Tips & Trik</div>
+      <div
+        class="blog-filter px-4 py-2 bg-[#1A1F2C] border border-white/10 text-[#F1F0FB] rounded-full cursor-pointer hover:bg-white/5 transition-all"
+        data-category="reviews">Reviews</div>
+      <div
+        class="blog-filter px-4 py-2 bg-[#1A1F2C] border border-white/10 text-[#F1F0FB] rounded-full cursor-pointer hover:bg-white/5 transition-all"
+        data-category="news">Berita</div>
+      <div
+        class="blog-filter px-4 py-2 bg-[#1A1F2C] border border-white/10 text-[#F1F0FB] rounded-full cursor-pointer hover:bg-white/5 transition-all"
+        data-category="guides">Panduan</div>
+    </div>
+
+    <div class="blog-content" id="blog-content">
+      <!-- Content will be loaded dynamically with JavaScript -->
+    </div>
+  </div>
+
+  <footer class="bg-[#151922] pt-20 pb-6 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div>
+          <h3
+            class="text-lg font-rajdhani font-semibold relative pb-4 mb-6 after:content enrolling-[''] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-[3px] after:bg-[#9b87f5] after:rounded">
+            GamerTech</h3>
+          <p class="text-[#8E9196] mb-6">Premium gaming gear, PC components, and custom builds for gamers and
+            enthusiasts.</p>
+          <div class="flex gap-4">
+            <a href="#"
+              class="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full hover:bg-[#9b87f5] hover:-translate-y-1 transition-all"><i
+                class="fab fa-facebook"></i></a>
+            <a href="#"
+              class="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full hover:bg-[#9b87f5] hover:-translate-y-1 transition-all"><i
+                class="fab fa-twitter"></i></a>
+            <a href="#"
+              class="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full hover:bg-[#9b87f5] hover:-translate-y-1 transition-all"><i
+                class="fab fa-instagram"></i></a>
+            <a href="#"
+              class="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full hover:bg-[#9b87f5] hover:-translate-y-1 transition-all"><i
+                class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3
+            class="text-lg font-rajdhani font-semibold relative pb-4 mb-6 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-[3px] after:bg-[#9b87f5] after:rounded">
+            Links</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="hover:text-[#9b87f5] hover:pl-1 transition-all">Beranda</a></li>
+            <li><a href="catalog.html" class="hover:text-[#9b87f5] hover:pl-1 transition-all">Katalog</a></li>
+            <li><a href="blog.html" class="hover:text-[#9b87f5] hover:pl-1 transition-all">Blog</a></li>
+            <li><a href="about.html" class="hover:text-[#9b87f5] hover:pl-1 transition-all">Tentang Kami</a></li>
+            <li><a href="contact.html" class="hover:text-[#9b87f5] hover:pl-1 transition-all">Kontak</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3
+            class="text-lg font-rajdhani font-semibold relative pb-4 mb-6 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-[3px] after:bg-[#9b87f5] after:rounded">
+            Kategori</h3>
+          <ul class="space-y-2">
+            <li><a href="catalog.html?category=gaming-gear"
+                class="hover:text-[#9b87f5] hover:pl-1 transition-all">Gaming Gear</a></li>
+            <li><a href="catalog.html?category=peripherals"
+                class="hover:text-[#9b87f5] hover:pl-1 transition-all">Peripheral</a></li>
+            <li><a href="catalog.html?category=pc-builds" class="hover:text-[#9b87f5] hover:pl-1 transition-all">PC
+                Rakitan</a></li>
+            <li><a href="catalog.html?category=components"
+                class="hover:text-[#9b87f5] hover:pl-1 transition-all">Komponen</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3
+            class="text-lg font-rajdhani font-semibold relative pb-4 mb-6 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-[3px] after:bg-[#9b87f5] after:rounded">
+            Kontak</h3>
+          <ul class="space-y-4">
+            <li class="flex items-center"><i class="fas fa-map-marker-alt mr-4 text-[#9b87f5]"></i> Jl. Gaming No. 123,
+              Jakarta</li>
+            <li class="flex items-center"><i class="fas fa-phone mr-4 text-[#9b87f5]"></i> +62 123 456 7890</li>
+            <li class="flex items-center"><i class="fas fa-envelope mr-4 text-[#9b87f5]"></i> info@gamertech.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/5 pt-6 text-center">
+        <p>© 2025 GamerTech. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // DOM Elements
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    const blogFilters = document.querySelectorAll('.blog-filter');
+    const blogSearchBtn = document.getElementById('blog-search-btn');
+    const blogSearchInput = document.getElementById('blog-search-input');
+    const blogContent = document.getElementById('blog-content');
+
+    // Sample Blog Data
+    const blogPosts = [
+      {
+        id: 1,
+        title: 'Memilih Mouse Gaming yang Tepat untuk Gaya Permainan Anda',
+        image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b',
+        date: '20 April 2023',
+        category: 'guides',
+        excerpt: 'Panduan lengkap untuk membantu Anda menemukan mouse gaming ideal yang sesuai dengan kebutuhan dan gaya bermain Anda.',
+        content: `
+          <h2>Pengenalan</h2>
+          <p>Mouse gaming adalah salah satu perangkat terpenting bagi seorang gamer. Dengan berbagai pilihan di pasaran, memilih mouse yang tepat bisa menjadi tantangan. Artikel ini akan membantu Anda memahami faktor-faktor yang perlu dipertimbangkan.</p>
+          <h2>Faktor yang Perlu Dipertimbangkan</h2>
+          <ul>
+            <li><strong>Jenis Pegangan</strong>: Apakah Anda menggunakan palm grip, claw grip, atau fingertip grip?</li>
+            <li><strong>DPI dan Sensitivitas</strong>: Pilih mouse dengan DPI yang sesuai untuk game yang Anda mainkan.</li>
+            <li><strong>Berat</strong>: Mouse ringan cocok untuk FPS, sedangkan mouse berat lebih stabil untuk MMO.</li>
+            <li><strong>Konektivitas</strong>: Kabel atau nirkabel? Pertimbangkan latensi dan kepraktisan.</li>
+          </ul>
+          <h2>Rekomendasi Mouse Gaming</h2>
+          <p>Berikut adalah beberapa mouse gaming terbaik di tahun 2023:</p>
+          <ol>
+            <li><strong>Logitech G Pro X Superlight</strong>: Ringan dan responsif, ideal untuk esports.</li>
+            <li><strong>Razer DeathAdder V3 Pro</strong>: Desain ergonomis untuk berbagai jenis pegangan.</li>
+            <li><strong>SteelSeries Aerox 3</strong>: Ringan dengan desain honeycomb untuk ventilasi.</li>
+          </ol>
+          <p>Dengan memahami kebutuhan Anda dan mencocokkannya dengan spesifikasi mouse, Anda dapat meningkatkan performa gaming Anda secara signifikan.</p>
+        `
+      },
+      {
+        id: 2,
+        title: '10 Tips Meningkatkan Performa PC Gaming Anda',
+        image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5',
+        date: '15 April 2023',
+        category: 'tips',
+        excerpt: 'Kumpulan tips praktis untuk meningkatkan framerate dan pengalaman gaming tanpa harus upgrade hardware.',
+        content: `
+          <h2>Pengenalan</h2>
+          <p>Meningkatkan performa PC gaming tidak selalu membutuhkan upgrade hardware yang mahal. Dengan beberapa penyesuaian, Anda bisa mendapatkan FPS lebih tinggi dan pengalaman bermain yang lebih mulus.</p>
+          <h2>Tips Praktis</h2>
+          <ol>
+            <li><strong>Update Driver GPU</strong>: Pastikan driver NVIDIA atau AMD Anda selalu terbaru.</li>
+            <li><strong>Optimalkan Pengaturan Game</strong>: Kurangi bayangan dan efek anti-aliasing untuk FPS lebih tinggi.</li>
+            <li><strong>Tutup Aplikasi Latar Belakang</strong>: Matikan aplikasi yang tidak perlu untuk membebaskan RAM.</li>
+            <li><strong>Overclock dengan Hati-hati</strong>: Tingkatkan performa GPU atau CPU dengan software seperti MSI Afterburner.</li>
+            <li><strong>Perbarui Windows</strong>: Patch terbaru sering kali meningkatkan performa gaming.</li>
+          </ol>
+          <p>Dengan menerapkan tips ini, Anda dapat memaksimalkan potensi PC gaming Anda tanpa mengeluarkan biaya besar.</p>
+        `
+      },
+      {
+        id: 3,
+        title: 'Mechanical vs Membrane Keyboard: Mana yang Lebih Baik?',
+        image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e',
+        date: '10 April 2023',
+        category: 'reviews',
+        excerpt: 'Perbandingan mendalam antara keyboard mechanical dan membrane untuk membantu Anda membuat keputusan pembelian yang tepat.',
+        content: `
+          <h2>Pengenalan</h2>
+          <p>Keyboard adalah alat penting untuk gaming dan produktivitas. Dua jenis utama yang tersedia adalah mechanical dan membrane. Mana yang lebih cocok untuk Anda?</p>
+          <h2>Keyboard Mechanical</h2>
+          <p>Keyboard mechanical menggunakan sakelar fisik untuk setiap tombol, memberikan respons taktil dan suara klik yang khas.</p>
+          <ul>
+            <li><strong>Kelebihan</strong>: Tahan lama, respons cepat, customizable.</li>
+            <li><strong>Kekurangan</strong>: Lebih berisik, lebih mahal.</li>
+          </ul>
+          <h2>Keyboard Membrane</h2>
+          <p>Keyboard membrane menggunakan lapisan karet untuk mendeteksi penekanan tombol, lebih tenang dan terjangkau.</p>
+          <ul>
+            <li><strong>Kelebihan</strong>: Harga murah, lebih senyap.</li>
+            <li><strong>Kekurangan</strong>: Kurang responsif, umur lebih pendek.</li>
+          </ul>
+          <p>Pilihan tergantung pada preferensi Anda. Untuk gaming, mechanical sering lebih disukai karena responsnya yang cepat.</p>
+        `
+      },
+      {
+        id: 4,
+        title: 'Review: RTX 4090 - Raja Baru GPU Gaming',
+        image: 'https://images.unsplash.com/photo-1518770660439-4636190af475',
+        date: '5 April 2023',
+        category: 'reviews',
+        excerpt: 'Mengulas performa dan kemampuan dari GPU terbaru NVIDIA, apakah layak untuk dibeli?',
+        content: `
+          <h2>Pengenalan</h2>
+          <p>NVIDIA RTX 4090 adalah GPU terbaru yang menjanjikan performa luar biasa untuk gaming dan rendering. Namun, dengan harga premium, apakah worth it?</p>
+          <h2>Spesifikasi</h2>
+          <ul>
+            <li><strong>Arsitektur</strong>: Ada Lovelace.</li>
+            <li><strong>VRAM</strong>: 24GB GDDR6X.</li>
+            <li><strong>Ray Tracing</strong>: Generasi ke-3 untuk visual realistis.</li>
+          </ul>
+          <h2>Performa</h2>
+          <p>RTX 4090 mampu menjalankan game 4K pada 120+ FPS dengan ray tracing penuh. Namun, untuk gamer 1080p, performanya mungkin berlebihan.</p>
+          <p>Kesimpulan: Jika Anda membutuhkan performa terbaik dan budget bukan masalah, RTX 4090 adalah pilihan utama.</p>
+        `
+      },
+      {
+        id: 5,
+        title: 'Panduan Build PC Gaming Budget 15 Juta',
+        image: 'https://images.unsplash.com/photo-1518770660439-4636190af475',
+        date: '1 April 2023',
+        category: 'guides',
+        excerpt: 'Rekomendasi komponen terbaik untuk membangun PC gaming dengan budget 15 juta rupiah.',
+        content: `
+          <h2>Pengenalan</h2>
+          <p>Membangun PC gaming dengan budget 15 juta adalah tantangan, tetapi dengan pilihan komponen yang tepat, Anda bisa mendapatkan performa luar biasa.</p>
+          <h2>Rekomendasi Komponen</h2>
+          <ul>
+            <li><strong>CPU</strong>: AMD Ryzen 5 5600X.</li>
+            <li><strong>GPU</strong>: NVIDIA RTX 3060 Ti.</li>
+            <li><strong>RAM</strong>: 16GB DDR4 3200MHz.</li>
+            <li><strong>Storage</strong>: 1TB NVMe SSD.</li>
+            <li><strong>PSU</strong>: 650W 80+ Bronze.</li>
+          </ul>
+          <p>Dengan build ini, Anda bisa menjalankan game modern pada pengaturan tinggi dengan FPS yang stabil.</p>
+        `
+      },
+      {
+        id: 6,
+        title: 'Berita: AMD Meluncurkan Prosesor Ryzen 7000 Series',
+        image: 'https://images.unsplash.com/photo-1518770660439-4636190af475',
+        date: '25 Maret 2023',
+        category: 'news',
+        excerpt: 'AMD mengumumkan generasi terbaru prosesor Ryzen dengan arsitektur Zen 4.',
+        content: `
+          <h2>Pengenalan</h2>
+          <p>AMD telah meluncurkan seri Ryzen 7000, membawa arsitektur Zen 4 yang menjanjikan peningkatan performa signifikan.</p>
+          <h2>Fitur Utama</h2>
+          <ul>
+            <li><strong>Arsitektur Zen 4</strong>: Hingga 13% IPC lebih tinggi.</li>
+            <li><strong>DDR5 Support</strong>: Memori lebih cepat untuk gaming dan multitasking.</li>
+            <li><strong>PCIe 5.0</strong>: Bandwidth lebih besar untuk GPU dan SSD.</li>
+          </ul>
+          <p>Ryzen 7000 series adalah pilihan menarik bagi gamer dan profesional yang mencari performa tinggi.</p>
+        `
+      },
+      {
+        id: 7,
+        title: 'Cara Mengoptimalkan Pengaturan Game untuk FPS Terbaik',
+        image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5',
+        date: '20 Maret 2023',
+        category: 'tips',
+        excerpt: 'Panduan lengkap untuk mengatur grafik game agar mendapatkan keseimbangan antara visual dan performa.',
+        content: `
+          <h2>Pengenalan</h2>
+          <p>Pengaturan grafik yang tepat dapat membuat perbedaan besar dalam performa game Anda. Berikut adalah panduan untuk mengoptimalkan FPS.</p>
+          <h2>Pengaturan yang Perlu Diperhatikan</h2>
+          <ul>
+            <li><strong>Resolusi</strong>: Turunkan ke 1080p jika FPS rendah.</li>
+            <li><strong>Bayangan</strong>: Nonaktifkan atau turunkan kualitas bayangan.</li>
+            <li><strong>Anti-Aliasing</strong>: Gunakan TAA atau matikan untuk FPS lebih tinggi.</li>
+          </ul>
+          <p>Dengan tweaking ini, Anda bisa mendapatkan FPS tinggi tanpa mengorbankan terlalu banyak kualitas visual.</p>
+        `
+      },
+      {
+        id: 8,
+        title: 'Review: SteelSeries Arctis Nova Pro',
+        image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5',
+        date: '15 Maret 2023',
+        category: 'reviews',
+        excerpt: 'Mengulas headset gaming premium terbaru dari SteelSeries, apakah layak dengan harganya?',
+        content: `
+          <h2>Pengenalan</h2>
+          <p>SteelSeries Arctis Nova Pro adalah headset gaming premium dengan fitur canggih. Apakah harganya sebanding dengan performanya?</p>
+          <h2>Fitur Utama</h2>
+          <ul>
+            <li><strong>Kualitas Suara</strong>: Audio Hi-Res dengan driver premium.</li>
+            <li><strong>Mikrofon</strong>: Noise-cancelling untuk komunikasi jernih.</li>
+            <li><strong>Kenyamanan</strong>: Desain ringan dengan bantalan telinga yang lembut.</li>
+          </ul>
+          <p>Arctis Nova Pro adalah pilihan terbaik untuk gamer yang mengutamakan kualitas audio dan kenyamanan.</p>
+        `
+      },
+      {
+        id: 9,
+        title: 'Berita: Sony Umumkan PlayStation 5 Pro',
+        image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5',
+        date: '10 Maret 2023',
+        category: 'news',
+        excerpt: 'Sony mengumumkan versi upgrade dari PlayStation 5 dengan performa yang lebih tinggi.',
+        content: `
+          <h2>Pengenalan</h2>
+          <p>Sony telah mengumumkan PlayStation 5 Pro, versi upgrade dari konsol populer mereka dengan fokus pada performa 4K dan ray tracing.</p>
+          <h2>Spesifikasi</h2>
+          <ul>
+            <li><strong>GPU</strong>: Peningkatan performa untuk ray tracing lebih baik.</li>
+            <li><strong>SSD</strong>: Kapasitas lebih besar dan kecepatan lebih tinggi.</li>
+            <li><strong>Desain</strong>: Lebih ramping dengan opsi disk drive yang dapat dilepas.</li>
+          </ul>
+          <p>PS5 Pro diharapkan menjadi pilihan utama bagi gamer konsol yang menginginkan pengalaman premium.</p>
+        `
+      },
+      {
+        id: 10,
+        title: 'Berita: NVIDIA Rilis GPU RTX 5090 dengan Teknologi AI Terbaru',
+        image: 'https://images.unsplash.com/photo-1590283603385-8d7b940c5007',
+        date: '5 Mei 2025',
+        category: 'news',
+        excerpt: 'NVIDIA mengumumkan RTX 5090 dengan fitur AI untuk gaming dan rendering yang lebih cerdas.',
+        content: `
+          <h2>Pengenalan</h2>
+          <p>NVIDIA baru saja merilis RTX 5090, GPU terbaru mereka yang mengintegrasikan teknologi AI untuk meningkatkan performa gaming dan rendering. Peluncuran ini dilakukan pada acara teknologi tahunan NVIDIA di Las Vegas.</p>
+          <h2>Fitur Utama</h2>
+          <ul>
+            <li><strong>Teknologi AI</strong>: Fitur DLSS 4.0 untuk upscaling gambar yang lebih realistis.</li>
+            <li><strong>Performa</strong>: Mendukung 8K gaming pada 120 FPS dengan ray tracing penuh.</li>
+            <li><strong>Efisiensi</strong>: Konsumsi daya lebih rendah dibandingkan RTX 4090.</li>
+          </ul>
+          <p>GPU ini dijadwalkan mulai tersedia di pasar global pada akhir Mei 2025 dengan harga mulai dari $1.999.</p>
+        `
+      },
+      {
+        id: 11,
+        title: 'Berita: Microsoft Luncurkan Xbox Series X Pro dengan Fitur Cloud Gaming',
+        image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c',
+        date: '1 Mei 2025',
+        category: 'news',
+        excerpt: 'Microsoft mengumumkan Xbox Series X Pro dengan integrasi cloud gaming yang lebih baik.',
+        content: `
+          <h2>Pengenalan</h2>
+          <p>Microsoft telah meluncurkan Xbox Series X Pro, versi terbaru dari konsol mereka yang menawarkan fitur cloud gaming terintegrasi. Peluncuran ini bertujuan untuk memperkuat posisi Xbox di pasar konsol gaming.</p>
+          <h2>Fitur Utama</h2>
+          <ul>
+            <li><strong>Cloud Gaming</strong>: Akses langsung ke Xbox Game Pass Ultimate tanpa perlu unduh game.</li>
+            <li><strong>Performa</strong>: Peningkatan GPU untuk mendukung 4K 120 FPS.</li>
+            <li><strong>Desain</strong>: Lebih kecil dan ringan dengan sistem pendingin baru.</li>
+          </ul>
+          <p>Xbox Series X Pro akan tersedia mulai Juni 2025 dengan harga $599.</p>
+        `
+      },
+      {
+        id: 12,
+        title: 'Berita: Game Baru "CyberSmith 2078" Siap Rilis di Semua Platform',
+        image: 'https://images.unsplash.com/photo-1593305841991-2a1b2d2859df',
+        date: '28 April 2025',
+        category: 'news',
+        excerpt: 'Game RPG terbaru "CyberSmith 2078" akan dirilis untuk PC, PS5, dan Xbox Series X|S.',
+        content: `
+          <h2>Pengenalan</h2>
+          <p>CD Projekt Red mengumumkan bahwa game RPG terbaru mereka, "CyberSmith 2078", akan segera dirilis pada 15 Juni 2025. Game ini menawarkan dunia terbuka futuristik yang penuh dengan cerita mendalam.</p>
+          <h2>Detail Game</h2>
+          <ul>
+            <li><strong>Platform</strong>: PC, PS5, Xbox Series X|S.</li>
+            <li><strong>Gameplay</strong>: Pilihan cerita interaktif dengan lebih dari 100 jam gameplay.</li>
+            <li><strong>Grafik</strong>: Mendukung ray tracing dan visual 4K.</li>
+          </ul>
+          <p>Pre-order sudah dibuka dengan bonus eksklusif untuk pemain yang memesan lebih awal.</p>
+        `
+      }
+    ];
+
+    // Get query parameter
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // Display blog posts
+    function displayContent() {
+      const articleId = getQueryParam('id');
+      if (articleId) {
+        // Display article detail (unchanged, as per request focus on filters)
+        const article = blogPosts.find(post => post.id === parseInt(articleId));
+        if (article) {
+          blogContent.innerHTML = `
+            <div class="article-content bg-[#1A1F2C] rounded-xl p-8 border border-white/5 shadow-lg">
+              <div class="article-header mb-8">
+                <div class="blog-meta flex justify-center items-center gap-4 text-[#8E9196] mb-4">
+                  <div class="flex items-center gap-1"><i class="far fa-calendar-alt"></i> ${article.date}</div>
+                  <div class="flex items-center gap-1"><i class="far fa-folder"></i> ${getCategoryName(article.category)}</div>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-rajdhani font-bold mb-6">${article.title}</h1>
+              </div>
+              <img src="${article.image}" alt="${article.title}" class="w-full h-64 object-cover rounded-lg mb-8" onerror="this.src='https://via.placeholder.com/300x200?text=Gambar+Tidak+Tersedia';">
+              <div class="prose prose-invert max-w-none">${article.content}</div>
+              <div class="article-actions mt-8 flex justify-between items-center">
+                <a href="blog.html" class="py-2 px-4 bg-[#0EA5E9] text-white rounded-lg hover:bg-[#0c93d0] transition-all"><i class="fas fa-arrow-left mr-2"></i> Kembali ke Blog</a>
+              </div>
+            </div>
+          `;
+        } else {
+          blogContent.innerHTML = '<p class="text-center text-[#8E9196]">Artikel tidak ditemukan.</p>';
+        }
+      } else {
+        // Display blog posts
+        const blogContainer = document.createElement('div');
+        blogContainer.className = 'blog-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6';
+        blogContent.innerHTML = '';
+        blogContent.appendChild(blogContainer);
+
+        let filteredPosts = blogPosts;
+        const activeFilter = document.querySelector('.blog-filter.active');
+        if (activeFilter && activeFilter.getAttribute('data-category') !== 'all') {
+          filteredPosts = blogPosts.filter(post => post.category === activeFilter.getAttribute('data-category'));
+        }
+        const searchTerm = blogSearchInput.value.toLowerCase().trim();
+        if (searchTerm) {
+          filteredPosts = filteredPosts.filter(post =>
+            post.title.toLowerCase().includes(searchTerm) || post.excerpt.toLowerCase().includes(searchTerm)
+          );
+        }
+
+        if (filteredPosts.length === 0) {
+          blogContainer.innerHTML = '<p class="text-center text-[#8E9196]">Tidak ada artikel yang ditemukan.</p>';
+          return;
+        }
+
+        filteredPosts.forEach(post => {
+          const postCard = document.createElement('div');
+          postCard.className = 'bg-[#1A1F2C] rounded-xl overflow-hidden border border-white/5 hover:-translate-y-2 hover:border-[#9b87f5] transition-all flex flex-col relative';
+          postCard.innerHTML = `
+            ${post.category === 'news' ? '<span class="absolute top-3 left-3 bg-[#EF4444] text-white text-xs font-bold px-2 py-1 rounded-full">Berita Populer</span>' : ''}
+            <div class="h-48 overflow-hidden">
+              <img src="${post.image}" alt="${post.title}" class="w-full h-full object-cover hover:scale-110 transition-transform duration-300" onerror="this.src='https://via.placeholder.com/300x200?text=Gambar+Tidak+Tersedia';">
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <div class="blog-meta flex items-center gap-4 text-[#8E9196] mb-4">
+                <div class="flex items-center gap-1"><i class="far fa-calendar-alt"></i> ${post.date}</div>
+                <div class="flex items-center gap-1"><i class="far fa-folder"></i> ${getCategoryName(post.category)}</div>
+              </div>
+              <h3 class="text-xl font-semibold mb-4">${post.title}</h3>
+              <p class="text-[#8E9196] mb-6 flex-1 line-clamp-3">${post.excerpt}</p>
+              <a href="detailblog.html?id=${post.id}" class="py-2 px-4 bg-[#0EA5E9] text-white rounded-lg hover:bg-[#0c93d0] transition-all text-center">Baca Selengkapnya</a>
+            </div>
+          `;
+          blogContainer.appendChild(postCard);
+        });
+      }
+    }
+
+    // Get category name for display
+    function getCategoryName(category) {
+      const categories = {
+        'tips': 'Tips & Trik',
+        'reviews': 'Reviews',
+        'news': 'Berita',
+        'guides': 'Panduan'
+      };
+      return categories[category] || category;
+    }
+
+    // Filter blog posts
+    blogFilters.forEach(filter => {
+      filter.addEventListener('click', function () {
+        blogFilters.forEach(f => {
+          f.classList.remove('active');
+          f.classList.add('bg-[#1A1F2C]', 'border-white/10', 'text-[#F1F0FB]', 'hover:bg-white/5');
+          f.classList.remove('bg-[#9b87f5]', 'border-[#9b87f5]', 'text-white');
+        });
+        this.classList.add('active');
+        this.classList.remove('bg-[#1A1F2C]', 'border-white/10', 'text-[#F1F0FB]', 'hover:bg-white/5');
+        this.classList.add('bg-[#9b87f5]', 'border-[#9b87f5]', 'text-white');
+        displayContent();
+      });
+    });
+
+    // Search functionality
+    function searchBlog() {
+      displayContent();
+    }
+
+    blogSearchBtn.addEventListener('click', searchBlog);
+    blogSearchInput.addEventListener('keyup', function (event) {
+      if (event.key === 'Enter') {
+        searchBlog();
+      }
+    });
+
+    // Navigation Toggle
+    navToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', displayContent);
+  </script>
+</body>
+
+</html>
