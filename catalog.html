@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog - GamerTech</title>
+    <meta name="description" content="Browse our extensive collection of gaming gear, PC components, and accessories">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/catalog.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" class="logo">
+                    <span class="gamer">Gamer</span><span class="tech">Tech</span>
+                </a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i><span>Home</span></a></li>
+                    <li class="nav-item"><a href="catalog.html" class="nav-link active"><i class="fas fa-th-large"></i><span>Catalog</span></a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link"><i class="fas fa-newspaper"></i><span>Blog</span></a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link"><i class="fas fa-info-circle"></i><span>About</span></a></li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <button class="search-btn" id="search-btn"><i class="fas fa-search"></i></button>
+                <div class="cart-container">
+                    <button class="cart-btn" id="cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </button>
+                    <div class="cart-dropdown" id="cart-dropdown">
+                        <div class="cart-header">
+                            <h3>Shopping Cart</h3>
+                            <button class="cart-close" id="cart-close"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="cart-items" id="cart-items">
+                            <div class="cart-empty">
+                                <i class="fas fa-shopping-cart"></i>
+                                <p>Your cart is empty</p>
+                                <a href="catalog.html" class="btn btn-primary">Start Shopping</a>
+                            </div>
+                        </div>
+                        <div class="cart-footer">
+                            <div class="cart-total">
+                                <span>Total: <span id="cart-total">$0.00</span></span>
+                            </div>
+                            <div class="cart-actions">
+                                <a href="cart.html" class="btn btn-outline">View Cart</a>
+                                <a href="checkout.html" class="btn btn-primary">Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-menu">
+                    <button class="user-btn" id="user-btn"><i class="fas fa-user"></i></button>
+                    <div class="user-dropdown" id="user-dropdown">
+                        <a href="login.html" class="user-link"><i class="fas fa-sign-in-alt"></i><span>Login</span></a>
+                        <a href="register.html" class="user-link"><i class="fas fa-user-plus"></i><span>Register</span></a>
+                    </div>
+                </div>
+                <button class="mobile-toggle" id="mobile-toggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Breadcrumb -->
+        <section class="breadcrumb">
+            <div class="container">
+                <nav class="breadcrumb-nav">
+                    <a href="index.html">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Catalog</span>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Catalog Header -->
+        <section class="catalog-header">
+            <div class="container">
+                <div class="header-content">
+                    <h1 class="page-title">Product Catalog</h1>
+                    <p class="page-description">
+                        Discover our extensive collection of premium gaming gear, PC components, and accessories
+                    </p>
+                    <div class="quick-search">
+                        <div class="search-box">
+                            <input type="text" placeholder="Search products..." id="product-search">
+                            <button type="button" class="search-submit"><i class="fas fa-search"></i></button>
+                        </div>
+                        <div class="search-suggestions" id="search-suggestions">
+                            <span class="suggestion-tag">Gaming Mouse</span>
+                            <span class="suggestion-tag">Mechanical Keyboard</span>
+                            <span class="suggestion-tag">Gaming Headset</span>
+                            <span class="suggestion-tag">Graphics Card</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catalog Content -->
+        <section class="catalog-content">
+            <div class="container">
+                <div class="catalog-layout">
+                    <!-- Sidebar Filters -->
+                    <aside class="filters-sidebar" id="filters-sidebar">
+                        <div class="filters-header">
+                            <h3>Filters</h3>
+                            <button class="clear-filters" id="clear-filters"><i class="fas fa-times"></i><span>Clear All</span></button>
+                        </div>
+                        <div class="filter-group">
+                            <h4 class="filter-title"><span>Categories</span><i class="fas fa-chevron-down"></i></h4>
+                            <div class="filter-content">
+                                <label class="filter-option">
+                                    <input type="checkbox" name="category" value="gaming-gear">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">Gaming Gear</span>
+                                    <span class="count">(45)</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="category" value="pc-components">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">PC Components</span>
+                                    <span class="count">(32)</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="category" value="monitors">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">Gaming Monitors</span>
+                                    <span class="count">(18)</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="category" value="audio">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">Gaming Audio</span>
+                                    <span class="count">(25)</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="category" value="accessories">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">Accessories</span>
+                                    <span class="count">(38)</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="filter-group">
+                            <h4 class="filter-title"><span>Brands</span><i class="fas fa-chevron-down"></i></h4>
+                            <div class="filter-content">
+                                <label class="filter-option">
+                                    <input type="checkbox" name="brand" value="logitech">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">Logitech</span>
+                                    <span class="count">(28)</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="brand" value="razer">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">Razer</span>
+                                    <span class="count">(22)</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="brand" value="corsair">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">Corsair</span>
+                                    <span class="count">(19)</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="brand" value="steelseries">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">SteelSeries</span>
+                                    <span class="count">(15)</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="brand" value="asus">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">ASUS</span>
+                                    <span class="count">(24)</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="filter-group">
+                            <h4 class="filter-title"><span>Price Range</span><i class="fas fa-chevron-down"></i></h4>
+                            <div class="filter-content">
+                                <div class="price-range-slider">
+                                    <div class="price-inputs">
+                                        <div class="price-input">
+                                            <label>Min</label>
+                                            <input type="number" id="min-price" value="0" min="0" max="5000">
+                                        </div>
+                                        <div class="price-input">
+                                            <label>Max</label>
+                                            <input type="number" id="max-price" value="5000" min="0" max="5000">
+                                        </div>
+                                    </div>
+                                    <div class="slider-container">
+                                        <div class="price-slider">
+                                            <div class="progress"></div>
+                                        </div>
+                                        <div class="range-input">
+                                            <input type="range" class="range-min" min="0" max="5000" value="0" step="10">
+                                            <input type="range" class="range-max" min="0" max="5000" value="5000" step="10">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-group">
+                            <h4 class="filter-title"><span>Customer Rating</span><i class="fas fa-chevron-down"></i></h4>
+                            <div class="filter-content">
+                                <label class="filter-option">
+                                    <input type="checkbox" name="rating" value="5">
+                                    <span class="checkmark"></span>
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="count">(12)</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="rating" value="4">
+                                    <span class="checkmark"></span>
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <span class="rating-text">& Up</span>
+                                    </div>
+                                    <span class="count">(28)</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="rating" value="3">
+                                    <span class="checkmark"></span>
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <span class="rating-text">& Up</span>
+                                    </div>
+                                    <span class="count">(45)</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="filter-group">
+                            <h4 class="filter-title"><span>Availability</span><i class="fas fa-chevron-down"></i></h4>
+                            <div class="filter-content">
+                                <label class="filter-option">
+                                    <input type="checkbox" name="availability" value="in-stock">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">In Stock</span>
+                                    <span class="count">(142)</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="availability" value="on-sale">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">On Sale</span>
+                                    <span class="count">(28)</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="availability" value="new-arrivals">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">New Arrivals</span>
+                                    <span class="count">(15)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Main Content Area -->
+                    <div class="products-area">
+                        <div class="products-toolbar">
+                            <div class="toolbar-left">
+                                <button class="mobile-filter-toggle" id="mobile-filter-toggle">
+                                    <i class="fas fa-filter"></i><span>Filters</span>
+                                </button>
+                                <div class="results-count">
+                                    <span id="results-count">Showing 1-12 of 158 products</span>
+                                </div>
+                            </div>
+                            <div class="toolbar-right">
+                                <div class="view-options">
+                                    <button class="view-btn active" data-view="grid"><i class="fas fa-th"></i></button>
+                                    <button class="view-btn" data-view="list"><i class="fas fa-list"></i></button>
+                                </div>
+                                <div class="sort-options">
+                                    <select id="sort-select">
+                                        <option value="featured">Featured</option>
+                                        <option value="newest">Newest First</option>
+                                        <option value="price-low">Price: Low to High</option>
+                                        <option value="price-high">Price: High to Low</option>
+                                        <option value="rating">Highest Rated</option>
+                                        <option value="popular">Most Popular</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="active-filters" id="active-filters"></div>
+                        <div class="products-grid" id="products-grid"></div>
+                        <div class="pagination-container">
+                            <nav class="pagination" id="pagination"></nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <span class="gamer">Gamer</span><span class="tech">Tech</span>
+                        </a>
+                        <p>Premium gaming gear and PC components for enthusiasts who demand the best performance and quality.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="catalog.html">Catalog</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="catalog.html?category=gaming-gear">Gaming Gear</a></li>
+                        <li><a href="catalog.html?category=pc-components">PC Components</a></li>
+                        <li><a href="catalog.html?category=monitors">Gaming Monitors</a></li>
+                        <li><a href="catalog.html?category=audio">Gaming Audio</a></li>
+                        <li><a href="catalog.html?category=accessories">Accessories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="support.html">Help Center</a></li>
+                        <li><a href="shipping.html">Shipping Info</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="warranty.html">Warranty</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Gaming Street, Tech City, TC 12345</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@gamertech.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon-Fri: 9AM-6PM EST</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>© 2024 GamerTech. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                        <a href="cookies.html">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top"><i class="fas fa-chevron-up"></i></button>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GamerTech - Premium Gaming Gear & PC Components</title>
+    <meta name="description" content="Premium gaming gear, PC components, and custom builds for gamers and enthusiasts">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <span class="gamer">Gamer</span><span class="tech">Tech</span>
+            </div>
+            <div class="loading-spinner"></div>
+            <p>Loading Gaming Experience...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" class="logo">
+                    <span class="gamer">Gamer</span><span class="tech">Tech</span>
+                </a>
+            </div>
+            
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link active">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="catalog.html" class="nav-link">
+                            <i class="fas fa-th-large"></i>
+                            <span>Catalog</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="blog.html" class="nav-link">
+                            <i class="fas fa-newspaper"></i>
+                            <span>Blog</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">
+                            <i class="fas fa-info-circle"></i>
+                            <span>About</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-actions">
+                <!-- Search Button -->
+                <button class="search-btn" id="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+                
+                <!-- Cart -->
+                <div class="cart-container">
+                    <button class="cart-btn" id="cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </button>
+                    <div class="cart-dropdown" id="cart-dropdown">
+                        <div class="cart-header">
+                            <h3>Shopping Cart</h3>
+                            <button class="cart-close" id="cart-close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="cart-items" id="cart-items">
+                            <div class="cart-empty">
+                                <i class="fas fa-shopping-cart"></i>
+                                <p>Your cart is empty</p>
+                                <a href="catalog.html" class="btn btn-primary">Start Shopping</a>
+                            </div>
+                        </div>
+                        <div class="cart-footer">
+                            <div class="cart-total">
+                                <span>Total: <span id="cart-total">$0.00</span></span>
+                            </div>
+                            <div class="cart-actions">
+                                <a href="cart.html" class="btn btn-outline">View Cart</a>
+                                <a href="checkout.html" class="btn btn-primary">Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- User Menu -->
+                <div class="user-menu">
+                    <button class="user-btn" id="user-btn">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <div class="user-dropdown" id="user-dropdown">
+                        <a href="login.html" class="user-link">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span>Login</span>
+                        </a>
+                        <a href="register.html" class="user-link">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Register</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-toggle" id="mobile-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="search-overlay">
+        <div class="search-container">
+            <div class="search-header">
+                <h2>Search Products</h2>
+                <button class="search-close" id="search-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="search-form">
+                <input type="text" placeholder="Search for gaming gear, components..." id="search-input">
+                <button type="submit" class="search-submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <div class="search-suggestions">
+                <h3>Popular Searches</h3>
+                <div class="suggestion-tags">
+                    <span class="tag">Gaming Mouse</span>
+                    <span class="tag">Mechanical Keyboard</span>
+                    <span class="tag">Gaming Headset</span>
+                    <span class="tag">Graphics Card</span>
+                    <span class="tag">Gaming Monitor</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="hero-background">
+                <div class="hero-particles" id="hero-particles"></div>
+                <div class="hero-gradient"></div>
+            </div>
+            
+            <div class="hero-content">
+                <div class="container">
+                    <div class="hero-text">
+                        <h1 class="hero-title">
+                            <span class="title-line">Level Up Your</span>
+                            <span class="title-line highlight">Gaming Experience</span>
+                        </h1>
+                        <p class="hero-description">
+                            Discover premium gaming gear, cutting-edge PC components, and custom builds 
+                            designed for gamers who demand excellence.
+                        </p>
+                        <div class="hero-actions">
+                            <a href="catalog.html" class="btn btn-primary btn-large">
+                                <span>Shop Now</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a href="#featured" class="btn btn-outline btn-large">
+                                <span>Explore</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="10000">0</div>
+                            <div class="stat-label">Happy Gamers</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="500">0</div>
+                            <div class="stat-label">Products</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="50">0</div>
+                            <div class="stat-label">Brands</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator">
+                <div class="scroll-mouse">
+                    <div class="scroll-wheel"></div>
+                </div>
+                <span>Scroll to explore</span>
+            </div>
+        </section>
+
+        <!-- Featured Categories -->
+        <section class="featured-categories" id="featured">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Featured Categories</h2>
+                    <p class="section-description">Explore our premium gaming categories</p>
+                </div>
+                
+                <div class="categories-grid">
+                    <div class="category-card" data-category="gaming-gear">
+                        <div class="category-image">
+                            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5" alt="Gaming Gear">
+                            <div class="category-overlay">
+                                <div class="category-icon">
+                                    <i class="fas fa-gamepad"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-content">
+                            <h3>Gaming Gear</h3>
+                            <p>Premium mice, keyboards, and accessories</p>
+                            <div class="category-stats">
+                                <span>150+ Products</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card" data-category="pc-components">
+                        <div class="category-image">
+                            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475" alt="PC Components">
+                            <div class="category-overlay">
+                                <div class="category-icon">
+                                    <i class="fas fa-microchip"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-content">
+                            <h3>PC Components</h3>
+                            <p>Graphics cards, processors, and more</p>
+                            <div class="category-stats">
+                                <span>200+ Products</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card" data-category="monitors">
+                        <div class="category-image">
+                            <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf" alt="Gaming Monitors">
+                            <div class="category-overlay">
+                                <div class="category-icon">
+                                    <i class="fas fa-desktop"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-content">
+                            <h3>Gaming Monitors</h3>
+                            <p>High refresh rate displays</p>
+                            <div class="category-stats">
+                                <span>80+ Products</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card" data-category="audio">
+                        <div class="category-image">
+                            <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944" alt="Gaming Audio">
+                            <div class="category-overlay">
+                                <div class="category-icon">
+                                    <i class="fas fa-headphones"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-content">
+                            <h3>Gaming Audio</h3>
+                            <p>Headsets and sound systems</p>
+                            <div class="category-stats">
+                                <span>70+ Products</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="featured-products">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Featured Products</h2>
+                    <p class="section-description">Hand-picked products for serious gamers</p>
+                </div>
+                
+                <div class="products-grid" id="featured-products">
+                    <!-- Products will be loaded dynamically -->
+                </div>
+                
+                <div class="section-footer">
+                    <a href="catalog.html" class="btn btn-outline btn-large">
+                        <span>View All Products</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Why Choose GamerTech?</h2>
+                    <p class="section-description">We're committed to delivering the best gaming experience</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h3>Fast Shipping</h3>
+                        <p>Free shipping on orders over $100. Get your gear delivered in 1-3 business days.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Warranty Protection</h3>
+                        <p>All products come with manufacturer warranty and our extended protection plans.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>24/7 Support</h3>
+                        <p>Our gaming experts are available around the clock to help with any questions.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h3>Premium Quality</h3>
+                        <p>We only stock products from trusted brands known for their quality and performance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h2>Stay Updated</h2>
+                        <p>Get the latest gaming news, product launches, and exclusive deals delivered to your inbox.</p>
+                    </div>
+                    <form class="newsletter-form" id="newsletter-form">
+                        <div class="form-group">
+                            <input type="email" placeholder="Enter your email address" required>
+                            <button type="submit" class="btn btn-primary">
+                                <span>Subscribe</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <p class="form-note">We respect your privacy. Unsubscribe at any time.</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <span class="gamer">Gamer</span><span class="tech">Tech</span>
+                        </a>
+                        <p>Premium gaming gear and PC components for enthusiasts who demand the best performance and quality.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-discord"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="catalog.html">Catalog</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="catalog.html?category=gaming-gear">Gaming Gear</a></li>
+                        <li><a href="catalog.html?category=pc-components">PC Components</a></li>
+                        <li><a href="catalog.html?category=monitors">Gaming Monitors</a></li>
+                        <li><a href="catalog.html?category=audio">Gaming Audio</a></li>
+                        <li><a href="catalog.html?category=accessories">Accessories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="support.html">Help Center</a></li>
+                        <li><a href="shipping.html">Shipping Info</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="warranty.html">Warranty</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Gaming Street, Tech City, TC 12345</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@gamertech.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon-Fri: 9AM-6PM EST</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 GamerTech. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                        <a href="cookies.html">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>

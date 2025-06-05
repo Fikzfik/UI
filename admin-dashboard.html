@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - GamerTech</title>
+    <link rel="stylesheet" href="css/admin-dashboard.css">
+    <link rel="stylesheet" href="css/admin-management.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-gamepad"></i>
+                <span>GamerTech Admin</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="nav-item active">
+                    <a href="#dashboard" class="nav-link" data-section="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#articles" class="nav-link" data-section="articles">
+                        <i class="fas fa-newspaper"></i>
+                        <span>Kelola Artikel</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#products" class="nav-link" data-section="products">
+                        <i class="fas fa-box"></i>
+                        <span>Kelola Produk</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#users" class="nav-link" data-section="users">
+                        <i class="fas fa-users"></i>
+                        <span>Kelola Pengguna</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#transactions" class="nav-link" data-section="transactions">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Kelola Transaksi</span>
+                    </a>
+                </li>
+                <li class="nav-separator"></li>
+                <li class="nav-item">
+                    <a href="#analytics" class="nav-link" data-section="analytics">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#reports" class="nav-link" data-section="reports">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#settings" class="nav-link" data-section="settings">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="user-details">
+                    <span class="user-name">Admin User</span>
+                    <span class="user-role">Administrator</span>
+                </div>
+            </div>
+            <button class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Sales Dashboard</h1>
+            </div>
+            
+            <div class="header-right">
+                <div class="date-filter">
+                    <select id="dateRange" class="date-select">
+                        <option value="7">Last 7 Days</option>
+                        <option value="30" selected>Last 30 Days</option>
+                        <option value="90">Last 3 Months</option>
+                        <option value="365">Last Year</option>
+                        <option value="custom">Custom Range</option>
+                    </select>
+                </div>
+                
+                <div class="custom-date-range" id="customDateRange" style="display: none;">
+                    <input type="date" id="startDate" class="date-input">
+                    <span>to</span>
+                    <input type="date" id="endDate" class="date-input">
+                    <button id="applyDateRange" class="apply-btn">Apply</button>
+                </div>
+                
+                <button class="refresh-btn" id="refreshData">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+                
+                <div class="notification-bell">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content" id="dashboardSection">
+            <!-- KPI Cards -->
+            <section class="kpi-section">
+                <div class="kpi-grid">
+                    <div class="kpi-card revenue-card">
+                        <div class="kpi-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="kpi-content">
+                            <h3>Total Revenue</h3>
+                            <div class="kpi-value" id="totalRevenue">$0</div>
+                            <div class="kpi-change positive" id="revenueChange">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+12.5%</span>
+                            </div>
+                        </div>
+                        <div class="kpi-chart">
+                            <canvas id="revenueSparkline"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card orders-card">
+                        <div class="kpi-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="kpi-content">
+                            <h3>Total Orders</h3>
+                            <div class="kpi-value" id="totalOrders">0</div>
+                            <div class="kpi-change positive" id="ordersChange">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+8.3%</span>
+                            </div>
+                        </div>
+                        <div class="kpi-chart">
+                            <canvas id="ordersSparkline"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card aov-card">
+                        <div class="kpi-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="kpi-content">
+                            <h3>Avg Order Value</h3>
+                            <div class="kpi-value" id="avgOrderValue">$0</div>
+                            <div class="kpi-change negative" id="aovChange">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>-2.1%</span>
+                            </div>
+                        </div>
+                        <div class="kpi-chart">
+                            <canvas id="aovSparkline"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card customers-card">
+                        <div class="kpi-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="kpi-content">
+                            <h3>New Customers</h3>
+                            <div class="kpi-value" id="newCustomers">0</div>
+                            <div class="kpi-change positive" id="customersChange">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+15.7%</span>
+                            </div>
+                        </div>
+                        <div class="kpi-chart">
+                            <canvas id="customersSparkline"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section class="charts-section">
+                <div class="charts-grid">
+                    <div class="chart-card large">
+                        <div class="chart-header">
+                            <h3>Sales Trend</h3>
+                            <div class="chart-controls">
+                                <button class="chart-btn active" data-period="daily">Daily</button>
+                                <button class="chart-btn" data-period="weekly">Weekly</button>
+                                <button class="chart-btn" data-period="monthly">Monthly</button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="salesTrendChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card medium">
+                        <div class="chart-header">
+                            <h3>Sales by Category</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="categoriesChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card medium">
+                        <div class="chart-header">
+                            <h3>Top Selling Products</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="topProductsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Tables Section -->
+            <section class="tables-section">
+                <div class="tables-grid">
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3>Recent Orders</h3>
+                            <button class="view-all-btn">View All</button>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table" id="recentOrdersTable">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer</th>
+                                        <th>Product</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentOrdersBody">
+                                    <!-- Data will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3>Top Products Performance</h3>
+                            <button class="export-btn">
+                                <i class="fas fa-download"></i>
+                                Export
+                            </button>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table" id="topProductsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Sales</th>
+                                        <th>Revenue</th>
+                                        <th>Growth</th>
+                                        <th>Stock</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="topProductsBody">
+                                    <!-- Data will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Insights -->
+            <section class="insights-section">
+                <div class="insights-grid">
+                    <div class="insight-card">
+                        <div class="insight-icon">
+                            <i class="fas fa-trending-up"></i>
+                        </div>
+                        <div class="insight-content">
+                            <h4>Sales Growth</h4>
+                            <p>Your sales have increased by 23% compared to last month. Gaming peripherals are performing exceptionally well.</p>
+                            <div class="insight-action">
+                                <button class="insight-btn">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="insight-card">
+                        <div class="insight-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="insight-content">
+                            <h4>Low Stock Alert</h4>
+                            <p>5 products are running low on stock. Consider restocking to avoid missed sales opportunities.</p>
+                            <div class="insight-action">
+                                <button class="insight-btn">Manage Inventory</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="insight-card">
+                        <div class="insight-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="insight-content">
+                            <h4>Customer Satisfaction</h4>
+                            <p>Average rating has improved to 4.8/5. Customer reviews mention fast delivery and product quality.</p>
+                            <div class="insight-action">
+                                <button class="insight-btn">View Reviews</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Articles Management Section -->
+        <div class="management-section" id="articlesSection" style="display: none;">
+            <div class="section-header">
+                <h1>Kelola Artikel</h1>
+                <button class="add-btn" id="addArticleBtn">
+                    <i class="fas fa-plus"></i>
+                    Tambah Artikel
+                </button>
+            </div>
+            <div class="management-content">
+                <div class="articles-management">
+                    <div class="management-toolbar">
+                        <div class="search-container">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="articleSearch" placeholder="Cari artikel..." class="search-input">
+                        </div>
+                        <div class="filter-container">
+                            <select id="categoryFilterArticles" class="filter-select">
+                                <option value="">Semua Kategori</option>
+                                <option value="gaming">Gaming</option>
+                                <option value="hardware">Hardware</option>
+                                <option value="review">Review</option>
+                                <option value="tutorial">Tutorial</option>
+                            </select>
+                            <select id="statusFilterArticles" class="filter-select">
+                                <option value="">Semua Status</option>
+                                <option value="published">Published</option>
+                                <option value="draft">Draft</option>
+                                <option value="archived">Archived</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="articles-grid" id="articlesGrid">
+                        <!-- Articles will be populated here -->
+                    </div>
+                    <div class="pagination-container">
+                        <div class="pagination" id="articlesPagination">
+                            <!-- Pagination will be generated here -->
+                        </div>
+                    </div>
+                    <!-- Article Modal -->
+                    <div class="modal-overlay" id="articleModal">
+                        <div class="modal-container">
+                            <div class="modal-header">
+                                <h3 id="modalTitleArticles">Tambah Artikel</h3>
+                                <button class="modal-close" id="closeModalArticles">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="articleForm" class="article-form">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="articleTitle">Judul Artikel</label>
+                                            <input type="text" id="articleTitle" name="title" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="articleCategory">Kategori</label>
+                                            <select id="articleCategory" name="category" required>
+                                                <option value="">Pilih Kategori</option>
+                                                <option value="gaming">Gaming</option>
+                                                <option value="hardware">Hardware</option>
+                                                <option value="review">Review</option>
+                                                <option value="tutorial">Tutorial</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="articleExcerpt">Excerpt</label>
+                                        <textarea id="articleExcerpt" name="excerpt" rows="3" placeholder="Ringkasan singkat artikel..."></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="articleContent">Konten</label>
+                                        <textarea id="articleContent" name="content" rows="10" placeholder="Tulis konten artikel di sini..."></textarea>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="articleImage">Gambar Utama</label>
+                                            <div class="image-upload">
+                                                <input type="file" id="articleImage" name="image" accept="image/*">
+                                                <div class="image-preview" id="imagePreview">
+                                                    <i class="fas fa-image"></i>
+                                                    <span>Upload Gambar</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="articleStatus">Status</label>
+                                            <select id="articleStatus" name="status" required>
+                                                <option value="draft">Draft</option>
+                                                <option value="published">Published</option>
+                                                <option value="archived">Archived</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="articleTags">Tags</label>
+                                        <input type="text" id="articleTags" name="tags" placeholder="gaming, hardware, review (pisahkan dengan koma)">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn-secondary" id="cancelBtnArticles">Batal</button>
+                                <button type="submit" form="articleForm" class="btn-primary" id="saveBtnArticles">Simpan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Management Section -->
+        <div class="management-section" id="productsSection" style="display: none;">
+            <div class="section-header">
+                <h1>Kelola Produk</h1>
+                <button class="add-btn" id="addProductBtn">
+                    <i class="fas fa-plus"></i>
+                    Tambah Produk
+                </button>
+            </div>
+            <div class="management-content">
+                <div class="products-management">
+                    <div class="management-toolbar">
+                        <div class="search-container">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="productSearch" placeholder="Cari produk..." class="search-input">
+                        </div>
+                        <div class="filter-container">
+                            <select id="categoryFilterProducts" class="filter-select">
+                                <option value="">Semua Kategori</option>
+                                <option value="gaming-peripherals">Gaming Peripherals</option>
+                                <option value="pc-components">PC Components</option>
+                                <option value="gaming-furniture">Gaming Furniture</option>
+                                <option value="accessories">Accessories</option>
+                            </select>
+                            <select id="stockFilter" class="filter-select">
+                                <option value="">Semua Stock</option>
+                                <option value="in-stock">In Stock</option>
+                                <option value="low-stock">Low Stock</option>
+                                <option value="out-of-stock">Out of Stock</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="products-grid" id="productsGrid">
+                        <!-- Products will be populated here -->
+                    </div>
+                    <div class="pagination-container">
+                        <div class="pagination" id="productsPagination">
+                            <!-- Pagination will be generated here -->
+                        </div>
+                    </div>
+                    <!-- Product Modal -->
+                    <div class="modal-overlay" id="productModal">
+                        <div class="modal-container large">
+                            <div class="modal-header">
+                                <h3 id="modalTitleProducts">Tambah Produk</h3>
+                                <button class="modal-close" id="closeModalProducts">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="productForm" class="product-form">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="productName">Nama Produk</label>
+                                            <input type="text" id="productName" name="name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="productCategory">Kategori</label>
+                                            <select id="productCategory" name="category" required>
+                                                <option value="">Pilih Kategori</option>
+                                                <option value="gaming-peripherals">Gaming Peripherals</option>
+                                                <option value="pc-components">PC Components</option>
+                                                <option value="gaming-furniture">Gaming Furniture</option>
+                                                <option value="accessories">Accessories</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="productDescription">Deskripsi</label>
+                                        <textarea id="productDescription" name="description" rows="4" placeholder="Deskripsi produk..."></textarea>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="productPrice">Harga (Rp)</label>
+                                            <input type="number" id="productPrice" name="price" min="0" step="1000" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="productStock">Stock</label>
+                                            <input type="number" id="productStock" name="stock" min="0" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="productSKU">SKU</label>
+                                            <input type="text" id="productSKU" name="sku" placeholder="SKU-001">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="productImages">Gambar Produk</label>
+                                        <div class="images-upload">
+                                            <input type="file" id="productImages" name="images" accept="image/*" multiple>
+                                            <div class="images-preview" id="imagesPreview">
+                                                <div class="upload-placeholder">
+                                                    <i class="fas fa-images"></i>
+                                                    <span>Upload Gambar (Max 5)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="productBrand">Brand</label>
+                                            <input type="text" id="productBrand" name="brand" placeholder="Nama brand">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="productWeight">Berat (kg)</label>
+                                            <input type="number" id="productWeight" name="weight" min="0" step="0.1">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="productStatus">Status</label>
+                                            <select id="productStatus" name="status" required>
+                                                <option value="active">Active</option>
+                                                <option value="inactive">Inactive</option>
+                                                <option value="discontinued">Discontinued</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="productSpecs">Spesifikasi</label>
+                                        <textarea id="productSpecs" name="specifications" rows="4" placeholder="Spesifikasi teknis produk..."></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn-secondary" id="cancelBtnProducts">Batal</button>
+                                <button type="submit" form="productForm" class="btn-primary" id="saveBtnProducts">Simpan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Users Management Section -->
+        <div class="management-section" id="usersSection" style="display: none;">
+            <div class="section-header">
+                <h1>Kelola Pengguna</h1>
+                <button class="add-btn" id="addUserBtn">
+                    <i class="fas fa-plus"></i>
+                    Tambah Pengguna
+                </button>
+            </div>
+            <div class="management-content">
+                <div class="users-management">
+                    <div class="management-toolbar">
+                        <div class="search-container">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="userSearch" placeholder="Cari pengguna..." class="search-input">
+                        </div>
+                        <div class="filter-container">
+                            <select id="roleFilter" class="filter-select">
+                                <option value="">Semua Role</option>
+                                <option value="admin">Admin</option>
+                                <option value="customer">Customer</option>
+                                <option value="moderator">Moderator</option>
+                            </select>
+                            <select id="statusFilterUsers" class="filter-select">
+                                <option value="">Semua Status</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="banned">Banned</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="users-table-container">
+                        <table class="users-table" id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="selectAll">
+                                    </th>
+                                    <th>Avatar</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Bergabung</th>
+                                    <th>Last Login</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <!-- Users will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination-container">
+                        <div class="pagination" id="usersPagination">
+                            <!-- Pagination will be generated here -->
+                        </div>
+                    </div>
+                    <!-- User Modal -->
+                    <div class="modal-overlay" id="userModal">
+                        <div class="modal-container">
+                            <div class="modal-header">
+                                <h3 id="modalTitleUsers">Tambah Pengguna</h3>
+                                <button class="modal-close" id="closeModalUsers">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="userForm" class="user-form">
+                                    <div class="form-group">
+                                        <label for="userAvatar">Avatar</label>
+                                        <div class="avatar-upload">
+                                            <input type="file" id="userAvatar" name="avatar" accept="image/*">
+                                            <div class="avatar-preview" id="avatarPreview">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="userFirstName">Nama Depan</label>
+                                            <input type="text" id="userFirstName" name="firstName" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="userLastName">Nama Belakang</label>
+                                            <input type="text" id="userLastName" name="lastName" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="userEmail">Email</label>
+                                        <input type="email" id="userEmail" name="email" required>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="userPhone">Telepon</label>
+                                            <input type="tel" id="userPhone" name="phone">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="userRole">Role</label>
+                                            <select id="userRole" name="role" required>
+                                                <option value="customer">Customer</option>
+                                                <option value="moderator">Moderator</option>
+                                                <option value="admin">Admin</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="userAddress">Alamat</label>
+                                        <textarea id="userAddress" name="address" rows="3" placeholder="Alamat lengkap..."></textarea>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="userStatus">Status</label>
+                                            <select id="userStatus" name="status" required>
+                                                <option value="active">Active</option>
+                                                <option value="inactive">Inactive</option>
+                                                <option value="banned">Banned</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="userPassword">Password</label>
+                                            <input type="password" id="userPassword" name="password" placeholder="Kosongkan jika tidak ingin mengubah">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn-secondary" id="cancelBtnUsers">Batal</button>
+                                <button type="submit" form="userForm" class="btn-primary" id="saveBtnUsers">Simpan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transactions Management Section -->
+        <div class="management-section" id="transactionsSection" style="display: none;">
+            <div class="section-header">
+                <h1>Kelola Transaksi</h1>
+                <div class="transaction-filters">
+                    <select id="transactionStatus" class="filter-select">
+                        <option value="">Semua Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="processing">Processing</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                        <option value="refunded">Refunded</option>
+                    </select>
+                    <select id="paymentFilter" class="filter-select">
+                        <option value="">Semua Payment</option>
+                        <option value="credit-card">Credit Card</option>
+                        <option value="bank-transfer">Bank Transfer</option>
+                        <option value="e-wallet">E-Wallet</option>
+                        <option value="cod">COD</option>
+                    </select>
+                    <input type="date" id="transactionDate" class="filter-input">
+                </div>
+            </div>
+            <div class="management-content">
+                <div class="transactions-management">
+                    <div class="management-toolbar">
+                        <div class="search-container">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="transactionSearch" placeholder="Cari transaksi..." class="search-input">
+                        </div>
+                    </div>
+                    <div class="transactions-table-container">
+                        <table class="transactions-table" id="transactionsTable">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Produk</th>
+                                    <th>Total</th>
+                                    <th>Payment</th>
+                                    <th>Status</th>
+                                    <th>Tanggal</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactionsTableBody">
+                                <!-- Transactions will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination-container">
+                        <div class="pagination" id="transactionsPagination">
+                            <!-- Pagination will be generated here -->
+                        </div>
+                    </div>
+                    <!-- Transaction Detail Modal -->
+                    <div class="modal-overlay" id="transactionModal">
+                        <div class="modal-container large">
+                            <div class="modal-header">
+                                <h3 id="modalTitleTransactions">Detail Transaksi</h3>
+                                <button class="modal-close" id="closeModalTransactions">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="transaction-detail" id="transactionDetail">
+                                    <!-- Transaction details will be populated here -->
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn-secondary" id="cancelBtnTransactions">Tutup</button>
+                                <button type="button" class="btn-warning" id="updateStatusBtn">Update Status</button>
+                                <button type="button" class="btn-primary" id="printInvoiceBtn">Print Invoice</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Status Update Modal -->
+                    <div class="modal-overlay" id="statusModal">
+                        <div class="modal-container small">
+                            <div class="modal-header">
+                                <h3>Update Status Transaksi</h3>
+                                <button class="modal-close" id="closeStatusModal">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="statusForm">
+                                    <div class="form-group">
+                                        <label for="newStatus">Status Baru</label>
+                                        <select id="newStatus" name="status" required>
+                                            <option value="pending">Pending</option>
+                                            <option value="processing">Processing</option>
+                                            <option value="completed">Completed</option>
+                                            <option value="cancelled">Cancelled</option>
+                                            <option value="refunded">Refunded</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="statusNote">Catatan</label>
+                                        <textarea id="statusNote" name="note" rows="3" placeholder="Catatan untuk perubahan status..."></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn-secondary" id="cancelStatusBtn">Batal</button>
+                                <button type="submit" form="statusForm" class="btn-primary" id="saveStatusBtn">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics, Reports, Settings Sections (Placeholder) -->
+        <div class="management-section" id="analyticsSection" style="display: none;">
+            <div class="section-header">
+                <h1>Analytics</h1>
+            </div>
+            <div class="management-content">
+                <p>Analytics content will be displayed here.</p>
+            </div>
+        </div>
+        <div class="management-section" id="reportsSection" style="display: none;">
+            <div class="section-header">
+                <h1>Reports</h1>
+            </div>
+            <div class="management-content">
+                <p>Reports content will be displayed here.</p>
+            </div>
+        </div>
+        <div class="management-section" id="settingsSection" style="display: none;">
+            <div class="section-header">
+                <h1>Settings</h1>
+            </div>
+            <div class="management-content">
+                <p>Settings content will be displayed here.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <script src="js/admin-dashboard.js"></script>
+</body>
+</html>

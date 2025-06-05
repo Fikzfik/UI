@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Mouse Pro X - Product Detail - GamerTech</title>
+    <meta name="description" content="High-precision gaming mouse with customizable RGB lighting and programmable buttons">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Product Detail Specific Styles */
+        .main-content { padding-top: 70px; }
+        
+        .breadcrumb {
+            background: var(--bg-secondary);
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--border-primary);
+        }
+        
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        
+        .breadcrumb-nav a:hover { color: var(--primary-color); }
+        .breadcrumb-nav i { color: var(--text-muted); font-size: 0.8rem; }
+        .breadcrumb-nav span { color: var(--text-primary); }
+        
+        .product-detail {
+            padding: var(--spacing-2xl) 0;
+        }
+        
+        .product-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-2xl);
+            margin-bottom: var(--spacing-2xl);
+        }
+        
+        .product-gallery {
+            position: sticky;
+            top: 90px;
+            height: fit-content;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 500px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: var(--spacing-lg);
+            border: 1px solid var(--border-primary);
+        }
+        
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .thumbnail-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-sm);
+        }
+        
+        .thumbnail {
+            height: 100px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .thumbnail.active,
+        .thumbnail:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-info h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            color: var(--text-primary);
+        }
+        
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .rating-stars {
+            display: flex;
+            gap: 2px;
+        }
+        
+        .rating-stars i {
+            color: var(--star-color);
+            font-size: 1.1rem;
+        }
+        
+        .rating-text {
+            color: var(--text-secondary);
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .current-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .original-price {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+        
+        .discount-badge {
+            background: var(--error-color);
+            color: white;
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-full);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .product-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .product-options {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .option-group {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .option-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+        }
+        
+        .option-values {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+        }
+        
+        .option-value {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-md);
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .option-value:hover,
+        .option-value.active {
+            background: var(--primary-color);
+            color: var(--text-primary);
+            border-color: var(--primary-color);
+        }
+        
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .quantity-label {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+        
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-tertiary);
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .quantity-btn:hover {
+            background: var(--primary-color);
+            color: var(--text-primary);
+        }
+        
+        .quantity-input {
+            width: 60px;
+            height: 40px;
+            text-align: center;
+            border: none;
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .btn-add-cart {
+            flex: 1;
+            background: var(--primary-color);
+            color: var(--text-primary);
+            border: none;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--radius-md);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .btn-add-cart:hover {
+            background: var(--primary-color-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-wishlist,
+        .btn-compare {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-wishlist:hover,
+        .btn-compare:hover {
+            background: var(--primary-color);
+            color: var(--text-primary);
+            border-color: var(--primary-color);
+        }
+        
+        .product-meta {
+            border-top: 1px solid var(--border-primary);
+            padding-top: var(--spacing-lg);
+        }
+        
+        .meta-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .meta-label {
+            color: var(--text-muted);
+        }
+        
+        .meta-value {
+            color: var(--text-primary);
+        }
+        
+        .product-tabs {
+            margin-top: var(--spacing-2xl);
+        }
+        
+        .tab-nav {
+            display: flex;
+            border-bottom: 1px solid var(--border-primary);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .tab-btn {
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab-btn.active,
+        .tab-btn:hover {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .specifications-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .specifications-table th,
+        .specifications-table td {
+            padding: var(--spacing-md);
+            text-align: left;
+            border-bottom: 1px solid var(--border-primary);
+        }
+        
+        .specifications-table th {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .specifications-table td {
+            color: var(--text-secondary);
+        }
+        
+        .review-item {
+            padding: var(--spacing-lg);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        .reviewer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-full);
+            object-fit: cover;
+        }
+        
+        .reviewer-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .review-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .review-content {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .related-products {
+            margin-top: var(--spacing-2xl);
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        
+        @media (max-width: 768px) {
+            .product-layout {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+            
+            .product-gallery {
+                position: static;
+            }
+            
+            .product-info h1 {
+                font-size: 2rem;
+            }
+            
+            .product-actions {
+                flex-direction: column;
+            }
+            
+            .btn-wishlist,
+            .btn-compare {
+                width: 100%;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" class="logo">
+                    <span class="gamer">Gamer</span><span class="tech">Tech</span>
+                </a>
+            </div>
+            
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="catalog.html" class="nav-link active">
+                            <i class="fas fa-th-large"></i>
+                            <span>Catalog</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="blog.html" class="nav-link">
+                            <i class="fas fa-newspaper"></i>
+                            <span>Blog</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">
+                            <i class="fas fa-info-circle"></i>
+                            <span>About</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-actions">
+                <button class="search-btn" id="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+                
+                <div class="cart-container">
+                    <button class="cart-btn" id="cart-btn" onclick="window.location.href='cart.html'">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </button>
+                </div>
+                
+                <div class="user-menu">
+                    <button class="user-btn" id="user-btn">
+                        <i class="fas fa-user"></i>
+                    </button>
+                </div>
+                
+                <button class="mobile-toggle" id="mobile-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Breadcrumb -->
+        <section class="breadcrumb">
+            <div class="container">
+                <nav class="breadcrumb-nav">
+                    <a href="index.html">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <a href="catalog.html">Catalog</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <a href="catalog.html?category=gaming-gear">Gaming Gear</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Gaming Mouse Pro X</span>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Product Detail -->
+        <section class="product-detail">
+            <div class="container">
+                <div class="product-layout">
+                    <!-- Product Gallery -->
+                    <div class="product-gallery">
+                        <div class="main-image" id="main-image">
+                            <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46" alt="Gaming Mouse Pro X">
+                        </div>
+                        <div class="thumbnail-gallery" id="thumbnail-gallery">
+                            <div class="thumbnail active">
+                                <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46" alt="View 1">
+                            </div>
+                            <div class="thumbnail">
+                                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7" alt="View 2">
+                            </div>
+                            <div class="thumbnail">
+                                <img src="https://images.unsplash.com/photo-1563297007-0686b7003af7" alt="View 3">
+                            </div>
+                            <div class="thumbnail">
+                                <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07" alt="View 4">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Info -->
+                    <div class="product-info">
+                        <h1 id="product-title">Gaming Mouse Pro X</h1>
+                        
+                        <div class="product-rating">
+                            <div class="rating-stars" id="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-text">(4.8 out of 5 - 245 reviews)</span>
+                        </div>
+
+                        <div class="product-price">
+                            <span class="current-price" id="current-price">$89.99</span>
+                            <span class="original-price" id="original-price">$109.99</span>
+                            <span class="discount-badge">-18%</span>
+                        </div>
+
+                        <div class="product-description" id="product-description">
+                            <p>Experience precision gaming with the Gaming Mouse Pro X. Featuring advanced optical sensor technology, customizable RGB lighting, and programmable buttons, this mouse is designed for competitive gamers who demand the best performance.</p>
+                        </div>
+
+                        <!-- Product Options -->
+                        <div class="product-options">
+                            <div class="option-group">
+                                <label class="option-label">Color:</label>
+                                <div class="option-values" id="color-options">
+                                    <div class="option-value active" data-value="black">Black</div>
+                                    <div class="option-value" data-value="white">White</div>
+                                    <div class="option-value" data-value="red">Red</div>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <label class="option-label">DPI:</label>
+                                <div class="option-values" id="dpi-options">
+                                    <div class="option-value" data-value="12000">12,000 DPI</div>
+                                    <div class="option-value active" data-value="16000">16,000 DPI</div>
+                                    <div class="option-value" data-value="25600">25,600 DPI</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quantity Selector -->
+                        <div class="quantity-selector">
+                            <span class="quantity-label">Quantity:</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" id="qty-decrease">-</button>
+                                <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="10">
+                                <button class="quantity-btn" id="qty-increase">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Product Actions -->
+                        <div class="product-actions">
+                            <button class="btn-add-cart" id="add-to-cart">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>Add to Cart</span>
+                            </button>
+                            <button class="btn-wishlist" id="add-to-wishlist" title="Add to Wishlist">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="btn-compare" id="add-to-compare" title="Add to Compare">
+                                <i class="fas fa-balance-scale"></i>
+                            </button>
+                        </div>
+
+                        <!-- Product Meta -->
+                        <div class="product-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">SKU:</span>
+                                <span class="meta-value">GMP-001-BLK</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Brand:</span>
+                                <span class="meta-value">Logitech</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Category:</span>
+                                <span class="meta-value">Gaming Gear</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Availability:</span>
+                                <span class="meta-value" style="color: var(--success-color);">In Stock (15 units)</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Shipping:</span>
+                                <span class="meta-value">Free shipping on orders over $50</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Tabs -->
+                <div class="product-tabs">
+                    <div class="tab-nav">
+                        <button class="tab-btn active" data-tab="description">Description</button>
+                        <button class="tab-btn" data-tab="specifications">Specifications</button>
+                        <button class="tab-btn" data-tab="reviews">Reviews (245)</button>
+                        <button class="tab-btn" data-tab="shipping">Shipping & Returns</button>
+                    </div>
+
+                    <!-- Description Tab -->
+                    <div class="tab-content active" id="description-tab">
+                        <h3>Product Description</h3>
+                        <p>The Gaming Mouse Pro X represents the pinnacle of gaming precision and performance. Engineered for competitive gamers, this mouse features an advanced optical sensor with up to 25,600 DPI, ensuring pixel-perfect accuracy in every movement.</p>
+                        
+                        <h4>Key Features:</h4>
+                        <ul>
+                            <li><strong>Advanced Optical Sensor:</strong> Up to 25,600 DPI with zero smoothing, filtering, or acceleration</li>
+                            <li><strong>Customizable RGB Lighting:</strong> 16.8 million colors with multiple lighting effects</li>
+                            <li><strong>Programmable Buttons:</strong> 11 programmable buttons for custom macros and commands</li>
+                            <li><strong>Ergonomic Design:</strong> Comfortable grip for extended gaming sessions</li>
+                            <li><strong>Durable Construction:</strong> Built to withstand over 50 million clicks</li>
+                            <li><strong>Gaming Software:</strong> Advanced customization software included</li>
+                        </ul>
+
+                        <h4>What's in the Box:</h4>
+                        <ul>
+                            <li>Gaming Mouse Pro X</li>
+                            <li>USB Cable (6 feet)</li>
+                            <li>User Manual</li>
+                            <li>Software Installation Guide</li>
+                            <li>Warranty Card</li>
+                        </ul>
+                    </div>
+
+                    <!-- Specifications Tab -->
+                    <div class="tab-content" id="specifications-tab">
+                        <table class="specifications-table">
+                            <tr>
+                                <th>Specification</th>
+                                <th>Details</th>
+                            </tr>
+                            <tr>
+                                <td>Sensor Type</td>
+                                <td>Advanced Optical Sensor</td>
+                            </tr>
+                            <tr>
+                                <td>DPI Range</td>
+                                <td>100 - 25,600 DPI</td>
+                            </tr>
+                            <tr>
+                                <td>Tracking Speed</td>
+                                <td>400+ IPS</td>
+                            </tr>
+                            <tr>
+                                <td>Acceleration</td>
+                                <td>40G</td>
+                            </tr>
+                            <tr>
+                                <td>Programmable Buttons</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>Lighting</td>
+                                <td>RGB (16.8M colors)</td>
+                            </tr>
+                            <tr>
+                                <td>Connection</td>
+                                <td>USB 2.0</td>
+                            </tr>
+                            <tr>
+                                <td>Cable Length</td>
+                                <td>6 feet (1.8m)</td>
+                            </tr>
+                            <tr>
+                                <td>Dimensions</td>
+                                <td>5.0" x 2.6" x 1.6"</td>
+                            </tr>
+                            <tr>
+                                <td>Weight</td>
+                                <td>3.5 oz (99g)</td>
+                            </tr>
+                            <tr>
+                                <td>Compatibility</td>
+                                <td>Windows 7/8/10/11, macOS 10.12+</td>
+                            </tr>
+                            <tr>
+                                <td>Warranty</td>
+                                <td>2 Years Limited</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Reviews Tab -->
+                    <div class="tab-content" id="reviews-tab">
+                        <div class="reviews-summary" style="margin-bottom: var(--spacing-xl); padding: var(--spacing-lg); background: var(--bg-tertiary); border-radius: var(--radius-lg);">
+                            <h3>Customer Reviews</h3>
+                            <div style="display: flex; align-items: center; gap: var(--spacing-lg); margin-bottom: var(--spacing-md);">
+                                <div style="font-size: 2rem; font-weight: 700; color: var(--primary-color);">4.8</div>
+                                <div>
+                                    <div class="rating-stars" style="margin-bottom: var(--spacing-xs);">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <div style="color: var(--text-secondary);">Based on 245 reviews</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="reviewer-info">
+                                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde" alt="John D." class="reviewer-avatar">
+                                    <div>
+                                        <div class="reviewer-name">John D.</div>
+                                        <div class="rating-stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="review-date">December 10, 2024</div>
+                            </div>
+                            <div class="review-content">
+                                <p>Excellent gaming mouse! The precision is incredible and the RGB lighting looks amazing. I've been using it for competitive gaming and it's made a noticeable difference in my performance. Highly recommended!</p>
+                            </div>
+                        </div>
+
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="reviewer-info">
+                                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786" alt="Sarah M." class="reviewer-avatar">
+                                    <div>
+                                        <div class="reviewer-name">Sarah M.</div>
+                                        <div class="rating-stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="review-date">December 8, 2024</div>
+                            </div>
+                            <div class="review-content">
+                                <p>Great mouse overall. The build quality is solid and it feels comfortable during long gaming sessions. The only minor issue is that the software could be more intuitive, but once you figure it out, it's very customizable.</p>
+                            </div>
+                        </div>
+
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="reviewer-info">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Mike R." class="reviewer-avatar">
+                                    <div>
+                                        <div class="reviewer-name">Mike R.</div>
+                                        <div class="rating-stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="review-date">December 5, 2024</div>
+                            </div>
+                            <div class="review-content">
+                                <p>Perfect for FPS games! The sensor is incredibly accurate and responsive. The programmable buttons are a game-changer for MMOs too. Worth every penny!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Tab -->
+                    <div class="tab-content" id="shipping-tab">
+                        <h3>Shipping Information</h3>
+                        <div style="margin-bottom: var(--spacing-lg);">
+                            <h4>Shipping Options:</h4>
+                            <ul>
+                                <li><strong>Standard Shipping (5-7 business days):</strong> Free on orders over $50, otherwise $5.99</li>
+                                <li><strong>Express Shipping (2-3 business days):</strong> $12.99</li>
+                                <li><strong>Overnight Shipping (1 business day):</strong> $24.99</li>
+                            </ul>
+                        </div>
+
+                        <h3>Returns & Exchanges</h3>
+                        <div style="margin-bottom: var(--spacing-lg);">
+                            <h4>Return Policy:</h4>
+                            <ul>
+                                <li>30-day return window from date of delivery</li>
+                                <li>Items must be in original condition and packaging</li>
+                                <li>Free returns for defective items</li>
+                                <li>Customer pays return shipping for non-defective returns</li>
+                            </ul>
+                        </div>
+
+                        <h3>Warranty</h3>
+                        <p>This product comes with a 2-year limited warranty covering manufacturing defects. Warranty does not cover damage from misuse, accidents, or normal wear and tear.</p>
+                    </div>
+                </div>
+
+                <!-- Related Products -->
+                <div class="related-products">
+                    <h2>Related Products</h2>
+                    <div class="related-grid" id="related-products">
+                        <!-- Related products will be loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <span class="gamer">Gamer</span><span class="tech">Tech</span>
+                        </a>
+                        <p>Premium gaming gear and PC components for enthusiasts who demand the best performance and quality.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="catalog.html">Catalog</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="catalog.html?category=gaming-gear">Gaming Gear</a></li>
+                        <li><a href="catalog.html?category=pc-components">PC Components</a></li>
+                        <li><a href="catalog.html?category=monitors">Gaming Monitors</a></li>
+                        <li><a href="catalog.html?category=audio">Gaming Audio</a></li>
+                        <li><a href="catalog.html?category=accessories">Accessories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="support.html">Help Center</a></li>
+                        <li><a href="shipping.html">Shipping Info</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="warranty.html">Warranty</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Gaming Street, Tech City, TC 12345</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@gamertech.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon-Fri: 9AM-6PM EST</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 GamerTech. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                        <a href="cookies.html">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        // Product Detail JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sample related products data
+            const relatedProducts = [
+                {
+                    id: 2,
+                    name: "Mechanical Keyboard RGB",
+                    price: 149.99,
+                    image: "https://images.unsplash.com/photo-1541140532154-b024d705b90a",
+                    rating: 4.6
+                },
+                {
+                    id: 3,
+                    name: "Gaming Headset Wireless",
+                    price: 199.99,
+                    originalPrice: 249.99,
+                    image: "https://images.unsplash.com/photo-1484704849700-f032a568e944",
+                    rating: 4.7
+                },
+                {
+                    id: 6,
+                    name: "Gaming Chair Ergonomic",
+                    price: 299.99,
+                    image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07",
+                    rating: 4.4
+                },
+                {
+                    id: 8,
+                    name: "Gaming Laptop Cooling Pad",
+                    price: 49.99,
+                    image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302",
+                    rating: 4.2
+                }
+            ];
+
+            // Initialize product detail functionality
+            initProductDetail();
+            loadRelatedProducts();
+            updateCartCount();
+
+            function initProductDetail() {
+                // Tab functionality
+                const tabButtons = document.querySelectorAll('.tab-btn');
+                const tabContents = document.querySelectorAll('.tab-content');
+
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabId = button.dataset.tab;
+                        
+                        // Remove active class from all tabs
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        tabContents.forEach(content => content.classList.remove('active'));
+                        
+                        // Add active class to clicked tab
+                        button.classList.add('active');
+                        document.getElementById(tabId + '-tab').classList.add('active');
+                    });
+                });
+
+                // Image gallery
+                const thumbnails = document.querySelectorAll('.thumbnail');
+                const mainImage = document.querySelector('#main-image img');
+
+                thumbnails.forEach(thumbnail => {
+                    thumbnail.addEventListener('click', () => {
+                        // Remove active class from all thumbnails
+                        thumbnails.forEach(thumb => thumb.classList.remove('active'));
+                        
+                        // Add active class to clicked thumbnail
+                        thumbnail.classList.add('active');
+                        
+                        // Update main image
+                        const newImageSrc = thumbnail.querySelector('img').src;
+                        mainImage.src = newImageSrc;
+                    });
+                });
+
+                // Product options
+                const optionValues = document.querySelectorAll('.option-value');
+                optionValues.forEach(option => {
+                    option.addEventListener('click', () => {
+                        // Remove active class from siblings
+                        const siblings = option.parentElement.querySelectorAll('.option-value');
+                        siblings.forEach(sibling => sibling.classList.remove('active'));
+                        
+                        // Add active class to clicked option
+                        option.classList.add('active');
+                    });
+                });
+
+                // Quantity controls
+                const qtyDecrease = document.getElementById('qty-decrease');
+                const qtyIncrease = document.getElementById('qty-increase');
+                const quantityInput = document.getElementById('quantity');
+
+                qtyDecrease.addEventListener('click', () => {
+                    const currentValue = parseInt(quantityInput.value);
+                    if (currentValue > 1) {
+                        quantityInput.value = currentValue - 1;
+                    }
+                });
+
+                qtyIncrease.addEventListener('click', () => {
+                    const currentValue = parseInt(quantityInput.value);
+                    const maxValue = parseInt(quantityInput.max);
+                    if (currentValue < maxValue) {
+                        quantityInput.value = currentValue + 1;
+                    }
+                });
+
+                // Add to cart
+                const addToCartBtn = document.getElementById('add-to-cart');
+                addToCartBtn.addEventListener('click', () => {
+                    const quantity = parseInt(quantityInput.value);
+                    const selectedColor = document.querySelector('#color-options .option-value.active').dataset.value;
+                    const selectedDPI = document.querySelector('#dpi-options .option-value.active').dataset.value;
+                    
+                    addToCart(1, quantity, { color: selectedColor, dpi: selectedDPI });
+                });
+
+                // Add to wishlist
+                const addToWishlistBtn = document.getElementById('add-to-wishlist');
+                addToWishlistBtn.addEventListener('click', () => {
+                    toggleWishlist(1);
+                });
+
+                // Add to compare
+                const addToCompareBtn = document.getElementById('add-to-compare');
+                addToCompareBtn.addEventListener('click', () => {
+                    addToCompare(1);
+                });
+            }
+
+            function loadRelatedProducts() {
+                const relatedGrid = document.getElementById('related-products');
+                if (!relatedGrid) return;
+
+                relatedGrid.innerHTML = relatedProducts.map(product => {
+                    const discount = product.originalPrice ? 
+                        Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) : 0;
+                    
+                    return `
+                        <div class="product-card" onclick="window.location.href='product-detail.html?id=${product.id}'" style="cursor: pointer; background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: var(--radius-lg); overflow: hidden; transition: all var(--transition-normal);">
+                            <div style="height: 200px; overflow: hidden;">
+                                <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div style="padding: var(--spacing-lg);">
+                                <h3 style="font-size: 1.1rem; margin-bottom: var(--spacing-sm); color: var(--text-primary);">${product.name}</h3>
+                                <div style="display: flex; align-items: center; gap: var(--spacing-xs); margin-bottom: var(--spacing-sm);">
+                                    ${generateStars(product.rating)}
+                                </div>
+                                <div style="display: flex; align-items: center; gap: var(--spacing-sm);">
+                                    <span style="font-size: 1.2rem; font-weight: 600; color: var(--primary-color);">$${product.price}</span>
+                                    ${product.originalPrice ? `<span style="color: var(--text-muted); text-decoration: line-through;">$${product.originalPrice}</span>` : ''}
+                                    ${discount > 0 ? `<span style="background: var(--error-color); color: white; padding: 2px 8px; border-radius: var(--radius-full); font-size: 0.8rem;">-${discount}%</span>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            function generateStars(rating) {
+                const fullStars = Math.floor(rating);
+                const hasHalfStar = rating % 1 !== 0;
+                let starsHTML = '';
+
+                for (let i = 0; i < fullStars; i++) {
+                    starsHTML += '<i class="fas fa-star" style="color: var(--star-color);"></i>';
+                }
+
+                if (hasHalfStar) {
+                    starsHTML += '<i class="fas fa-star-half-alt" style="color: var(--star-color);"></i>';
+                }
+
+                const emptyStars = 5 - Math.ceil(rating);
+                for (let i = 0; i < emptyStars; i++) {
+                    starsHTML += '<i class="far fa-star" style="color: var(--star-color);"></i>';
+                }
+
+                return starsHTML;
+            }
+
+            function addToCart(productId, quantity = 1, options = {}) {
+                let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                
+                const product = {
+                    id: productId,
+                    name: "Gaming Mouse Pro X",
+                    price: 89.99,
+                    image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46",
+                    quantity: quantity,
+                    options: options
+                };
+
+                const existingItem = cart.find(item => 
+                    item.id === productId && 
+                    JSON.stringify(item.options) === JSON.stringify(options)
+                );
+
+                if (existingItem) {
+                    existingItem.quantity += quantity;
+                } else {
+                    cart.push(product);
+                }
+
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                showNotification('Product added to cart!', 'success');
+            }
+
+            function toggleWishlist(productId) {
+                let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+                const index = wishlist.indexOf(productId);
+                
+                if (index > -1) {
+                    wishlist.splice(index, 1);
+                    showNotification('Removed from wishlist', 'info');
+                } else {
+                    wishlist.push(productId);
+                    showNotification('Added to wishlist!', 'success');
+                }
+                
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            }
+
+            function addToCompare(productId) {
+                let compare = JSON.parse(localStorage.getItem('compare') || '[]');
+                
+                if (compare.length >= 4) {
+                    showNotification('You can only compare up to 4 products', 'warning');
+                    return;
+                }
+                
+                if (!compare.includes(productId)) {
+                    compare.push(productId);
+                    localStorage.setItem('compare', JSON.stringify(compare));
+                    showNotification('Added to compare list!', 'success');
+                } else {
+                    showNotification('Product already in compare list', 'info');
+                }
+            }
+
+            function updateCartCount() {
+                const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                
+                const cartCountElement = document.getElementById('cart-count');
+                if (cartCountElement) {
+                    cartCountElement.textContent = totalItems;
+                }
+            }
+
+            function showNotification(message, type = 'info') {
+                // Remove existing notifications
+                document.querySelectorAll('.notification').forEach(notification => {
+                    notification.remove();
+                });
+
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.innerHTML = `
+                    <div class="notification-content">
+                        <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : type === 'warning' ? 'fa-exclamation-triangle' : 'fa-info-circle'}"></i>
+                        <span>${message}</span>
+                        <button class="notification-close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+
+                // Add styles if not already added
+                if (!document.getElementById('notification-styles')) {
+                    const style = document.createElement('style');
+                    style.id = 'notification-styles';
+                    style.textContent = `
+                        .notification {
+                            position: fixed;
+                            top: 90px;
+                            right: var(--spacing-lg);
+                            background: var(--bg-card);
+                            border: 1px solid var(--border-primary);
+                            border-radius: var(--radius-lg);
+                            padding: var(--spacing-md);
+                            box-shadow: var(--shadow-lg);
+                            z-index: 10000;
+                            transform: translateX(100%);
+                            transition: transform var(--transition-normal);
+                            max-width: 400px;
+                        }
+                        
+                        .notification.show { transform: translateX(0); }
+                        .notification.success { border-color: var(--success-color); }
+                        .notification.error { border-color: var(--error-color); }
+                        .notification.warning { border-color: var(--warning-color); }
+                        
+                        .notification-content {
+                            display: flex;
+                            align-items: center;
+                            gap: var(--spacing-sm);
+                        }
+                        
+                        .notification-content i:first-child { color: var(--primary-color); }
+                        .notification.success .notification-content i:first-child { color: var(--success-color); }
+                        .notification.error .notification-content i:first-child { color: var(--error-color); }
+                        .notification.warning .notification-content i:first-child { color: var(--warning-color); }
+                        
+                        .notification-content span {
+                            flex: 1;
+                            color: var(--text-primary);
+                        }
+                        
+                        .notification-close {
+                            background: none;
+                            border: none;
+                            color: var(--text-muted);
+                            cursor: pointer;
+                            padding: var(--spacing-xs);
+                            border-radius: var(--radius-sm);
+                            transition: all var(--transition-fast);
+                        }
+                        
+                        .notification-close:hover {
+                            background: var(--bg-tertiary);
+                            color: var(--text-primary);
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+
+                document.body.appendChild(notification);
+                setTimeout(() => notification.classList.add('show'), 100);
+
+                notification.querySelector('.notification-close').addEventListener('click', () => {
+                    notification.classList.remove('show');
+                    setTimeout(() => notification.remove(), 300);
+                });
+
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.classList.remove('show');
+                        setTimeout(() => notification.remove(), 300);
+                    }
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - GamerTech</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="css/register.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 min-h-screen">
+    <!-- Background Animation -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-pink-900/20"></div>
+        <div class="floating-particles"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="relative z-10 bg-gray-800/80 backdrop-blur-sm border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <i class="fas fa-gamepad text-2xl text-blue-400"></i>
+                        <span class="text-xl font-bold text-white">GamerTech</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="login.html" class="text-gray-300 hover:text-white transition-colors">
+                        Sudah punya akun?
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="relative z-10 flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8">
+            <!-- Register Card -->
+            <div class="register-card bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-700 p-8">
+                <!-- Header -->
+                <div class="text-center mb-8">
+                    <div class="mx-auto h-16 w-16 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-user-plus text-white text-2xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-white mb-2">Bergabung dengan GamerTech</h2>
+                    <p class="text-gray-400">Buat akun baru dan mulai petualangan gaming Anda</p>
+                </div>
+
+                <!-- Progress Steps -->
+                <div class="mb-8">
+                    <div class="flex items-center justify-between">
+                        <div class="step-item active" data-step="1">
+                            <div class="step-circle">1</div>
+                            <span class="step-label">Info Dasar</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step-item" data-step="2">
+                            <div class="step-circle">2</div>
+                            <span class="step-label">Keamanan</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step-item" data-step="3">
+                            <div class="step-circle">3</div>
+                            <span class="step-label">Selesai</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Register Form -->
+                <form id="registerForm" class="space-y-6">
+                    <!-- Step 1: Basic Info -->
+                    <div class="form-step active" data-step="1">
+                        <!-- Full Name -->
+                        <div class="form-group">
+                            <label for="fullName" class="block text-sm font-medium text-gray-300 mb-2">
+                                <i class="fas fa-user mr-2"></i>Nama Lengkap
+                            </label>
+                            <div class="relative">
+                                <input 
+                                    type="text" 
+                                    id="fullName" 
+                                    name="fullName" 
+                                    required
+                                    class="input-field w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                                    placeholder="Masukkan nama lengkap Anda"
+                                >
+                                <div class="input-icon absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            </div>
+                            <div class="error-message text-red-400 text-sm mt-1 hidden"></div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-2">
+                                <i class="fas fa-envelope mr-2"></i>Email
+                            </label>
+                            <div class="relative">
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    required
+                                    class="input-field w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                                    placeholder="Masukkan email Anda"
+                                >
+                                <div class="input-icon absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                            </div>
+                            <div class="error-message text-red-400 text-sm mt-1 hidden"></div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="form-group">
+                            <label for="phone" class="block text-sm font-medium text-gray-300 mb-2">
+                                <i class="fas fa-phone mr-2"></i>Nomor Telepon
+                            </label>
+                            <div class="relative">
+                                <input 
+                                    type="tel" 
+                                    id="phone" 
+                                    name="phone" 
+                                    required
+                                    class="input-field w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                                    placeholder="Masukkan nomor telepon"
+                                >
+                                <div class="input-icon absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                            </div>
+                            <div class="error-message text-red-400 text-sm mt-1 hidden"></div>
+                        </div>
+
+                        <button type="button" class="next-btn w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white py-3 px-4 rounded-lg font-medium hover:from-purple-600 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-300 transform hover:scale-105">
+                            Lanjutkan
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+
+                    <!-- Step 2: Security -->
+                    <div class="form-step" data-step="2">
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label for="password" class="block text-sm font-medium text-gray-300 mb-2">
+                                <i class="fas fa-lock mr-2"></i>Password
+                            </label>
+                            <div class="relative">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    required
+                                    class="input-field w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                                    placeholder="Buat password yang kuat"
+                                >
+                                <button 
+                                    type="button" 
+                                    id="togglePassword"
+                                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                                >
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="password-strength mt-2">
+                                <div class="strength-bar">
+                                    <div class="strength-fill"></div>
+                                </div>
+                                <div class="strength-text text-sm text-gray-400 mt-1">Kekuatan password</div>
+                            </div>
+                            <div class="error-message text-red-400 text-sm mt-1 hidden"></div>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="form-group">
+                            <label for="confirmPassword" class="block text-sm font-medium text-gray-300 mb-2">
+                                <i class="fas fa-lock mr-2"></i>Konfirmasi Password
+                            </label>
+                            <div class="relative">
+                                <input 
+                                    type="password" 
+                                    id="confirmPassword" 
+                                    name="confirmPassword" 
+                                    required
+                                    class="input-field w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                                    placeholder="Ulangi password Anda"
+                                >
+                                <div class="input-icon absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                    <i class="fas fa-check-circle hidden"></i>
+                                </div>
+                            </div>
+                            <div class="error-message text-red-400 text-sm mt-1 hidden"></div>
+                        </div>
+
+                        <!-- Terms and Conditions -->
+                        <div class="form-group">
+                            <div class="flex items-start">
+                                <input 
+                                    id="terms" 
+                                    name="terms" 
+                                    type="checkbox" 
+                                    required
+                                    class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-600 bg-gray-700 rounded mt-1"
+                                >
+                                <label for="terms" class="ml-3 block text-sm text-gray-300">
+                                    Saya setuju dengan 
+                                    <a href="#" class="text-purple-400 hover:text-purple-300 transition-colors">Syarat & Ketentuan</a> 
+                                    dan 
+                                    <a href="#" class="text-purple-400 hover:text-purple-300 transition-colors">Kebijakan Privasi</a>
+                                </label>
+                            </div>
+                            <div class="error-message text-red-400 text-sm mt-1 hidden"></div>
+                        </div>
+
+                        <div class="flex space-x-3">
+                            <button type="button" class="prev-btn flex-1 bg-gray-600 hover:bg-gray-700 text-white py-3 px-4 rounded-lg font-medium transition-all duration-300">
+                                <i class="fas fa-arrow-left mr-2"></i>
+                                Kembali
+                            </button>
+                            <button type="submit" class="register-btn flex-1 bg-gradient-to-r from-purple-500 to-pink-600 text-white py-3 px-4 rounded-lg font-medium hover:from-purple-600 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-300 transform hover:scale-105">
+                                <span class="btn-text">Daftar</span>
+                                <i class="fas fa-spinner fa-spin hidden ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Success -->
+                    <div class="form-step" data-step="3">
+                        <div class="text-center">
+                            <div class="mx-auto h-20 w-20 bg-green-500 rounded-full flex items-center justify-center mb-6">
+                                <i class="fas fa-check text-white text-3xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4">Pendaftaran Berhasil!</h3>
+                            <p class="text-gray-400 mb-6">
+                                Selamat datang di GamerTech! Akun Anda telah berhasil dibuat.
+                                Silakan login untuk memulai petualangan gaming Anda.
+                            </p>
+                            <button type="button" id="goToLogin" class="w-full bg-gradient-to-r from-green-500 to-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:from-green-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105">
+                                Masuk ke Akun Saya
+                                <i class="fas fa-sign-in-alt ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Social Register -->
+                <div class="mt-8" id="socialSection">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-600"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-2 bg-gray-800 text-gray-400">Atau daftar dengan</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 grid grid-cols-2 gap-3">
+                        <button class="social-btn w-full inline-flex justify-center py-3 px-4 border border-gray-600 rounded-lg bg-gray-700/50 text-sm font-medium text-gray-300 hover:bg-gray-600 transition-all duration-300">
+                            <i class="fab fa-google text-red-400 mr-2"></i>
+                            Google
+                        </button>
+                        <button class="social-btn w-full inline-flex justify-center py-3 px-4 border border-gray-600 rounded-lg bg-gray-700/50 text-sm font-medium text-gray-300 hover:bg-gray-600 transition-all duration-300">
+                            <i class="fab fa-facebook text-blue-400 mr-2"></i>
+                            Facebook
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Login Link -->
+                <div class="text-center mt-8" id="loginSection">
+                    <p class="text-gray-400">
+                        Sudah punya akun? 
+                        <a href="login.html" class="text-purple-400 hover:text-purple-300 font-medium transition-colors">
+                            Masuk sekarang
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/register.js"></script>
+</body>
+</html>
