@@ -1,20 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GamerTech - Premium Gaming Gear & PC Components</title>
     <meta name="description" content="Premium gaming gear, PC components, and custom builds for gamers and enthusiasts">
-    
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <style>
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-content {
+            padding: 15px;
+        }
+
+        .product-title {
+            font-size: 1.2em;
+            margin: 0 0 10px;
+        }
+
+        .product-price .price {
+            color: #e60000;
+            font-weight: bold;
+        }
+
+        .product-price .original-price {
+            text-decoration: line-through;
+            color: #999;
+            margin-left: 10px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 5px 10px;
+            border-radius: 3px;
+            color: #fff;
+        }
+
+        .badge-new {
+            background: #28a745;
+        }
+
+        .badge-sale {
+            background: #dc3545;
+        }
+
+        .badge-popular {
+            background: #ffc107;
+        }
+    </style>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
     <!-- Loading Screen -->
     <div id="loading-screen" class="loading-screen">
@@ -35,7 +110,7 @@
                     <span class="gamer">Gamer</span><span class="tech">Tech</span>
                 </a>
             </div>
-            
+
             <div class="nav-menu" id="nav-menu">
                 <ul class="nav-list">
                     <li class="nav-item">
@@ -57,9 +132,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="about.html" class="nav-link">
-                            <i class="fas fa-info-circle"></i>
-                            <span>About</span>
+                        <a href="history.html" class="nav-link">
+                            <i class="fas fa-history"></i>
+                            <span>History</span>
                         </a>
                     </li>
                 </ul>
@@ -70,7 +145,7 @@
                 <button class="search-btn" id="search-btn">
                     <i class="fas fa-search"></i>
                 </button>
-                
+
                 <!-- Cart -->
                 <div class="cart-container">
                     <button class="cart-btn" id="cart-btn">
@@ -102,7 +177,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- User Menu -->
                 <div class="user-menu">
                     <button class="user-btn" id="user-btn">
@@ -119,7 +194,7 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <!-- Mobile Menu Toggle -->
                 <button class="mobile-toggle" id="mobile-toggle">
                     <span></span>
@@ -166,7 +241,7 @@
                 <div class="hero-particles" id="hero-particles"></div>
                 <div class="hero-gradient"></div>
             </div>
-            
+
             <div class="hero-content">
                 <div class="container">
                     <div class="hero-text">
@@ -175,7 +250,7 @@
                             <span class="title-line highlight">Gaming Experience</span>
                         </h1>
                         <p class="hero-description">
-                            Discover premium gaming gear, cutting-edge PC components, and custom builds 
+                            Discover premium gaming gear, cutting-edge PC components, and custom builds
                             designed for gamers who demand excellence.
                         </p>
                         <div class="hero-actions">
@@ -189,7 +264,7 @@
                             </a>
                         </div>
                     </div>
-                    
+
                     <div class="hero-stats">
                         <div class="stat-item">
                             <div class="stat-number" data-count="10000">0</div>
@@ -206,7 +281,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Scroll Indicator -->
             <div class="scroll-indicator">
                 <div class="scroll-mouse">
@@ -223,7 +298,7 @@
                     <h2 class="section-title">Featured Categories</h2>
                     <p class="section-description">Explore our premium gaming categories</p>
                 </div>
-                
+
                 <div class="categories-grid">
                     <div class="category-card" data-category="gaming-gear">
                         <div class="category-image">
@@ -242,7 +317,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="category-card" data-category="pc-components">
                         <div class="category-image">
                             <img src="https://images.unsplash.com/photo-1518770660439-4636190af475" alt="PC Components">
@@ -260,10 +335,11 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="category-card" data-category="monitors">
                         <div class="category-image">
-                            <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf" alt="Gaming Monitors">
+                            <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf"
+                                alt="Gaming Monitors">
                             <div class="category-overlay">
                                 <div class="category-icon">
                                     <i class="fas fa-desktop"></i>
@@ -278,7 +354,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="category-card" data-category="audio">
                         <div class="category-image">
                             <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944" alt="Gaming Audio">
@@ -307,11 +383,11 @@
                     <h2 class="section-title">Featured Products</h2>
                     <p class="section-description">Hand-picked products for serious gamers</p>
                 </div>
-                
+
                 <div class="products-grid" id="featured-products">
                     <!-- Products will be loaded dynamically -->
                 </div>
-                
+
                 <div class="section-footer">
                     <a href="catalog.html" class="btn btn-outline btn-large">
                         <span>View All Products</span>
@@ -328,7 +404,7 @@
                     <h2 class="section-title">Why Choose GamerTech?</h2>
                     <p class="section-description">We're committed to delivering the best gaming experience</p>
                 </div>
-                
+
                 <div class="features-grid">
                     <div class="feature-card">
                         <div class="feature-icon">
@@ -337,7 +413,7 @@
                         <h3>Fast Shipping</h3>
                         <p>Free shipping on orders over $100. Get your gear delivered in 1-3 business days.</p>
                     </div>
-                    
+
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-shield-alt"></i>
@@ -345,7 +421,7 @@
                         <h3>Warranty Protection</h3>
                         <p>All products come with manufacturer warranty and our extended protection plans.</p>
                     </div>
-                    
+
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-headset"></i>
@@ -353,7 +429,7 @@
                         <h3>24/7 Support</h3>
                         <p>Our gaming experts are available around the clock to help with any questions.</p>
                     </div>
-                    
+
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-medal"></i>
@@ -365,13 +441,111 @@
             </div>
         </section>
 
+        <!-- Featured Products -->
+        <section class="featured-products">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Featured Products</h2>
+                    <p class="section-description">Hand-picked products for serious gamers</p>
+                </div>
+
+                <div class="products-grid" id="featured-products">
+                    <!-- Product Card 1 -->
+                    <div class="product-card" data-product-id="1">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620"
+                                alt="HyperX Cloud III Gaming Headset">
+                            <div class="product-badges">
+                                <span class="badge badge-new">New</span>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">HyperX Cloud III Gaming Headset</h3>
+                            <p class="product-description">Wired gaming headset for PC, PS5, Xbox, with 4.6/5 rating.
+                            </p>
+                            <div class="product-price">
+                                <span class="price">$99.99</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-primary btn-small add-to-cart" data-product-id="1">
+                                    <i class="fas fa-cart-plus"></i> Add to Cart
+                                </button>
+                                <a href="product-detail.html?id=1" class="btn btn-outline btn-small">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 2 -->
+                    <div class="product-card" data-product-id="2">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b"
+                                alt="SteelSeries Apex Pro Keyboard">
+                            <div class="product-badges">
+                                <span class="badge badge-sale">Sale</span>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">SteelSeries Apex Pro Keyboard</h3>
+                            <p class="product-description">Mechanical keyboard with customizable OmniPoint 3.0 switches.
+                            </p>
+                            <div class="product-price">
+                                <span class="price">$199.99</span>
+                                <span class="original-price">$229.99</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-primary btn-small add-to-cart" data-product-id="2">
+                                    <i class="fas fa-cart-plus"></i> Add to Cart
+                                </button>
+                                <a href="product-detail.html?id=2" class="btn btn-outline btn-small">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 3 -->
+                    <div class="product-card" data-product-id="3">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1593642532973-d31b97d1f5f4"
+                                alt="ASUS ROG Keris II WL Ace Mouse">
+                            <div class="product-badges">
+                                <span class="badge badge-popular">Popular</span>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">ASUS ROG Keris II WL Ace Mouse</h3>
+                            <p class="product-description">54g ergonomic mouse with 42,000 DPI and wireless tech.</p>
+                            <div class="product-price">
+                                <span class="price">$149.99</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-primary btn-small add-to-cart" data-product-id="3">
+                                    <i class="fas fa-cart-plus"></i> Add to Cart
+                                </button>
+                                <a href="product-detail.html?id=3" class="btn btn-outline btn-small">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 4 -->
+                    
+                </div>
+
+                <div class="section-footer">
+                    <a href="catalog.html" class="btn btn-outline btn-large">
+                        <span>View All Products</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+        ```
         <!-- Newsletter -->
         <section class="newsletter">
             <div class="container">
                 <div class="newsletter-content">
                     <div class="newsletter-text">
                         <h2>Stay Updated</h2>
-                        <p>Get the latest gaming news, product launches, and exclusive deals delivered to your inbox.</p>
+                        <p>Get the latest gaming news, product launches, and exclusive deals delivered to your inbox.
+                        </p>
                     </div>
                     <form class="newsletter-form" id="newsletter-form">
                         <div class="form-group">
@@ -397,7 +571,8 @@
                         <a href="index.html" class="logo">
                             <span class="gamer">Gamer</span><span class="tech">Tech</span>
                         </a>
-                        <p>Premium gaming gear and PC components for enthusiasts who demand the best performance and quality.</p>
+                        <p>Premium gaming gear and PC components for enthusiasts who demand the best performance and
+                            quality.</p>
                         <div class="social-links">
                             <a href="#" class="social-link">
                                 <i class="fab fa-facebook-f"></i>
@@ -417,7 +592,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
@@ -428,7 +603,7 @@
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Categories</h3>
                     <ul class="footer-links">
@@ -439,7 +614,7 @@
                         <li><a href="catalog.html?category=accessories">Accessories</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Support</h3>
                     <ul class="footer-links">
@@ -450,7 +625,7 @@
                         <li><a href="faq.html">FAQ</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Contact Info</h3>
                     <div class="contact-info">
@@ -473,7 +648,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
                     <p>&copy; 2024 GamerTech. All rights reserved.</p>
@@ -495,4 +670,5 @@
     <!-- Scripts -->
     <script src="js/main.js"></script>
 </body>
+
 </html>

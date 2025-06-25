@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,9 @@
     <meta name="description" content="Browse our extensive collection of gaming gear, PC components, and accessories">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,6 +19,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/catalog.css">
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
@@ -27,10 +31,28 @@
             </div>
             <div class="nav-menu" id="nav-menu">
                 <ul class="nav-list">
-                    <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i><span>Home</span></a></li>
-                    <li class="nav-item"><a href="catalog.html" class="nav-link active"><i class="fas fa-th-large"></i><span>Catalog</span></a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link"><i class="fas fa-newspaper"></i><span>Blog</span></a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link"><i class="fas fa-info-circle"></i><span>About</span></a></li>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="catalog.html" class="nav-link active">
+                            <i class="fas fa-th-large"></i>
+                            <span>Catalog</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="blog.html" class="nav-link">
+                            <i class="fas fa-newspaper"></i>
+                            <span>Blog</span>
+                        </a>
+                    </li>
+                    <a href="history.html" class="nav-link">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                    </a>
                 </ul>
             </div>
             <div class="nav-actions">
@@ -67,7 +89,8 @@
                     <button class="user-btn" id="user-btn"><i class="fas fa-user"></i></button>
                     <div class="user-dropdown" id="user-dropdown">
                         <a href="login.html" class="user-link"><i class="fas fa-sign-in-alt"></i><span>Login</span></a>
-                        <a href="register.html" class="user-link"><i class="fas fa-user-plus"></i><span>Register</span></a>
+                        <a href="register.html" class="user-link"><i
+                                class="fas fa-user-plus"></i><span>Register</span></a>
                     </div>
                 </div>
                 <button class="mobile-toggle" id="mobile-toggle">
@@ -80,15 +103,7 @@
     <!-- Main Content -->
     <main class="main-content">
         <!-- Breadcrumb -->
-        <section class="breadcrumb">
-            <div class="container">
-                <nav class="breadcrumb-nav">
-                    <a href="index.html">Home</a>
-                    <i class="fas fa-chevron-right"></i>
-                    <span>Catalog</span>
-                </nav>
-            </div>
-        </section>
+    
 
         <!-- Catalog Header -->
         <section class="catalog-header">
@@ -122,7 +137,8 @@
                     <aside class="filters-sidebar" id="filters-sidebar">
                         <div class="filters-header">
                             <h3>Filters</h3>
-                            <button class="clear-filters" id="clear-filters"><i class="fas fa-times"></i><span>Clear All</span></button>
+                            <button class="clear-filters" id="clear-filters"><i class="fas fa-times"></i><span>Clear
+                                    All</span></button>
                         </div>
                         <div class="filter-group">
                             <h4 class="filter-title"><span>Categories</span><i class="fas fa-chevron-down"></i></h4>
@@ -213,15 +229,18 @@
                                             <div class="progress"></div>
                                         </div>
                                         <div class="range-input">
-                                            <input type="range" class="range-min" min="0" max="5000" value="0" step="10">
-                                            <input type="range" class="range-max" min="0" max="5000" value="5000" step="10">
+                                            <input type="range" class="range-min" min="0" max="5000" value="0"
+                                                step="10">
+                                            <input type="range" class="range-max" min="0" max="5000" value="5000"
+                                                step="10">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="filter-group">
-                            <h4 class="filter-title"><span>Customer Rating</span><i class="fas fa-chevron-down"></i></h4>
+                            <h4 class="filter-title"><span>Customer Rating</span><i class="fas fa-chevron-down"></i>
+                            </h4>
                             <div class="filter-content">
                                 <label class="filter-option">
                                     <input type="checkbox" name="rating" value="5">
@@ -336,7 +355,8 @@
                         <a href="index.html" class="logo">
                             <span class="gamer">Gamer</span><span class="tech">Tech</span>
                         </a>
-                        <p>Premium gaming gear and PC components for enthusiasts who demand the best performance and quality.</p>
+                        <p>Premium gaming gear and PC components for enthusiasts who demand the best performance and
+                            quality.</p>
                         <div class="social-links">
                             <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                             <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
@@ -417,4 +437,5 @@
     <!-- JavaScript -->
     <script src="js/main.js"></script>
 </body>
+
 </html>

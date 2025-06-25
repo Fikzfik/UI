@@ -1,23 +1,28 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaming Blog - GamerTech</title>
     <meta name="description" content="Latest gaming news, reviews, and guides from GamerTech experts">
-    
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/blog.css">
 </head>
+
 <body>
-    <!-- Navigation (Same as index.html) -->
+    <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-brand">
@@ -25,7 +30,7 @@
                     <span class="gamer">Gamer</span><span class="tech">Tech</span>
                 </a>
             </div>
-            
+
             <div class="nav-menu" id="nav-menu">
                 <ul class="nav-list">
                     <li class="nav-item">
@@ -47,9 +52,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="about.html" class="nav-link">
-                            <i class="fas fa-info-circle"></i>
-                            <span>About</span>
+                        <a href="history.html" class="nav-link">
+                            <i class="fas fa-history"></i>
+                            <span>History</span>
                         </a>
                     </li>
                 </ul>
@@ -59,7 +64,7 @@
                 <button class="search-btn" id="search-btn">
                     <i class="fas fa-search"></i>
                 </button>
-                
+
                 <div class="cart-container">
                     <button class="cart-btn" id="cart-btn">
                         <i class="fas fa-shopping-cart"></i>
@@ -90,7 +95,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="user-menu">
                     <button class="user-btn" id="user-btn">
                         <i class="fas fa-user"></i>
@@ -106,7 +111,7 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <button class="mobile-toggle" id="mobile-toggle">
                     <span></span>
                     <span></span>
@@ -116,7 +121,7 @@
         </div>
     </nav>
 
-    <!-- Search Overlay (Same as index.html) -->
+    <!-- Search Overlay -->
     <div class="search-overlay" id="search-overlay">
         <div class="search-container">
             <div class="search-header">
@@ -188,9 +193,9 @@
                         </div>
                         <h2 class="featured-title">The Ultimate Gaming Setup Guide for 2024</h2>
                         <p class="featured-excerpt">
-                            Discover the best gaming peripherals, components, and accessories to build 
+                            Discover the best gaming peripherals, components, and accessories to build
                             your dream gaming setup. From budget-friendly options to premium gear.
-                        </p>D
+                        </p>
                         <div class="featured-author">
                             <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="Author">
                             <div class="author-info">
@@ -221,7 +226,7 @@
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="filters-container">
                     <div class="filter-tabs">
                         <button class="filter-tab active" data-category="all">All</button>
@@ -231,7 +236,7 @@
                         <button class="filter-tab" data-category="hardware">Hardware</button>
                         <button class="filter-tab" data-category="esports">Esports</button>
                     </div>
-                    
+
                     <div class="filter-controls">
                         <select class="sort-select" id="sort-select">
                             <option value="newest">Newest First</option>
@@ -239,7 +244,7 @@
                             <option value="popular">Most Popular</option>
                             <option value="trending">Trending</option>
                         </select>
-                        
+
                         <div class="search-filter">
                             <input type="text" placeholder="Search articles..." id="article-search">
                             <i class="fas fa-search"></i>
@@ -253,15 +258,307 @@
         <section class="articles-section">
             <div class="container">
                 <div class="articles-grid" id="articles-grid">
-                    <!-- Articles will be loaded dynamically -->
-                </div>
-                
-                <!-- Load More Button -->
-                <div class="load-more-container">
-                    <button class="btn btn-outline btn-large" id="load-more-btn">
-                        <span>Load More Articles</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
+                    <!-- Articles from ArticlesManager -->
+                    <div class="article-card" data-category="review">
+                        <div class="article-image">
+                            <img src="https://via.placeholder.com/320x200?text=Article+1" alt="Review Gaming Mouse RGB Pro Terbaru">
+                            <div class="article-meta">
+                                <span class="category">review</span>
+                                <span class="date">05/09/2024</span>
+                                <span class="read-time">5 min read</span>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <h3 class="article-title">Review Gaming Mouse RGB Pro Terbaru</h3>
+                            <p class="article-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="article-author">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="Author">
+                                <div class="author-info">
+                                    <span class="author-name">Admin User</span>
+                                    <span class="author-title">Gaming Enthusiast</span>
+                                </div>
+                            </div>
+                            <a href="blog-detail.html?id=1" class="btn btn-primary">
+                                <span>Read Article</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="article-card" data-category="tutorial">
+                        <div class="article-image">
+                            <img src="https://via.placeholder.com/320x200?text=Article+2" alt="Tutorial Setup Gaming PC untuk Pemula">
+                            <div class="article-meta">
+                                <span class="category">tutorial</span>
+                                <span class="date">04/20/2024</span>
+                                <span class="read-time">5 min read</span>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <h3 class="article-title">Tutorial Setup Gaming PC untuk Pemula</h3>
+                            <p class="article-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="article-author">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="Author">
+                                <div class="author-info">
+                                    <span class="author-name">Admin User</span>
+                                    <span class="author-title">Gaming Enthusiast</span>
+                                </div>
+                            </div>
+                            <a href="blog-detail.html?id=2" class="btn btn-primary">
+                                <span>Read Article</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="article-card" data-category="hardware">
+                        <div class="article-image">
+                            <img src="https://via.placeholder.com/320x200?text=Article+3" alt="Hardware Terbaik untuk Gaming 2024">
+                            <div class="article-meta">
+                                <span class="category">hardware</span>
+                                <span class="date">03/15/2024</span>
+                                <span class="read-time">5 min read</span>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <h3 class="article-title">Hardware Terbaik untuk Gaming 2024</h3>
+                            <p class="article-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="article-author">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="Author">
+                                <div class="author-info">
+                                    <span class="author-name">Admin User</span>
+                                    <span class="author-title">Gaming Enthusiast</span>
+                                </div>
+                            </div>
+                            <a href="blog-detail.html?id=3" class="btn btn-primary">
+                                <span>Read Article</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="article-card" data-category="tutorial">
+                        <div class="article-image">
+                            <img src="https://via.placeholder.com/320x200?text=Article+4" alt="Tips Memilih Keyboard Mechanical">
+                            <div class="article-meta">
+                                <span class="category">tutorial</span>
+                                <span class="date">06/01/2024</span>
+                                <span class="read-time">5 min read</span>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <h3 class="article-title">Tips Memilih Keyboard Mechanical</h3>
+                            <p class="article-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="article-author">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="Author">
+                                <div class="author-info">
+                                    <span class="author-name">Admin User</span>
+                                    <span class="author-title">Gaming Enthusiast</span>
+                                </div>
+                            </div>
+                            <a href="blog-detail.html?id=4" class="btn btn-primary">
+                                <span>Read Article</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="article-card" data-category="review">
+                        <div class="article-image">
+                            <img src="https://via.placeholder.com/320x200?text=Article+5" alt="Review Graphics Card RTX 4080">
+                            <div class="article-meta">
+                                <span class="category">review</span>
+                                <span class="date">02/28/2024</span>
+                                <span class="read-time">5 min read</span>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <h3 class="article-title">Review Graphics Card RTX 4080</h3>
+                            <p class="article-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="article-author">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="Author">
+                                <div class="author-info">
+                                    <span class="author-name">Admin User</span>
+                                    <span class="author-title">Gaming Enthusiast</span>
+                                </div>
+                            </div>
+                            <a href="blog-detail.html?id=5" class="btn btn-primary">
+                                <span>Read Article</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="article-card" data-category="tutorial">
+                        <div class="article-image">
+                            <img src="https://via.placeholder.com/320x200?text=Article+6" alt="Panduan Overclock CPU untuk Gaming">
+                            <div class="article-meta">
+                                <span class="category">tutorial</span>
+                                <span class="date">01/10/2024</span>
+                                <span class="read-time">5 min read</span>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <h3 class="article-title">Panduan Overclock CPU untuk Gaming</h3>
+                            <p class="article-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="article-author">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="Author">
+                                <div class="author-info">
+                                    <span class="author-name">Admin User</span>
+                                    <span class="author-title">Gaming Enthusiast</span>
+                                </div>
+                            </div>
+                            <a href="blog-detail.html?id=6" class="btn btn-primary">
+                                <span>Read Article</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="article-card" data-category="gaming">
+                        <div class="article-image">
+                            <img src="https://via.placeholder.com/320x200?text=Article+7" alt="Gaming Monitor 4K vs 1440p">
+                            <div class="article-meta">
+                                <span class="category">gaming</span>
+                                <span class="date">04/05/2024</span>
+                                <span class="read-time">5 min read</span>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <h3 class="article-title">Gaming Monitor 4K vs 1440p</h3>
+                            <p class="article-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="article-author">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="Author">
+                                <div class="author-info">
+                                    <span class="author-name">Admin User</span>
+                                    <span class="author-title">Gaming Enthusiast</span>
+                                </div>
+                            </div>
+                            <a href="blog-detail.html?id=7" class="btn btn-primary">
+                                <span>Read Article</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="article-card" data-category="tutorial">
+                        <div class="article-image">
+                            <img src="https://via.placeholder.com/320x200?text=Article+8" alt="Setup Streaming yang Optimal">
+                            <div class="article-meta">
+                                <span class="category">tutorial</span>
+                                <span class="date">03/01/2024</span>
+                                <span class="read-time">5 min read</span>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <h3 class="article-title">Setup Streaming yang Optimal</h3>
+                            <p class="article-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="article-author">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="Author">
+                                <div class="author-info">
+                                    <span class="author-name">Admin User</span>
+                                    <span class="author-title">Gaming Enthusiast</span>
+                                </div>
+                            </div>
+                            <a href="blog-detail.html?id=8" class="btn btn-primary">
+                                <span>Read Article</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="article-card" data-category="review">
+                        <div class="article-image">
+                            <img src="https://via.placeholder.com/320x200?text=Article+9" alt="Review Gaming Chair Ergonomis">
+                            <div class="article-meta">
+                                <span class="category">review</span>
+                                <span class="date">02/15/2024</span>
+                                <span class="read-time">5 min read</span>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <h3 class="article-title">Review Gaming Chair Ergonomis</h3>
+                            <p class="article-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="article-author">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="Author">
+                                <div class="author-info">
+                                    <span class="author-name">Admin User</span>
+                                    <span class="author-title">Gaming Enthusiast</span>
+                                </div>
+                            </div>
+                            <a href="blog-detail.html?id=9" class="btn btn-primary">
+                                <span>Read Article</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="article-card" data-category="tutorial">
+                        <div class="article-image">
+                            <img src="https://via.placeholder.com/320x200?text=Article+10" alt="Tips Maintenance PC Gaming">
+                            <div class="article-meta">
+                                <span class="category">tutorial</span>
+                                <span class="date">01/25/2024</span>
+                                <span class="read-time">5 min read</span>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <h3 class="article-title">Tips Maintenance PC Gaming</h3>
+                            <p class="article-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="article-author">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="Author">
+                                <div class="author-info">
+                                    <span class="author-name">Admin User</span>
+                                    <span class="author-title">Gaming Enthusiast</span>
+                                </div>
+                            </div>
+                            <a href="blog-detail.html?id=10" class="btn btn-primary">
+                                <span>Read Article</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="article-card" data-category="hardware">
+                        <div class="article-image">
+                            <img src="https://via.placeholder.com/320x200?text=Article+11" alt="Perbandingan SSD vs HDD untuk Gaming">
+                            <div class="article-meta">
+                                <span class="category">hardware</span>
+                                <span class="date">05/20/2024</span>
+                                <span class="read-time">5 min read</span>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <h3 class="article-title">Perbandingan SSD vs HDD untuk Gaming</h3>
+                            <p class="article-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="article-author">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="Author">
+                                <div class="author-info">
+                                    <span class="author-name">Admin User</span>
+                                    <span class="author-title">Gaming Enthusiast</span>
+                                </div>
+                            </div>
+                            <a href="blog-detail.html?id=11" class="btn btn-primary">
+                                <span>Read Article</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="article-card" data-category="review">
+                        <div class="article-image">
+                            <img src="https://via.placeholder.com/320x200?text=Article+12" alt="Gaming Headset dengan Audio Terbaik">
+                            <div class="article-meta">
+                                <span class="category">review</span>
+                                <span class="date">04/10/2024</span>
+                                <span class="read-time">5 min read</span>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <h3 class="article-title">Gaming Headset dengan Audio Terbaik</h3>
+                            <p class="article-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="article-author">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="Author">
+                                <div class="author-info">
+                                    <span class="author-name">Admin User</span>
+                                    <span class="author-title">Gaming Enthusiast</span>
+                                </div>
+                            </div>
+                            <a href="blog-detail.html?id=12" class="btn btn-primary">
+                                <span>Read Article</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -291,7 +588,7 @@
         </section>
     </main>
 
-    <!-- Footer (Same as index.html) -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -300,7 +597,8 @@
                         <a href="index.html" class="logo">
                             <span class="gamer">Gamer</span><span class="tech">Tech</span>
                         </a>
-                        <p>Premium gaming gear and PC components for enthusiasts who demand the best performance and quality.</p>
+                        <p>Premium gaming gear and PC components for enthusiasts who demand the best performance and
+                            quality.</p>
                         <div class="social-links">
                             <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                             <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
@@ -310,7 +608,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
@@ -321,7 +619,7 @@
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Categories</h3>
                     <ul class="footer-links">
@@ -332,7 +630,7 @@
                         <li><a href="catalog.html?category=accessories">Accessories</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Support</h3>
                     <ul class="footer-links">
@@ -343,7 +641,7 @@
                         <li><a href="faq.html">FAQ</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Contact Info</h3>
                     <div class="contact-info">
@@ -366,10 +664,10 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
-                    <p>&copy; 2024 GamerTech. All rights reserved.</p>
+                    <p>© 2024 GamerTech. All rights reserved.</p>
                     <div class="footer-bottom-links">
                         <a href="privacy.html">Privacy Policy</a>
                         <a href="terms.html">Terms of Service</a>
@@ -386,7 +684,10 @@
     </button>
 
     <!-- Scripts -->
+
     <script src="js/main.js"></script>
-    <script src="js/blog.js"></script>
+
 </body>
+
 </html>
+```

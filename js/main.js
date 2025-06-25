@@ -913,48 +913,67 @@ const Catalog = {
         this.updateResultsCount();
     },
 
-    bindEvents() {
-        if (this.searchInput) {
-            this.searchInput.addEventListener('input', Utils.debounce(() => this.filterProducts(), 300));
-            this.searchInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    this.filterProducts();
+   bindEvents() {
+    if (this.searchInput) {
+        this.searchInput.addEventListener('input', Utils.debounce(() => this.filterProducts(), 300));
+        this.searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                this.filterProducts();
+            }
+        });
+    }
+    document.addEventListener("click", (e) => {
+        const productLink = e.target.closest(".product-link");
+        if (productLink) {
+            e.preventDefault(); // Mencegah aksi default jika menggunakan tag <a>
+            const productCard = productLink.closest(".product-card");
+            if (productCard) {
+                const productId = productCard.dataset.id;
+                const product = PRODUCTS_DATA.find(p => p.id === Number.parseInt(productId));
+                if (product) {
+                    const productSlug = product.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                    window.location.href = `product-detail.html?id=${productId}&slug=${productSlug}`;
+                    console.log(`Navigating to product-detail.html?id=${productId}&slug=${productSlug}`); // Debugging
+                } else {
+                    console.error(`Product with ID ${productId} not found.`);
+                    this.showNotification("Product not found.", "error");
                 }
-            });
+            }
         }
-        if (this.sortSelect) {
-            this.sortSelect.addEventListener('change', () => this.sortProducts());
-        }
-        if (this.mobileFilterToggle) {
-            this.mobileFilterToggle.addEventListener('click', () => this.toggleFilters());
-        }
-        if (this.clearFiltersBtn) {
-            this.clearFiltersBtn.addEventListener('click', () => this.clearFilters());
-        }
-        if (this.filtersSidebar) {
-            this.bindFilterEvents();
-            this.bindPriceRangeEvents();
-        }
-        if (this.viewButtons) {
-            this.viewButtons.forEach(btn => {
-                btn.addEventListener('click', () => this.toggleView(btn.dataset.view));
-            });
-        }
-        if (this.paginationContainer) {
-            this.paginationContainer.addEventListener('click', (e) => {
-                const pageItem = e.target.closest('.pagination-item');
-                if (pageItem && !pageItem.classList.contains('disabled')) {
-                    const page = parseInt(pageItem.dataset.page);
-                    if (page) {
-                        this.currentPage = page;
-                        this.renderProducts();
-                        this.updatePagination();
-                        Utils.scrollTo(this.productsGrid, 100);
-                    }
+    });
+    if (this.sortSelect) {
+        this.sortSelect.addEventListener('change', () => this.sortProducts());
+    }
+    if (this.mobileFilterToggle) {
+        this.mobileFilterToggle.addEventListener('click', () => this.toggleFilters());
+    }
+    if (this.clearFiltersBtn) {
+        this.clearFiltersBtn.addEventListener('click', () => this.clearFilters());
+    }
+    if (this.filtersSidebar) {
+        this.bindFilterEvents();
+        this.bindPriceRangeEvents();
+    }
+    if (this.viewButtons) {
+        this.viewButtons.forEach(btn => {
+            btn.addEventListener('click', () => this.toggleView(btn.dataset.view));
+        });
+    }
+    if (this.paginationContainer) {
+        this.paginationContainer.addEventListener('click', (e) => {
+            const pageItem = e.target.closest('.pagination-item');
+            if (pageItem && !pageItem.classList.contains('disabled')) {
+                const page = parseInt(pageItem.dataset.page);
+                if (page) {
+                    this.currentPage = page;
+                    this.renderProducts();
+                    this.updatePagination();
+                    Utils.scrollTo(this.productsGrid, 100);
                 }
-            });
-        }
-    },
+            }
+        });
+    }
+},
     bindFilterEvents() {
         const filterOptions = this.filtersSidebar.querySelectorAll('.filter-option input');
         const filterTitles = this.filtersSidebar.querySelectorAll('.filter-title');
@@ -1122,13 +1141,14 @@ const Catalog = {
         const end = start + this.itemsPerPage;
         const paginatedProducts = this.filteredProducts.slice(start, end);
         this.productsGrid.innerHTML = paginatedProducts.map(product => `
-            <div class="product-card">
-                ${product.onSale ? '<span class="product-badge sale">Sale</span>' : ''}
-                ${product.isNew ? '<span class="product-badge new">New</span>' : ''}
-                ${product.isFeatured ? '<span class="product-badge featured">Featured</span>' : ''}
-                <div class="product-image">
-                    <img src="${product.image}" alt="${product.name}">
-                </div>
+        <div class="product-card" data-id="${product.id}">
+            ${product.onSale ? '<span class="product-badge sale">Sale</span>' : ''}
+            ${product.isNew ? '<span class="product-badge new">New</span>' : ''}
+            ${product.isFeatured ? '<span class="product-badge featured">Featured</span>' : ''}
+            <div class="product-image">
+                <a href="#" class="product-link" data-id="${product.id}">
+                    <img src="${product.image}" alt="${product.name}" loading="lazy">
+                </a>
                 <div class="product-actions">
                     <button class="product-action add-to-wishlist" data-id="${product.id}">
                         <i class="fas fa-heart"></i>
@@ -1137,32 +1157,35 @@ const Catalog = {
                         <i class="fas fa-eye"></i>
                     </button>
                 </div>
-                <div class="product-content">
-                    <span class="product-category">${product.category.replace('-', ' ').toUpperCase()}</span>
+            </div>
+            <div class="product-content">
+                <span class="product-category">${product.category.replace('-', ' ').toUpperCase()}</span>
+                <a href="#" class="product-link" data-id="${product.id}">
                     <h3 class="product-title">${product.name}</h3>
-                    <div class="product-rating">
-                        <div class="rating-stars">${Utils.generateStars(product.rating)}</div>
-                        <span class="rating-count">(${product.reviewCount})</span>
-                    </div>
-                    <div class="product-price">
-                        <span class="current-price">${Utils.formatPrice(product.price)}</span>
-                        ${product.originalPrice ? `
-                            <span class="original-price">${Utils.formatPrice(product.originalPrice)}</span>
-                            <span class="discount-percentage">${Utils.calculateDiscount(product.originalPrice, product.price)}% OFF</span>
-                        ` : ''}
-                    </div>
-                    <p class="product-description">${product.description}</p>
-                    <div class="product-footer">
-                        <span class="stock-status ${product.inStock ? 'in-stock' : 'out-of-stock'}">
-                            ${product.inStock ? `In Stock (${product.stockCount})` : 'Out of Stock'}
-                        </span>
-                        <button class="add-to-cart" data-id="${product.id}" ${!product.inStock ? 'disabled' : ''}>
-                            <i class="fas fa-cart-plus"></i> Add to Cart
-                        </button>
-                    </div>
+                </a>
+                <div class="product-rating">
+                    <div class="rating-stars">${Utils.generateStars(product.rating)}</div>
+                    <span class="rating-count">(${product.reviewCount})</span>
+                </div>
+                <div class="product-price">
+                    <span class="current-price">${Utils.formatPrice(product.price)}</span>
+                    ${product.originalPrice ? `
+                        <span class="original-price">${Utils.formatPrice(product.originalPrice)}</span>
+                        <span class="discount-percentage">${Utils.calculateDiscount(product.originalPrice, product.price)}% OFF</span>
+                    ` : ''}
+                </div>
+                <p class="product-description">${product.description}</p>
+                <div class="product-footer">
+                    <span class="stock-status ${product.inStock ? 'in-stock' : 'out-of-stock'}">
+                        ${product.inStock ? `In Stock (${product.stockCount})` : 'Out of Stock'}
+                    </span>
+                    <button class="add-to-cart" data-id="${product.id}" ${!product.inStock ? 'disabled' : ''}>
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    </button>
                 </div>
             </div>
-        `).join('');
+        </div>
+    `).join('');
         this.bindProductEvents();
     },
     bindProductEvents() {

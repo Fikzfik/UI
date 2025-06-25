@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - GamerTech</title>
     <link rel="stylesheet" href="css/admin-dashboard.css">
     <link rel="stylesheet" href="css/admin-management.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
 </head>
+
 <body>
+
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -22,7 +24,7 @@
                 <i class="fas fa-bars"></i>
             </button>
         </div>
-        
+
         <nav class="sidebar-nav">
             <ul>
                 <li class="nav-item active">
@@ -87,7 +89,7 @@
                     <span class="user-role">Administrator</span>
                 </div>
             </div>
-            <button class="logout-btn">
+            <button class="logout-btn" onclick="handleLogout()">
                 <i class="fas fa-sign-out-alt"></i>
             </button>
         </div>
@@ -103,7 +105,7 @@
                 </button>
                 <h1 class="page-title">Sales Dashboard</h1>
             </div>
-            
+
             <div class="header-right">
                 <div class="date-filter">
                     <select id="dateRange" class="date-select">
@@ -111,21 +113,13 @@
                         <option value="30" selected>Last 30 Days</option>
                         <option value="90">Last 3 Months</option>
                         <option value="365">Last Year</option>
-                        <option value="custom">Custom Range</option>
                     </select>
                 </div>
-                
-                <div class="custom-date-range" id="customDateRange" style="display: none;">
-                    <input type="date" id="startDate" class="date-input">
-                    <span>to</span>
-                    <input type="date" id="endDate" class="date-input">
-                    <button id="applyDateRange" class="apply-btn">Apply</button>
-                </div>
-                
+
                 <button class="refresh-btn" id="refreshData">
                     <i class="fas fa-sync-alt"></i>
                 </button>
-                
+
                 <div class="notification-bell">
                     <i class="fas fa-bell"></i>
                     <span class="notification-badge">3</span>
@@ -245,101 +239,29 @@
                 </div>
             </section>
 
-            <!-- Data Tables Section -->
-            <section class="tables-section">
-                <div class="tables-grid">
-                    <div class="table-card">
-                        <div class="table-header">
-                            <h3>Recent Orders</h3>
-                            <button class="view-all-btn">View All</button>
-                        </div>
-                        <div class="table-container">
-                            <table class="data-table" id="recentOrdersTable">
-                                <thead>
-                                    <tr>
-                                        <th>Order ID</th>
-                                        <th>Customer</th>
-                                        <th>Product</th>
-                                        <th>Amount</th>
-                                        <th>Status</th>
-                                        <th>Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="recentOrdersBody">
-                                    <!-- Data will be populated by JavaScript -->
-                                </tbody>
-                            </table>
-                        </div>
+            <!-- Recent Activity -->
+            <section class="activity-section">
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <h3>Recent Orders</h3>
+                        <button class="view-all-btn">View All</button>
                     </div>
-
-                    <div class="table-card">
-                        <div class="table-header">
-                            <h3>Top Products Performance</h3>
-                            <button class="export-btn">
-                                <i class="fas fa-download"></i>
-                                Export
-                            </button>
-                        </div>
-                        <div class="table-container">
-                            <table class="data-table" id="topProductsTable">
-                                <thead>
-                                    <tr>
-                                        <th>Product</th>
-                                        <th>Sales</th>
-                                        <th>Revenue</th>
-                                        <th>Growth</th>
-                                        <th>Stock</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="topProductsBody">
-                                    <!-- Data will be populated by JavaScript -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Analytics Insights -->
-            <section class="insights-section">
-                <div class="insights-grid">
-                    <div class="insight-card">
-                        <div class="insight-icon">
-                            <i class="fas fa-trending-up"></i>
-                        </div>
-                        <div class="insight-content">
-                            <h4>Sales Growth</h4>
-                            <p>Your sales have increased by 23% compared to last month. Gaming peripherals are performing exceptionally well.</p>
-                            <div class="insight-action">
-                                <button class="insight-btn">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="insight-card">
-                        <div class="insight-icon">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="insight-content">
-                            <h4>Low Stock Alert</h4>
-                            <p>5 products are running low on stock. Consider restocking to avoid missed sales opportunities.</p>
-                            <div class="insight-action">
-                                <button class="insight-btn">Manage Inventory</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="insight-card">
-                        <div class="insight-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="insight-content">
-                            <h4>Customer Satisfaction</h4>
-                            <p>Average rating has improved to 4.8/5. Customer reviews mention fast delivery and product quality.</p>
-                            <div class="insight-action">
-                                <button class="insight-btn">View Reviews</button>
-                            </div>
-                        </div>
+                    <div class="activity-list">
+                        <table class="orders-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Produk</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Tanggal</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentOrdersBody">
+                                <!-- Orders will be populated here -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </section>
@@ -355,104 +277,30 @@
                 </button>
             </div>
             <div class="management-content">
-                <div class="articles-management">
-                    <div class="management-toolbar">
-                        <div class="search-container">
-                            <i class="fas fa-search"></i>
-                            <input type="text" id="articleSearch" placeholder="Cari artikel..." class="search-input">
-                        </div>
-                        <div class="filter-container">
-                            <select id="categoryFilterArticles" class="filter-select">
-                                <option value="">Semua Kategori</option>
-                                <option value="gaming">Gaming</option>
-                                <option value="hardware">Hardware</option>
-                                <option value="review">Review</option>
-                                <option value="tutorial">Tutorial</option>
-                            </select>
-                            <select id="statusFilterArticles" class="filter-select">
-                                <option value="">Semua Status</option>
-                                <option value="published">Published</option>
-                                <option value="draft">Draft</option>
-                                <option value="archived">Archived</option>
-                            </select>
-                        </div>
+                <div class="management-toolbar">
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="articleSearch" placeholder="Cari artikel..." class="search-input">
                     </div>
-                    <div class="articles-grid" id="articlesGrid">
-                        <!-- Articles will be populated here -->
-                    </div>
-                    <div class="pagination-container">
-                        <div class="pagination" id="articlesPagination">
-                            <!-- Pagination will be generated here -->
-                        </div>
-                    </div>
-                    <!-- Article Modal -->
-                    <div class="modal-overlay" id="articleModal">
-                        <div class="modal-container">
-                            <div class="modal-header">
-                                <h3 id="modalTitleArticles">Tambah Artikel</h3>
-                                <button class="modal-close" id="closeModalArticles">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="articleForm" class="article-form">
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label for="articleTitle">Judul Artikel</label>
-                                            <input type="text" id="articleTitle" name="title" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="articleCategory">Kategori</label>
-                                            <select id="articleCategory" name="category" required>
-                                                <option value="">Pilih Kategori</option>
-                                                <option value="gaming">Gaming</option>
-                                                <option value="hardware">Hardware</option>
-                                                <option value="review">Review</option>
-                                                <option value="tutorial">Tutorial</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="articleExcerpt">Excerpt</label>
-                                        <textarea id="articleExcerpt" name="excerpt" rows="3" placeholder="Ringkasan singkat artikel..."></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="articleContent">Konten</label>
-                                        <textarea id="articleContent" name="content" rows="10" placeholder="Tulis konten artikel di sini..."></textarea>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label for="articleImage">Gambar Utama</label>
-                                            <div class="image-upload">
-                                                <input type="file" id="articleImage" name="image" accept="image/*">
-                                                <div class="image-preview" id="imagePreview">
-                                                    <i class="fas fa-image"></i>
-                                                    <span>Upload Gambar</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="articleStatus">Status</label>
-                                            <select id="articleStatus" name="status" required>
-                                                <option value="draft">Draft</option>
-                                                <option value="published">Published</option>
-                                                <option value="archived">Archived</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="articleTags">Tags</label>
-                                        <input type="text" id="articleTags" name="tags" placeholder="gaming, hardware, review (pisahkan dengan koma)">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn-secondary" id="cancelBtnArticles">Batal</button>
-                                <button type="submit" form="articleForm" class="btn-primary" id="saveBtnArticles">Simpan</button>
-                            </div>
-                        </div>
+                    <div class="filter-container">
+                        <select id="productCategoryFilter" class="filter-select">
+                            <option value="">Semua Kategori</option>
+                            <option value="gaming-gear">Gaming Gear</option>
+                            <option value="pc-components">PC Components</option>
+                            <option value="accessories">Accessories</option>
+                        </select>
+                        <select id="stockFilter" class="filter-select">
+                            <option value="">Semua Stok</option>
+                            <option value="in-stock">In Stock</option>
+                            <option value="low-stock">Low Stock</option>
+                            <option value="out-of-stock">Out of Stock</option>
+                        </select>
                     </div>
                 </div>
+                <div class="articles-grid" id="articlesGrid">
+                    <!-- Articles will be populated here -->
+                </div>
+                <div class="pagination-container" id="articlesPagination"></div>
             </div>
         </div>
 
@@ -466,124 +314,24 @@
                 </button>
             </div>
             <div class="management-content">
-                <div class="products-management">
-                    <div class="management-toolbar">
-                        <div class="search-container">
-                            <i class="fas fa-search"></i>
-                            <input type="text" id="productSearch" placeholder="Cari produk..." class="search-input">
-                        </div>
-                        <div class="filter-container">
-                            <select id="categoryFilterProducts" class="filter-select">
-                                <option value="">Semua Kategori</option>
-                                <option value="gaming-peripherals">Gaming Peripherals</option>
-                                <option value="pc-components">PC Components</option>
-                                <option value="gaming-furniture">Gaming Furniture</option>
-                                <option value="accessories">Accessories</option>
-                            </select>
-                            <select id="stockFilter" class="filter-select">
-                                <option value="">Semua Stock</option>
-                                <option value="in-stock">In Stock</option>
-                                <option value="low-stock">Low Stock</option>
-                                <option value="out-of-stock">Out of Stock</option>
-                            </select>
-                        </div>
+                <div class="management-toolbar">
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="productSearch" placeholder="Cari produk..." class="search-input">
                     </div>
-                    <div class="products-grid" id="productsGrid">
-                        <!-- Products will be populated here -->
-                    </div>
-                    <div class="pagination-container">
-                        <div class="pagination" id="productsPagination">
-                            <!-- Pagination will be generated here -->
-                        </div>
-                    </div>
-                    <!-- Product Modal -->
-                    <div class="modal-overlay" id="productModal">
-                        <div class="modal-container large">
-                            <div class="modal-header">
-                                <h3 id="modalTitleProducts">Tambah Produk</h3>
-                                <button class="modal-close" id="closeModalProducts">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="productForm" class="product-form">
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label for="productName">Nama Produk</label>
-                                            <input type="text" id="productName" name="name" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="productCategory">Kategori</label>
-                                            <select id="productCategory" name="category" required>
-                                                <option value="">Pilih Kategori</option>
-                                                <option value="gaming-peripherals">Gaming Peripherals</option>
-                                                <option value="pc-components">PC Components</option>
-                                                <option value="gaming-furniture">Gaming Furniture</option>
-                                                <option value="accessories">Accessories</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="productDescription">Deskripsi</label>
-                                        <textarea id="productDescription" name="description" rows="4" placeholder="Deskripsi produk..."></textarea>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label for="productPrice">Harga (Rp)</label>
-                                            <input type="number" id="productPrice" name="price" min="0" step="1000" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="productStock">Stock</label>
-                                            <input type="number" id="productStock" name="stock" min="0" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="productSKU">SKU</label>
-                                            <input type="text" id="productSKU" name="sku" placeholder="SKU-001">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="productImages">Gambar Produk</label>
-                                        <div class="images-upload">
-                                            <input type="file" id="productImages" name="images" accept="image/*" multiple>
-                                            <div class="images-preview" id="imagesPreview">
-                                                <div class="upload-placeholder">
-                                                    <i class="fas fa-images"></i>
-                                                    <span>Upload Gambar (Max 5)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label for="productBrand">Brand</label>
-                                            <input type="text" id="productBrand" name="brand" placeholder="Nama brand">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="productWeight">Berat (kg)</label>
-                                            <input type="number" id="productWeight" name="weight" min="0" step="0.1">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="productStatus">Status</label>
-                                            <select id="productStatus" name="status" required>
-                                                <option value="active">Active</option>
-                                                <option value="inactive">Inactive</option>
-                                                <option value="discontinued">Discontinued</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="productSpecs">Spesifikasi</label>
-                                        <textarea id="productSpecs" name="specifications" rows="4" placeholder="Spesifikasi teknis produk..."></textarea>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn-secondary" id="cancelBtnProducts">Batal</button>
-                                <button type="submit" form="productForm" class="btn-primary" id="saveBtnProducts">Simpan</button>
-                            </div>
-                        </div>
+                    <div class="filter-container">
+                        <select id="productCategoryFilter" class="filter-select">
+                            <option value="">Semua Kategori</option>
+                            <option value="gaming-gear">Gaming Gear</option>
+                            <option value="pc-components">PC Components</option>
+                            <option value="accessories">Accessories</option>
+                        </select>
                     </div>
                 </div>
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products will be populated here -->
+                </div>
+                <div class="pagination-container" id="productsPagination"></div>
             </div>
         </div>
 
@@ -597,129 +345,47 @@
                 </button>
             </div>
             <div class="management-content">
-                <div class="users-management">
-                    <div class="management-toolbar">
-                        <div class="search-container">
-                            <i class="fas fa-search"></i>
-                            <input type="text" id="userSearch" placeholder="Cari pengguna..." class="search-input">
-                        </div>
-                        <div class="filter-container">
-                            <select id="roleFilter" class="filter-select">
-                                <option value="">Semua Role</option>
-                                <option value="admin">Admin</option>
-                                <option value="customer">Customer</option>
-                                <option value="moderator">Moderator</option>
-                            </select>
-                            <select id="statusFilterUsers" class="filter-select">
-                                <option value="">Semua Status</option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                                <option value="banned">Banned</option>
-                            </select>
-                        </div>
+                <div class="management-toolbar">
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="userSearch" placeholder="Cari pengguna..." class="search-input">
                     </div>
-                    <div class="users-table-container">
-                        <table class="users-table" id="usersTable">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <input type="checkbox" id="selectAll">
-                                    </th>
-                                    <th>Avatar</th>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Status</th>
-                                    <th>Bergabung</th>
-                                    <th>Last Login</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="usersTableBody">
-                                <!-- Users will be populated here -->
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="pagination-container">
-                        <div class="pagination" id="usersPagination">
-                            <!-- Pagination will be generated here -->
-                        </div>
-                    </div>
-                    <!-- User Modal -->
-                    <div class="modal-overlay" id="userModal">
-                        <div class="modal-container">
-                            <div class="modal-header">
-                                <h3 id="modalTitleUsers">Tambah Pengguna</h3>
-                                <button class="modal-close" id="closeModalUsers">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="userForm" class="user-form">
-                                    <div class="form-group">
-                                        <label for="userAvatar">Avatar</label>
-                                        <div class="avatar-upload">
-                                            <input type="file" id="userAvatar" name="avatar" accept="image/*">
-                                            <div class="avatar-preview" id="avatarPreview">
-                                                <i class="fas fa-user"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label for="userFirstName">Nama Depan</label>
-                                            <input type="text" id="userFirstName" name="firstName" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="userLastName">Nama Belakang</label>
-                                            <input type="text" id="userLastName" name="lastName" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="userEmail">Email</label>
-                                        <input type="email" id="userEmail" name="email" required>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label for="userPhone">Telepon</label>
-                                            <input type="tel" id="userPhone" name="phone">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="userRole">Role</label>
-                                            <select id="userRole" name="role" required>
-                                                <option value="customer">Customer</option>
-                                                <option value="moderator">Moderator</option>
-                                                <option value="admin">Admin</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="userAddress">Alamat</label>
-                                        <textarea id="userAddress" name="address" rows="3" placeholder="Alamat lengkap..."></textarea>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label for="userStatus">Status</label>
-                                            <select id="userStatus" name="status" required>
-                                                <option value="active">Active</option>
-                                                <option value="inactive">Inactive</option>
-                                                <option value="banned">Banned</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="userPassword">Password</label>
-                                            <input type="password" id="userPassword" name="password" placeholder="Kosongkan jika tidak ingin mengubah">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn-secondary" id="cancelBtnUsers">Batal</button>
-                                <button type="submit" form="userForm" class="btn-primary" id="saveBtnUsers">Simpan</button>
-                            </div>
-                        </div>
+                    <div class="filter-container">
+                        <select id="roleFilter" class="filter-select">
+                            <option value="">Semua Role</option>
+                            <option value="admin">Admin</option>
+                            <option value="customer">Customer</option>
+                            <option value="moderator">Moderator</option>
+                        </select>
+                        <select id="statusFilterUsers" class="filter-select">
+                            <option value="">Semua Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="banned">Banned</option>
+                        </select>
                     </div>
                 </div>
+                <div class="users-table-container">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="selectAll"></th>
+                                <th>Avatar</th>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Bergabung</th>
+                                <th>Terakhir Login</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- Users will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination-container" id="usersPagination"></div>
             </div>
         </div>
 
@@ -727,145 +393,1203 @@
         <div class="management-section" id="transactionsSection" style="display: none;">
             <div class="section-header">
                 <h1>Kelola Transaksi</h1>
-                <div class="transaction-filters">
-                    <select id="transactionStatus" class="filter-select">
-                        <option value="">Semua Status</option>
+            </div>
+            <div class="management-content">
+                <div class="management-toolbar">
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="transactionSearch" placeholder="Cari transaksi..." class="search-input">
+                    </div>
+                    <div class="filter-container">
+                        <select id="transactionStatus" class="filter-select">
+                            <option value="">Semua Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="processing">Processing</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                            <option value="refunded">Refunded</option>
+                        </select>
+                        <select id="paymentFilter" class="filter-select">
+                            <option value="">Semua Pembayaran</option>
+                            <option value="credit-card">Credit Card</option>
+                            <option value="bank-transfer">Bank Transfer</option>
+                            <option value="e-wallet">E-Wallet</option>
+                            <option value="cod">Cash on Delivery</option>
+                        </select>
+                        <input type="date" id="transactionDate" class="filter-select">
+                    </div>
+                </div>
+                <div class="transactions-table-container">
+                    <table class="transactions-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Produk</th>
+                                <th>Total</th>
+                                <th>Metode Pembayaran</th>
+                                <th>Status</th>
+                                <th>Tanggal</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsTableBody">
+                            <!-- Transactions will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination-container" id="transactionsPagination"></div>
+            </div>
+
+            <!-- Other sections (Analytics, Reports, Settings) -->
+            <!-- Analytics Section -->
+            <div class="management-section" id="analyticsSection" style="display: none;">
+                <div class="section-header">
+                    <h1>Analytics Dashboard</h1>
+                    <div class="analytics-controls">
+                        <select id="analyticsTimeframe" class="filter-select">
+                            <option value="7">Last 7 Days</option>
+                            <option value="30" selected>Last 30 Days</option>
+                            <option value="90">Last 3 Months</option>
+                            <option value="365">Last Year</option>
+                        </select>
+                        <button class="export-btn">
+                            <i class="fas fa-download"></i>
+                            Export Report
+                        </button>
+                    </div>
+                </div>
+
+                <div class="analytics-content">
+                    <!-- Performance Metrics -->
+                    <section class="analytics-metrics">
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-icon revenue">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="metric-content">
+                                    <h3>Revenue Growth</h3>
+                                    <div class="metric-value">+23.5%</div>
+                                    <div class="metric-subtitle">vs last month</div>
+                                </div>
+                            </div>
+
+                            <div class="metric-card">
+                                <div class="metric-icon conversion">
+                                    <i class="fas fa-percentage"></i>
+                                </div>
+                                <div class="metric-content">
+                                    <h3>Conversion Rate</h3>
+                                    <div class="metric-value">3.2%</div>
+                                    <div class="metric-subtitle">+0.5% improvement</div>
+                                </div>
+                            </div>
+
+                            <div class="metric-card">
+                                <div class="metric-icon retention">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="metric-content">
+                                    <h3>Customer Retention</h3>
+                                    <div class="metric-value">87.3%</div>
+                                    <div class="metric-subtitle">+2.1% increase</div>
+                                </div>
+                            </div>
+
+                            <div class="metric-card">
+                                <div class="metric-icon satisfaction">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="metric-content">
+                                    <h3>Satisfaction Score</h3>
+                                    <div class="metric-value">4.8/5</div>
+                                    <div class="metric-subtitle">Based on 1,234 reviews</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Advanced Charts -->
+                    <section class="analytics-charts">
+                        <div class="charts-container">
+                            <div class="chart-card analytics-large">
+                                <div class="chart-header">
+                                    <h3>Revenue Analytics</h3>
+                                    <div class="chart-tabs">
+                                        <button class="tab-btn active" data-chart="revenue">Revenue</button>
+                                        <button class="tab-btn" data-chart="profit">Profit</button>
+                                        <button class="tab-btn" data-chart="orders">Orders</button>
+                                    </div>
+                                </div>
+                                <div class="chart-container">
+                                    <canvas id="revenueAnalyticsChart"></canvas>
+                                </div>
+                            </div>
+
+                            <div class="chart-card analytics-medium">
+                                <div class="chart-header">
+                                    <h3>Traffic Sources</h3>
+                                </div>
+                                <div class="chart-container">
+                                    <canvas id="trafficSourcesChart"></canvas>
+                                </div>
+                                <div class="chart-legend">
+                                    <div class="legend-item">
+                                        <span class="legend-color" style="background: #6366f1;"></span>
+                                        <span>Direct (45%)</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color" style="background: #10b981;"></span>
+                                        <span>Social Media (30%)</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color" style="background: #f59e0b;"></span>
+                                        <span>Search (25%)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="chart-card analytics-medium">
+                                <div class="chart-header">
+                                    <h3>Customer Demographics</h3>
+                                </div>
+                                <div class="demographics-content">
+                                    <div class="demo-item">
+                                        <div class="demo-label">Age 18-24</div>
+                                        <div class="demo-bar">
+                                            <div class="demo-fill" style="width: 25%;"></div>
+                                        </div>
+                                        <div class="demo-value">25%</div>
+                                    </div>
+                                    <div class="demo-item">
+                                        <div class="demo-label">Age 25-34</div>
+                                        <div class="demo-bar">
+                                            <div class="demo-fill" style="width: 40%;"></div>
+                                        </div>
+                                        <div class="demo-value">40%</div>
+                                    </div>
+                                    <div class="demo-item">
+                                        <div class="demo-label">Age 35-44</div>
+                                        <div class="demo-bar">
+                                            <div class="demo-fill" style="width: 20%;"></div>
+                                        </div>
+                                        <div class="demo-value">20%</div>
+                                    </div>
+                                    <div class="demo-item">
+                                        <div class="demo-label">Age 45+</div>
+                                        <div class="demo-bar">
+                                            <div class="demo-fill" style="width: 15%;"></div>
+                                        </div>
+                                        <div class="demo-value">15%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Performance Insights -->
+                    <section class="analytics-insights">
+                        <div class="insights-container">
+                            <div class="insight-card trend-up">
+                                <div class="insight-header">
+                                    <h4>Top Performing Product</h4>
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <div class="insight-content">
+                                    <div class="insight-title">Gaming Mouse Pro X</div>
+                                    <div class="insight-stats">
+                                        <span>1,234 units sold</span>
+                                        <span class="positive">+45% vs last month</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="insight-card trend-down">
+                                <div class="insight-header">
+                                    <h4>Needs Attention</h4>
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="insight-content">
+                                    <div class="insight-title">Wireless Headset</div>
+                                    <div class="insight-stats">
+                                        <span>234 units sold</span>
+                                        <span class="negative">-12% vs last month</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="insight-card trend-neutral">
+                                <div class="insight-header">
+                                    <h4>Peak Hours</h4>
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="insight-content">
+                                    <div class="insight-title">2:00 PM - 6:00 PM</div>
+                                    <div class="insight-stats">
+                                        <span>Highest traffic period</span>
+                                        <span>35% of daily visits</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div class="management-section" id="reportsSection" style="display: none;">
+                <div class="section-header">
+                    <h1>Reports Center</h1>
+                    <button class="add-btn" id="generateReportBtn">
+                        <i class="fas fa-plus"></i>
+                        Generate Report
+                    </button>
+                </div>
+
+                <div class="reports-content">
+                    <!-- Report Categories -->
+                    <section class="report-categories">
+                        <div class="categories-grid">
+                            <div class="category-card" data-category="sales">
+                                <div class="category-icon">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <div class="category-content">
+                                    <h3>Sales Reports</h3>
+                                    <p>Revenue, orders, and performance metrics</p>
+                                    <div class="category-count">12 reports</div>
+                                </div>
+                            </div>
+
+                            <div class="category-card" data-category="customers">
+                                <div class="category-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="category-content">
+                                    <h3>Customer Reports</h3>
+                                    <p>Customer behavior and demographics</p>
+                                    <div class="category-count">8 reports</div>
+                                </div>
+                            </div>
+
+                            <div class="category-card" data-category="inventory">
+                                <div class="category-icon">
+                                    <i class="fas fa-boxes"></i>
+                                </div>
+                                <div class="category-content">
+                                    <h3>Inventory Reports</h3>
+                                    <p>Stock levels and product performance</p>
+                                    <div class="category-count">6 reports</div>
+                                </div>
+                            </div>
+
+                            <div class="category-card" data-category="financial">
+                                <div class="category-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <div class="category-content">
+                                    <h3>Financial Reports</h3>
+                                    <p>Profit, expenses, and financial analysis</p>
+                                    <div class="category-count">10 reports</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Recent Reports -->
+                    <section class="recent-reports">
+                        <div class="section-title">
+                            <h3>Recent Reports</h3>
+                            <div class="report-filters">
+                                <select id="reportTypeFilter" class="filter-select">
+                                    <option value="">All Types</option>
+                                    <option value="sales">Sales</option>
+                                    <option value="customers">Customers</option>
+                                    <option value="inventory">Inventory</option>
+                                    <option value="financial">Financial</option>
+                                </select>
+                                <select id="reportStatusFilter" class="filter-select">
+                                    <option value="">All Status</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="processing">Processing</option>
+                                    <option value="scheduled">Scheduled</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="reports-table-container">
+                            <table class="reports-table">
+                                <thead>
+                                    <tr>
+                                        <th>Report Name</th>
+                                        <th>Type</th>
+                                        <th>Generated</th>
+                                        <th>Status</th>
+                                        <th>Size</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="reportsTableBody">
+                                    <tr>
+                                        <td>
+                                            <div class="report-info">
+                                                <i class="fas fa-file-pdf report-icon"></i>
+                                                <span>Monthly Sales Report - January 2024</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="report-type sales">Sales</span></td>
+                                        <td>Jan 31, 2024 10:30 AM</td>
+                                        <td><span class="status-badge status-completed">Completed</span></td>
+                                        <td>2.4 MB</td>
+                                        <td>
+                                            <div class="report-actions">
+                                                <button class="action-btn download" title="Download">
+                                                    <i class="fas fa-download"></i>
+                                                </button>
+                                                <button class="action-btn view" title="View">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="action-btn share" title="Share">
+                                                    <i class="fas fa-share"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="report-info">
+                                                <i class="fas fa-file-excel report-icon"></i>
+                                                <span>Customer Analytics Report</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="report-type customers">Customers</span></td>
+                                        <td>Jan 30, 2024 3:15 PM</td>
+                                        <td><span class="status-badge status-completed">Completed</span></td>
+                                        <td>1.8 MB</td>
+                                        <td>
+                                            <div class="report-actions">
+                                                <button class="action-btn download" title="Download">
+                                                    <i class="fas fa-download"></i>
+                                                </button>
+                                                <button class="action-btn view" title="View">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="action-btn share" title="Share">
+                                                    <i class="fas fa-share"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="report-info">
+                                                <i class="fas fa-file-chart-line report-icon"></i>
+                                                <span>Inventory Status Report</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="report-type inventory">Inventory</span></td>
+                                        <td>Jan 29, 2024 9:45 AM</td>
+                                        <td><span class="status-badge status-processing">Processing</span></td>
+                                        <td>-</td>
+                                        <td>
+                                            <div class="report-actions">
+                                                <button class="action-btn cancel" title="Cancel">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- Scheduled Reports -->
+                    <section class="scheduled-reports">
+                        <div class="section-title">
+                            <h3>Scheduled Reports</h3>
+                            <button class="schedule-btn">
+                                <i class="fas fa-calendar-plus"></i>
+                                Schedule New
+                            </button>
+                        </div>
+
+                        <div class="scheduled-grid">
+                            <div class="schedule-card">
+                                <div class="schedule-header">
+                                    <h4>Weekly Sales Summary</h4>
+                                    <div class="schedule-status active">Active</div>
+                                </div>
+                                <div class="schedule-details">
+                                    <div class="schedule-item">
+                                        <i class="fas fa-calendar"></i>
+                                        <span>Every Monday at 9:00 AM</span>
+                                    </div>
+                                    <div class="schedule-item">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>Send to: admin@gamertech.com</span>
+                                    </div>
+                                    <div class="schedule-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>Next run: Feb 5, 2024</span>
+                                    </div>
+                                </div>
+                                <div class="schedule-actions">
+                                    <button class="action-btn edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn pause">
+                                        <i class="fas fa-pause"></i>
+                                    </button>
+                                    <button class="action-btn delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="schedule-card">
+                                <div class="schedule-header">
+                                    <h4>Monthly Financial Report</h4>
+                                    <div class="schedule-status paused">Paused</div>
+                                </div>
+                                <div class="schedule-details">
+                                    <div class="schedule-item">
+                                        <i class="fas fa-calendar"></i>
+                                        <span>1st of every month at 8:00 AM</span>
+                                    </div>
+                                    <div class="schedule-item">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>Send to: finance@gamertech.com</span>
+                                    </div>
+                                    <div class="schedule-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>Last run: Jan 1, 2024</span>
+                                    </div>
+                                </div>
+                                <div class="schedule-actions">
+                                    <button class="action-btn edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn play">
+                                        <i class="fas fa-play"></i>
+                                    </button>
+                                    <button class="action-btn delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div class="management-section" id="settingsSection" style="display: none;">
+                <div class="section-header">
+                    <h1>Settings</h1>
+                    <button class="save-settings-btn">
+                        <i class="fas fa-save"></i>
+                        Save Changes
+                    </button>
+                </div>
+
+                <div class="settings-content">
+                    <!-- Settings Navigation -->
+                    <div class="settings-nav">
+                        <div class="settings-tabs">
+                            <button class="settings-tab active" data-tab="general">
+                                <i class="fas fa-cog"></i>
+                                General
+                            </button>
+                            <button class="settings-tab" data-tab="appearance">
+                                <i class="fas fa-palette"></i>
+                                Appearance
+                            </button>
+                            <button class="settings-tab" data-tab="notifications">
+                                <i class="fas fa-bell"></i>
+                                Notifications
+                            </button>
+                            <button class="settings-tab" data-tab="security">
+                                <i class="fas fa-shield-alt"></i>
+                                Security
+                            </button>
+                            <button class="settings-tab" data-tab="integrations">
+                                <i class="fas fa-plug"></i>
+                                Integrations
+                            </button>
+                            <button class="settings-tab" data-tab="backup">
+                                <i class="fas fa-database"></i>
+                                Backup
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Settings Panels -->
+                    <div class="settings-panels">
+                        <!-- General Settings -->
+                        <div class="settings-panel active" id="general-panel">
+                            <div class="panel-header">
+                                <h3>General Settings</h3>
+                                <p>Configure basic application settings</p>
+                            </div>
+
+                            <div class="settings-groups">
+                                <div class="settings-group">
+                                    <h4>Company Information</h4>
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label for="companyName">Company Name</label>
+                                            <input type="text" id="companyName" value="GamerTech"
+                                                class="settings-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="companyEmail">Company Email</label>
+                                            <input type="email" id="companyEmail" value="admin@gamertech.com"
+                                                class="settings-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="companyPhone">Phone Number</label>
+                                            <input type="tel" id="companyPhone" value="+1 (555) 123-4567"
+                                                class="settings-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="timezone">Timezone</label>
+                                            <select id="timezone" class="settings-select">
+                                                <option value="UTC">UTC</option>
+                                                <option value="EST" selected>Eastern Time</option>
+                                                <option value="PST">Pacific Time</option>
+                                                <option value="GMT">Greenwich Mean Time</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="settings-group">
+                                    <h4>Regional Settings</h4>
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label for="language">Language</label>
+                                            <select id="language" class="settings-select">
+                                                <option value="en" selected>English</option>
+                                                <option value="id">Bahasa Indonesia</option>
+                                                <option value="es">Español</option>
+                                                <option value="fr">Français</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="currency">Currency</label>
+                                            <select id="currency" class="settings-select">
+                                                <option value="USD" selected>USD ($)</option>
+                                                <option value="IDR">IDR (Rp)</option>
+                                                <option value="EUR">EUR (€)</option>
+                                                <option value="GBP">GBP (£)</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="dateFormat">Date Format</label>
+                                            <select id="dateFormat" class="settings-select">
+                                                <option value="MM/DD/YYYY" selected>MM/DD/YYYY</option>
+                                                <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                                                <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Appearance Settings -->
+                        <div class="settings-panel" id="appearance-panel">
+                            <div class="panel-header">
+                                <h3>Appearance Settings</h3>
+                                <p>Customize the look and feel of your dashboard</p>
+                            </div>
+
+                            <div class="settings-groups">
+                                <div class="settings-group">
+                                    <h4>Theme</h4>
+                                    <div class="theme-options">
+                                        <div class="theme-option active" data-theme="light">
+                                            <div class="theme-preview light">
+                                                <div class="preview-header"></div>
+                                                <div class="preview-sidebar"></div>
+                                                <div class="preview-content"></div>
+                                            </div>
+                                            <span>Light Mode</span>
+                                        </div>
+                                        <div class="theme-option" data-theme="dark">
+                                            <div class="theme-preview dark">
+                                                <div class="preview-header"></div>
+                                                <div class="preview-sidebar"></div>
+                                                <div class="preview-content"></div>
+                                            </div>
+                                            <span>Dark Mode</span>
+                                        </div>
+                                        <div class="theme-option" data-theme="auto">
+                                            <div class="theme-preview auto">
+                                                <div class="preview-header"></div>
+                                                <div class="preview-sidebar"></div>
+                                                <div class="preview-content"></div>
+                                            </div>
+                                            <span>Auto</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="settings-group">
+                                    <h4>Layout</h4>
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label for="sidebarStyle">Sidebar Style</label>
+                                            <select id="sidebarStyle" class="settings-select">
+                                                <option value="fixed" selected>Fixed</option>
+                                                <option value="collapsible">Collapsible</option>
+                                                <option value="overlay">Overlay</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="headerStyle">Header Style</label>
+                                            <select id="headerStyle" class="settings-select">
+                                                <option value="fixed" selected>Fixed</option>
+                                                <option value="static">Static</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="toggle-group">
+                                        <div class="toggle-item">
+                                            <label class="toggle-label">
+                                                <input type="checkbox" class="toggle-input" checked>
+                                                <span class="toggle-slider"></span>
+                                                Show breadcrumbs
+                                            </label>
+                                        </div>
+                                        <div class="toggle-item">
+                                            <label class="toggle-label">
+                                                <input type="checkbox" class="toggle-input" checked>
+                                                <span class="toggle-slider"></span>
+                                                Compact mode
+                                            </label>
+                                        </div>
+                                        <div class="toggle-item">
+                                            <label class="toggle-label">
+                                                <input type="checkbox" class="toggle-input">
+                                                <span class="toggle-slider"></span>
+                                                Animations
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notifications Settings -->
+                        <div class="settings-panel" id="notifications-panel">
+                            <div class="panel-header">
+                                <h3>Notification Settings</h3>
+                                <p>Configure how and when you receive notifications</p>
+                            </div>
+
+                            <div class="settings-groups">
+                                <div class="settings-group">
+                                    <h4>Email Notifications</h4>
+                                    <div class="notification-options">
+                                        <div class="notification-item">
+                                            <div class="notification-info">
+                                                <h5>New Orders</h5>
+                                                <p>Get notified when new orders are placed</p>
+                                            </div>
+                                            <label class="toggle-label">
+                                                <input type="checkbox" class="toggle-input" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="notification-item">
+                                            <div class="notification-info">
+                                                <h5>Low Stock Alerts</h5>
+                                                <p>Alert when product inventory is running low</p>
+                                            </div>
+                                            <label class="toggle-label">
+                                                <input type="checkbox" class="toggle-input" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="notification-item">
+                                            <div class="notification-info">
+                                                <h5>Weekly Reports</h5>
+                                                <p>Receive weekly performance summaries</p>
+                                            </div>
+                                            <label class="toggle-label">
+                                                <input type="checkbox" class="toggle-input">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="settings-group">
+                                    <h4>Push Notifications</h4>
+                                    <div class="notification-options">
+                                        <div class="notification-item">
+                                            <div class="notification-info">
+                                                <h5>System Updates</h5>
+                                                <p>Important system and security updates</p>
+                                            </div>
+                                            <label class="toggle-label">
+                                                <input type="checkbox" class="toggle-input" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="notification-item">
+                                            <div class="notification-info">
+                                                <h5>Customer Messages</h5>
+                                                <p>New customer support messages</p>
+                                            </div>
+                                            <label class="toggle-label">
+                                                <input type="checkbox" class="toggle-input" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Security Settings -->
+                        <div class="settings-panel" id="security-panel">
+                            <div class="panel-header">
+                                <h3>Security Settings</h3>
+                                <p>Manage your account security and access controls</p>
+                            </div>
+
+                            <div class="settings-groups">
+                                <div class="settings-group">
+                                    <h4>Password & Authentication</h4>
+                                    <div class="security-options">
+                                        <div class="security-item">
+                                            <div class="security-info">
+                                                <h5>Change Password</h5>
+                                                <p>Last changed 30 days ago</p>
+                                            </div>
+                                            <button class="security-btn">Change</button>
+                                        </div>
+                                        <div class="security-item">
+                                            <div class="security-info">
+                                                <h5>Two-Factor Authentication</h5>
+                                                <p>Add an extra layer of security</p>
+                                            </div>
+                                            <label class="toggle-label">
+                                                <input type="checkbox" class="toggle-input">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="settings-group">
+                                    <h4>Session Management</h4>
+                                    <div class="session-info">
+                                        <div class="session-item">
+                                            <div class="session-details">
+                                                <h5>Current Session</h5>
+                                                <p>Chrome on Windows • 192.168.1.100</p>
+                                                <span class="session-time">Active now</span>
+                                            </div>
+                                            <span class="session-status current">Current</span>
+                                        </div>
+                                        <div class="session-item">
+                                            <div class="session-details">
+                                                <h5>Mobile Session</h5>
+                                                <p>Safari on iPhone • 192.168.1.105</p>
+                                                <span class="session-time">2 hours ago</span>
+                                            </div>
+                                            <button class="session-revoke">Revoke</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Integrations Settings -->
+                        <div class="settings-panel" id="integrations-panel">
+                            <div class="panel-header">
+                                <h3>Integrations</h3>
+                                <p>Connect with third-party services and APIs</p>
+                            </div>
+
+                            <div class="settings-groups">
+                                <div class="integrations-grid">
+                                    <div class="integration-card connected">
+                                        <div class="integration-icon">
+                                            <i class="fab fa-google"></i>
+                                        </div>
+                                        <div class="integration-info">
+                                            <h4>Google Analytics</h4>
+                                            <p>Track website performance and user behavior</p>
+                                            <span class="integration-status">Connected</span>
+                                        </div>
+                                        <div class="integration-actions">
+                                            <button class="integration-btn configure">Configure</button>
+                                            <button class="integration-btn disconnect">Disconnect</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="integration-card">
+                                        <div class="integration-icon">
+                                            <i class="fab fa-stripe"></i>
+                                        </div>
+                                        <div class="integration-info">
+                                            <h4>Stripe</h4>
+                                            <p>Process payments and manage subscriptions</p>
+                                            <span class="integration-status">Not Connected</span>
+                                        </div>
+                                        <div class="integration-actions">
+                                            <button class="integration-btn connect">Connect</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="integration-card connected">
+                                        <div class="integration-icon">
+                                            <i class="fab fa-mailchimp"></i>
+                                        </div>
+                                        <div class="integration-info">
+                                            <h4>Mailchimp</h4>
+                                            <p>Email marketing and automation</p>
+                                            <span class="integration-status">Connected</span>
+                                        </div>
+                                        <div class="integration-actions">
+                                            <button class="integration-btn configure">Configure</button>
+                                            <button class="integration-btn disconnect">Disconnect</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="integration-card">
+                                        <div class="integration-icon">
+                                            <i class="fab fa-slack"></i>
+                                        </div>
+                                        <div class="integration-info">
+                                            <h4>Slack</h4>
+                                            <p>Team communication and notifications</p>
+                                            <span class="integration-status">Not Connected</span>
+                                        </div>
+                                        <div class="integration-actions">
+                                            <button class="integration-btn connect">Connect</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Backup Settings -->
+                        <div class="settings-panel" id="backup-panel">
+                            <div class="panel-header">
+                                <h3>Backup & Data</h3>
+                                <p>Manage your data backups and exports</p>
+                            </div>
+
+                            <div class="settings-groups">
+                                <div class="settings-group">
+                                    <h4>Automatic Backups</h4>
+                                    <div class="backup-options">
+                                        <div class="backup-item">
+                                            <div class="backup-info">
+                                                <h5>Daily Backups</h5>
+                                                <p>Automatically backup data every day at 2:00 AM</p>
+                                            </div>
+                                            <label class="toggle-label">
+                                                <input type="checkbox" class="toggle-input" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="backup-schedule">
+                                            <label for="backupTime">Backup Time</label>
+                                            <input type="time" id="backupTime" value="02:00" class="settings-input">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="settings-group">
+                                    <h4>Manual Backup</h4>
+                                    <div class="manual-backup">
+                                        <p>Create a backup of your current data</p>
+                                        <button class="backup-btn">
+                                            <i class="fas fa-download"></i>
+                                            Create Backup
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="settings-group">
+                                    <h4>Recent Backups</h4>
+                                    <div class="backup-list">
+                                        <div class="backup-entry">
+                                            <div class="backup-details">
+                                                <h5>backup_2024_01_31.zip</h5>
+                                                <p>January 31, 2024 at 2:00 AM • 45.2 MB</p>
+                                            </div>
+                                            <div class="backup-actions">
+                                                <button class="action-btn download">
+                                                    <i class="fas fa-download"></i>
+                                                </button>
+                                                <button class="action-btn delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="backup-entry">
+                                            <div class="backup-details">
+                                                <h5>backup_2024_01_30.zip</h5>
+                                                <p>January 30, 2024 at 2:00 AM • 44.8 MB</p>
+                                            </div>
+                                            <div class="backup-actions">
+                                                <button class="action-btn download">
+                                                    <i class="fas fa-download"></i>
+                                                </button>
+                                                <button class="action-btn delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+    <!-- Article Modal -->
+    <div class="modal" id="articleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitleArticles">Tambah Artikel</h3>
+                <button id="closeModalBtn" class="close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="modalForm" class="form-group">
+                <div class="form-group">
+                    <label for="articleTitle">Judul</label>
+                    <input type="text" id="nameInput" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="articleCategory">Kategori</label>
+                    <select id="categoryInput" name="category" required>
+                        <option value="gaming">Gaming</option>
+                        <option value="hardware">Hardware</option>
+                        <option value="review">Review</option>
+                        <option value="tutorial">Tutorial</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="articleExcerpt">Excerpt</label>
+                    <textarea id="excerptInput" name="excerpt" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="articleContent">Konten</label>
+                    <textarea id="contentInput" name="content" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="articleStatus">Status</label>
+                    <select id="statusSelect" name="status" required>
+                        <option value="published">Published</option>
+                        <option value="draft">Draft</option>
+                        <option value="archived">Archived</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="articleTags">Tags (pisahkan dengan koma)</label>
+                    <input type="text" id="tagsInput" name="tags">
+                </div>
+                <div class="form-group">
+                    <label for="articleImage">Gambar</label>
+                    <input type="file" id="imageInput" name="image" accept="image/*">
+                    <div id="imagePreview" class="image-preview"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cancelBtnArticles" class="btn cancel-btn">Batal</button>
+                    <button type="submit" class="btn submit-btn">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitleProducts">Tambah Produk</h3>
+                <button id="closeModalProducts" class="close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="productForm" class="form-group">
+                <div class="form-group">
+                    <label for="productName">Nama Produk</label>
+                    <input type="text" id="productName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="productCategory">Kategori</label>
+                    <select id="productCategory" name="category" required>
+                        <option value="gaming-peripherals">Gaming Peripherals</option>
+                        <option value="pc-components">PC Components</option>
+                        <option value="gaming-furniture">Gaming Furniture</option>
+                        <option value="accessories">Accessories</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="productDescription">Deskripsi</label>
+                    <textarea id="productDescription" name="description" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="productPrice">Harga (Rp)</label>
+                    <input type="number" id="productPrice" name="price" required>
+                </div>
+                <div class="form-group">
+                    <label for="productStock">Stok</label>
+                    <input type="number" id="productStock" name="stock" required>
+                </div>
+                <div class="form-group">
+                    <label for="productSKU">SKU</label>
+                    <input type="text" id="productSKU" name="sku" required>
+                </div>
+                <div class="form-group">
+                    <label for="productBrand">Merek</label>
+                    <input type="text" id="productBrand" name="brand" required>
+                </div>
+                <div class="form-group">
+                    <label for="productWeight">Berat (kg)</label>
+                    <input type="number" id="productWeight" name="weight" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="productStatus">Status</label>
+                    <select id="productStatus" name="status" required>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                        <option value="discontinued">Discontinued</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="productSpecs">Spesifikasi</label>
+                    <textarea id="productSpecs" name="specifications" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="productImages">Gambar (Max 5)</label>
+                    <input type="file" id="productImages" name="images" accept="image/*" multiple>
+                    <div id="imagesPreview" class="images-preview"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cancelBtnProducts" class="btn cancel-btn">Batal</button>
+                    <button type="submit" class="btn submit-btn">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Modal -->
+    <div class="modal" id="userModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitleUsers">Tambah Pengguna</h3>
+                <button id="closeModalUsers" class="close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="userForm" class="form-group">
+                <div class="form-group">
+                    <label for="userFirstName">Nama Depan</label>
+                    <input type="text" id="userFirstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="userLastName">Nama Belakang</label>
+                    <input type="text" id="userLastName" name="lastName">
+                </div>
+                <div class="form-group">
+                    <label for="userEmail">Email</label>
+                    <input type="email" id="userEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="userPhone">Telepon</label>
+                    <input type="text" id="userPhone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="userRole">Role</label>
+                    <select id="userRole" name="role" required>
+                        <option value="admin">Admin</option>
+                        <option value="customer">Customer</option>
+                        <option value="moderator">Moderator</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="userAddress">Alamat</label>
+                    <textarea id="userAddress" name="address" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="userStatus">Status</label>
+                    <select id="userStatus" name="status" required>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                        <option value="banned">Banned</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="userAvatar">Avatar</label>
+                    <input type="file" id="userAvatar" name="avatar" accept="image/*">
+                    <div id="avatarPreview" class="avatar-preview"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cancelBtnUsers" class="btn cancel-btn">Batal</button>
+                    <button type="submit" class="btn submit-btn">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Transaction Detail Modal -->
+    <div class="modal" id="transactionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Detail Transaksi</h3>
+                <button id="closeModalTransactions" class="close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="transactionDetail" class="transaction-details"></div>
+            <div class="modal-footer">
+                <button id="updateStatusBtn" class="btn">Update Status</button>
+                <button id="printInvoiceBtn" class="btn">Cetak Invoice</button>
+                <button id="cancelBtnTransactions" class="btn cancel-btn">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transaction Status Modal -->
+    <div class="modal" id="statusModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Update Status Transaksi</h3>
+                <button id="closeStatusModal" class="close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="statusForm" class="form-group">
+                <div class="form-group">
+                    <label for="transactionStatus">Status</label>
+                    <select id="transactionStatus" name="status" required>
                         <option value="pending">Pending</option>
                         <option value="processing">Processing</option>
                         <option value="completed">Completed</option>
                         <option value="cancelled">Cancelled</option>
                         <option value="refunded">Refunded</option>
                     </select>
-                    <select id="paymentFilter" class="filter-select">
-                        <option value="">Semua Payment</option>
-                        <option value="credit-card">Credit Card</option>
-                        <option value="bank-transfer">Bank Transfer</option>
-                        <option value="e-wallet">E-Wallet</option>
-                        <option value="cod">COD</option>
-                    </select>
-                    <input type="date" id="transactionDate" class="filter-input">
                 </div>
-            </div>
-            <div class="management-content">
-                <div class="transactions-management">
-                    <div class="management-toolbar">
-                        <div class="search-container">
-                            <i class="fas fa-search"></i>
-                            <input type="text" id="transactionSearch" placeholder="Cari transaksi..." class="search-input">
-                        </div>
-                    </div>
-                    <div class="transactions-table-container">
-                        <table class="transactions-table" id="transactionsTable">
-                            <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Customer</th>
-                                    <th>Produk</th>
-                                    <th>Total</th>
-                                    <th>Payment</th>
-                                    <th>Status</th>
-                                    <th>Tanggal</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="transactionsTableBody">
-                                <!-- Transactions will be populated here -->
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="pagination-container">
-                        <div class="pagination" id="transactionsPagination">
-                            <!-- Pagination will be generated here -->
-                        </div>
-                    </div>
-                    <!-- Transaction Detail Modal -->
-                    <div class="modal-overlay" id="transactionModal">
-                        <div class="modal-container large">
-                            <div class="modal-header">
-                                <h3 id="modalTitleTransactions">Detail Transaksi</h3>
-                                <button class="modal-close" id="closeModalTransactions">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="transaction-detail" id="transactionDetail">
-                                    <!-- Transaction details will be populated here -->
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn-secondary" id="cancelBtnTransactions">Tutup</button>
-                                <button type="button" class="btn-warning" id="updateStatusBtn">Update Status</button>
-                                <button type="button" class="btn-primary" id="printInvoiceBtn">Print Invoice</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Status Update Modal -->
-                    <div class="modal-overlay" id="statusModal">
-                        <div class="modal-container small">
-                            <div class="modal-header">
-                                <h3>Update Status Transaksi</h3>
-                                <button class="modal-close" id="closeStatusModal">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="statusForm">
-                                    <div class="form-group">
-                                        <label for="newStatus">Status Baru</label>
-                                        <select id="newStatus" name="status" required>
-                                            <option value="pending">Pending</option>
-                                            <option value="processing">Processing</option>
-                                            <option value="completed">Completed</option>
-                                            <option value="cancelled">Cancelled</option>
-                                            <option value="refunded">Refunded</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="statusNote">Catatan</label>
-                                        <textarea id="statusNote" name="note" rows="3" placeholder="Catatan untuk perubahan status..."></textarea>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn-secondary" id="cancelStatusBtn">Batal</button>
-                                <button type="submit" form="statusForm" class="btn-primary" id="saveStatusBtn">Update</button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="transactionNote">Catatan</label>
+                    <textarea id="transactionNote" name="note" rows="3"></textarea>
                 </div>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" id="cancelStatusBtn" class="btn cancel-btn">Batal</button>
+                    <button type="submit" class="btn submit-btn">Simpan</button>
+                </div>
+            </form>
         </div>
-
-        <!-- Analytics, Reports, Settings Sections (Placeholder) -->
-        <div class="management-section" id="analyticsSection" style="display: none;">
-            <div class="section-header">
-                <h1>Analytics</h1>
-            </div>
-            <div class="management-content">
-                <p>Analytics content will be displayed here.</p>
-            </div>
-        </div>
-        <div class="management-section" id="reportsSection" style="display: none;">
-            <div class="section-header">
-                <h1>Reports</h1>
-            </div>
-            <div class="management-content">
-                <p>Reports content will be displayed here.</p>
-            </div>
-        </div>
-        <div class="management-section" id="settingsSection" style="display: none;">
-            <div class="section-header">
-                <h1>Settings</h1>
-            </div>
-            <div class="management-content">
-                <p>Settings content will be displayed here.</p>
-            </div>
-        </div>
-    </main>
-
+    </div>
     <!-- Mobile Overlay -->
     <div class="mobile-overlay" id="mobileOverlay"></div>
 
+    <script src="js/script.js"></script>
     <script src="js/admin-dashboard.js"></script>
 </body>
+
 </html>

@@ -11,11 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Sample users for demo (in real app, this would be handled by backend)
   const sampleUsers = [
-    { email: "admin@gamertech.com", password: "admin123", name: "Admin GamerTech" },
-    { email: "user@gamertech.com", password: "user123", name: "User Demo" },
+    { email: "admin@gmail.com", password: "admin123", name: "Admin GamerTech" },
+    { email: "user@gmail.com", password: "user123", name: "User Demo" },
     { email: "gamer@gamertech.com", password: "gamer123", name: "Pro Gamer" },
   ]
-
   // Initialize
   init()
 
@@ -197,6 +196,17 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       showSuccessModal()
     }, 1000)
+
+    // Redirect based on email
+    setTimeout(() => {
+      if (user.email === "admin@gmail.com") {
+        window.location.href = "admin-dashboard.html"
+      } else if (user.email === "user@gmail.com") {
+        window.location.href = "index.html"
+      } else {
+        window.location.href = "index.html" // Default redirection
+      }
+    }, 1300) // Slightly longer delay to show modal
   }
 
   function handleLoginError() {

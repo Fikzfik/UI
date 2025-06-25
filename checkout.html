@@ -1,57 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - GamerTech</title>
     <meta name="description" content="Complete your order securely with multiple payment options">
-    
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
     <style>
         /* Checkout Specific Styles */
-        .main-content { padding-top: 70px; }
-        
+        .main-content {
+            padding-top: 70px;
+        }
+
         .breadcrumb {
             background: var(--bg-secondary);
             padding: var(--spacing-md) 0;
             border-bottom: 1px solid var(--border-primary);
         }
-        
+
         .breadcrumb-nav {
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
             font-size: 0.9rem;
         }
-        
+
         .breadcrumb-nav a {
             color: var(--text-secondary);
             text-decoration: none;
             transition: color var(--transition-fast);
         }
-        
-        .breadcrumb-nav a:hover { color: var(--primary-color); }
-        .breadcrumb-nav i { color: var(--text-muted); font-size: 0.8rem; }
-        .breadcrumb-nav span { color: var(--text-primary); }
-        
+
+        .breadcrumb-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .breadcrumb-nav i {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .breadcrumb-nav span {
+            color: var(--text-primary);
+        }
+
         .checkout-container {
             padding: var(--spacing-2xl) 0;
         }
-        
+
         .checkout-progress {
             display: flex;
             justify-content: center;
             margin-bottom: var(--spacing-2xl);
             position: relative;
         }
-        
+
         .progress-step {
             display: flex;
             flex-direction: column;
@@ -60,7 +74,7 @@
             flex: 1;
             max-width: 200px;
         }
-        
+
         .progress-step:not(:last-child)::after {
             content: '';
             position: absolute;
@@ -71,11 +85,11 @@
             background: var(--border-primary);
             z-index: 1;
         }
-        
+
         .progress-step.completed:not(:last-child)::after {
             background: var(--primary-color);
         }
-        
+
         .step-circle {
             width: 40px;
             height: 40px;
@@ -90,52 +104,52 @@
             z-index: 2;
             transition: all var(--transition-fast);
         }
-        
+
         .progress-step.completed .step-circle {
             background: var(--primary-color);
             border-color: var(--primary-color);
             color: white;
         }
-        
+
         .progress-step.active .step-circle {
             border-color: var(--primary-color);
             background: var(--bg-card);
             color: var(--primary-color);
         }
-        
+
         .step-label {
             font-size: 0.9rem;
             color: var(--text-muted);
             text-align: center;
         }
-        
+
         .progress-step.completed .step-label,
         .progress-step.active .step-label {
             color: var(--text-primary);
             font-weight: 500;
         }
-        
+
         .checkout-layout {
             display: grid;
             grid-template-columns: 1fr 400px;
             gap: var(--spacing-2xl);
         }
-        
+
         .checkout-form {
             background: var(--bg-card);
             border-radius: var(--radius-lg);
             border: 1px solid var(--border-primary);
             padding: var(--spacing-2xl);
         }
-        
+
         .form-section {
             margin-bottom: var(--spacing-2xl);
         }
-        
+
         .form-section:last-child {
             margin-bottom: 0;
         }
-        
+
         .section-title {
             font-size: 1.3rem;
             font-weight: 600;
@@ -145,39 +159,39 @@
             align-items: center;
             gap: var(--spacing-sm);
         }
-        
+
         .section-title i {
             color: var(--primary-color);
         }
-        
+
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-md);
         }
-        
+
         .form-group {
             margin-bottom: var(--spacing-md);
         }
-        
+
         .form-group.full-width {
             grid-column: 1 / -1;
         }
-        
+
         .form-label {
             display: block;
             margin-bottom: var(--spacing-xs);
             font-weight: 500;
             color: var(--text-primary);
         }
-        
+
         .form-label.required::after {
             content: '*';
             color: var(--error-color);
             margin-left: 4px;
         }
-        
+
         .form-input {
             width: 100%;
             padding: var(--spacing-md);
@@ -188,51 +202,51 @@
             font-size: 1rem;
             transition: all var(--transition-fast);
         }
-        
+
         .form-input:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
         }
-        
+
         .form-input.error {
             border-color: var(--error-color);
         }
-        
+
         .error-message {
             color: var(--error-color);
             font-size: 0.9rem;
             margin-top: var(--spacing-xs);
             display: none;
         }
-        
-        .form-input.error + .error-message {
+
+        .form-input.error+.error-message {
             display: block;
         }
-        
+
         .checkbox-group {
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
             margin-bottom: var(--spacing-md);
         }
-        
+
         .checkbox-input {
             width: 18px;
             height: 18px;
             accent-color: var(--primary-color);
         }
-        
+
         .checkbox-label {
             color: var(--text-secondary);
             cursor: pointer;
         }
-        
+
         .payment-methods {
             display: grid;
             gap: var(--spacing-md);
         }
-        
+
         .payment-method {
             border: 1px solid var(--border-primary);
             border-radius: var(--radius-md);
@@ -241,29 +255,29 @@
             transition: all var(--transition-fast);
             position: relative;
         }
-        
+
         .payment-method:hover {
             border-color: var(--primary-color);
         }
-        
+
         .payment-method.selected {
             border-color: var(--primary-color);
             background: rgba(0, 212, 255, 0.05);
         }
-        
+
         .payment-method input[type="radio"] {
             position: absolute;
             opacity: 0;
             pointer-events: none;
         }
-        
+
         .payment-header {
             display: flex;
             align-items: center;
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-sm);
         }
-        
+
         .payment-icon {
             width: 40px;
             height: 40px;
@@ -274,32 +288,32 @@
             border-radius: var(--radius-md);
             color: var(--primary-color);
         }
-        
+
         .payment-title {
             font-weight: 600;
             color: var(--text-primary);
         }
-        
+
         .payment-description {
             color: var(--text-secondary);
             font-size: 0.9rem;
         }
-        
+
         .payment-details {
             margin-top: var(--spacing-md);
             display: none;
         }
-        
+
         .payment-method.selected .payment-details {
             display: block;
         }
-        
+
         .card-row {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
             gap: var(--spacing-md);
         }
-        
+
         .order-summary {
             background: var(--bg-card);
             border-radius: var(--radius-lg);
@@ -309,18 +323,18 @@
             position: sticky;
             top: 90px;
         }
-        
+
         .summary-title {
             font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: var(--spacing-lg);
             color: var(--text-primary);
         }
-        
+
         .order-items {
             margin-bottom: var(--spacing-lg);
         }
-        
+
         .order-item {
             display: flex;
             gap: var(--spacing-md);
@@ -328,61 +342,61 @@
             padding-bottom: var(--spacing-md);
             border-bottom: 1px solid var(--border-primary);
         }
-        
+
         .order-item:last-child {
             margin-bottom: 0;
             padding-bottom: 0;
             border-bottom: none;
         }
-        
+
         .item-image {
             width: 60px;
             height: 60px;
             border-radius: var(--radius-md);
             overflow: hidden;
         }
-        
+
         .item-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
+
         .item-details {
             flex: 1;
         }
-        
+
         .item-name {
             font-weight: 500;
             color: var(--text-primary);
             margin-bottom: var(--spacing-xs);
             font-size: 0.9rem;
         }
-        
+
         .item-options {
             color: var(--text-muted);
             font-size: 0.8rem;
             margin-bottom: var(--spacing-xs);
         }
-        
+
         .item-quantity {
             color: var(--text-secondary);
             font-size: 0.9rem;
         }
-        
+
         .item-price {
             font-weight: 600;
             color: var(--primary-color);
             text-align: right;
         }
-        
+
         .summary-row {
             display: flex;
             justify-content: space-between;
             margin-bottom: var(--spacing-sm);
             color: var(--text-secondary);
         }
-        
+
         .summary-row.total {
             font-size: 1.1rem;
             font-weight: 600;
@@ -391,7 +405,7 @@
             padding-top: var(--spacing-md);
             margin-top: var(--spacing-md);
         }
-        
+
         .place-order-btn {
             width: 100%;
             background: var(--primary-color);
@@ -405,19 +419,19 @@
             transition: all var(--transition-fast);
             margin-top: var(--spacing-lg);
         }
-        
+
         .place-order-btn:hover {
             background: var(--primary-color-dark);
             transform: translateY(-2px);
         }
-        
+
         .place-order-btn:disabled {
             background: var(--bg-tertiary);
             color: var(--text-muted);
             cursor: not-allowed;
             transform: none;
         }
-        
+
         .security-info {
             display: flex;
             align-items: center;
@@ -429,44 +443,44 @@
             color: var(--text-secondary);
             font-size: 0.9rem;
         }
-        
+
         .security-info i {
             color: var(--success-color);
         }
-        
+
         @media (max-width: 1024px) {
             .checkout-layout {
                 grid-template-columns: 1fr;
                 gap: var(--spacing-lg);
             }
-            
+
             .order-summary {
                 position: static;
                 order: -1;
             }
         }
-        
+
         @media (max-width: 768px) {
             .checkout-progress {
                 margin-bottom: var(--spacing-lg);
             }
-            
+
             .progress-step {
                 max-width: 120px;
             }
-            
+
             .step-label {
                 font-size: 0.8rem;
             }
-            
+
             .form-row {
                 grid-template-columns: 1fr;
             }
-            
+
             .card-row {
                 grid-template-columns: 1fr;
             }
-            
+
             .checkout-form,
             .order-summary {
                 padding: var(--spacing-lg);
@@ -474,6 +488,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
@@ -483,7 +498,7 @@
                     <span class="gamer">Gamer</span><span class="tech">Tech</span>
                 </a>
             </div>
-            
+
             <div class="nav-menu" id="nav-menu">
                 <ul class="nav-list">
                     <li class="nav-item">
@@ -504,12 +519,10 @@
                             <span>Blog</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="about.html" class="nav-link">
-                            <i class="fas fa-info-circle"></i>
-                            <span>About</span>
-                        </a>
-                    </li>
+                    <a href="history.html" class="nav-link">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                    </a>
                 </ul>
             </div>
 
@@ -517,20 +530,20 @@
                 <button class="search-btn" id="search-btn">
                     <i class="fas fa-search"></i>
                 </button>
-                
+
                 <div class="cart-container">
                     <button class="cart-btn" id="cart-btn" onclick="window.location.href='cart.html'">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count" id="cart-count">0</span>
                     </button>
                 </div>
-                
+
                 <div class="user-menu">
                     <button class="user-btn" id="user-btn">
                         <i class="fas fa-user"></i>
                     </button>
                 </div>
-                
+
                 <button class="mobile-toggle" id="mobile-toggle">
                     <span></span>
                     <span></span>
@@ -590,7 +603,7 @@
                                     <i class="fas fa-shipping-fast"></i>
                                     Shipping Information
                                 </h2>
-                                
+
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label class="form-label required">First Name</label>
@@ -603,25 +616,25 @@
                                         <div class="error-message">Please enter your last name</div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label class="form-label required">Email Address</label>
                                     <input type="email" class="form-input" id="email" name="email" required>
                                     <div class="error-message">Please enter a valid email address</div>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label class="form-label required">Phone Number</label>
                                     <input type="tel" class="form-input" id="phone" name="phone" required>
                                     <div class="error-message">Please enter your phone number</div>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label class="form-label required">Street Address</label>
                                     <input type="text" class="form-input" id="address" name="address" required>
                                     <div class="error-message">Please enter your street address</div>
                                 </div>
-                                
+
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label class="form-label required">City</label>
@@ -641,7 +654,7 @@
                                         <div class="error-message">Please select your state</div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label class="form-label required">ZIP Code</label>
@@ -659,15 +672,17 @@
                                         <div class="error-message">Please select your country</div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="checkbox-group">
                                     <input type="checkbox" class="checkbox-input" id="saveAddress">
-                                    <label class="checkbox-label" for="saveAddress">Save this address for future orders</label>
+                                    <label class="checkbox-label" for="saveAddress">Save this address for future
+                                        orders</label>
                                 </div>
-                                
+
                                 <div class="checkbox-group">
                                     <input type="checkbox" class="checkbox-input" id="billingAddress">
-                                    <label class="checkbox-label" for="billingAddress">Billing address is the same as shipping address</label>
+                                    <label class="checkbox-label" for="billingAddress">Billing address is the same as
+                                        shipping address</label>
                                 </div>
                             </div>
 
@@ -677,7 +692,7 @@
                                     <i class="fas fa-credit-card"></i>
                                     Payment Method
                                 </h2>
-                                
+
                                 <div class="payment-methods">
                                     <!-- Credit Card -->
                                     <div class="payment-method selected" data-method="credit-card">
@@ -688,29 +703,34 @@
                                             </div>
                                             <div>
                                                 <div class="payment-title">Credit/Debit Card</div>
-                                                <div class="payment-description">Visa, Mastercard, American Express</div>
+                                                <div class="payment-description">Visa, Mastercard, American Express
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="payment-details">
                                             <div class="form-group">
                                                 <label class="form-label required">Card Number</label>
-                                                <input type="text" class="form-input" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                                                <input type="text" class="form-input" id="cardNumber"
+                                                    placeholder="1234 5678 9012 3456" maxlength="19">
                                                 <div class="error-message">Please enter a valid card number</div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label required">Cardholder Name</label>
-                                                <input type="text" class="form-input" id="cardName" placeholder="John Doe">
+                                                <input type="text" class="form-input" id="cardName"
+                                                    placeholder="John Doe">
                                                 <div class="error-message">Please enter the cardholder name</div>
                                             </div>
                                             <div class="card-row">
                                                 <div class="form-group">
                                                     <label class="form-label required">Expiry Date</label>
-                                                    <input type="text" class="form-input" id="cardExpiry" placeholder="MM/YY" maxlength="5">
+                                                    <input type="text" class="form-input" id="cardExpiry"
+                                                        placeholder="MM/YY" maxlength="5">
                                                     <div class="error-message">Please enter expiry date</div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="form-label required">CVV</label>
-                                                    <input type="text" class="form-input" id="cardCvv" placeholder="123" maxlength="4">
+                                                    <input type="text" class="form-input" id="cardCvv" placeholder="123"
+                                                        maxlength="4">
                                                     <div class="error-message">Please enter CVV</div>
                                                 </div>
                                             </div>
@@ -726,11 +746,13 @@
                                             </div>
                                             <div>
                                                 <div class="payment-title">PayPal</div>
-                                                <div class="payment-description">Pay securely with your PayPal account</div>
+                                                <div class="payment-description">Pay securely with your PayPal account
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="payment-details">
-                                            <p style="color: var(--text-secondary); margin: 0;">You will be redirected to PayPal to complete your payment.</p>
+                                            <p style="color: var(--text-secondary); margin: 0;">You will be redirected
+                                                to PayPal to complete your payment.</p>
                                         </div>
                                     </div>
 
@@ -747,7 +769,8 @@
                                             </div>
                                         </div>
                                         <div class="payment-details">
-                                            <p style="color: var(--text-secondary); margin: 0;">Use your fingerprint or face recognition to pay securely.</p>
+                                            <p style="color: var(--text-secondary); margin: 0;">Use your fingerprint or
+                                                face recognition to pay securely.</p>
                                         </div>
                                     </div>
 
@@ -764,7 +787,8 @@
                                             </div>
                                         </div>
                                         <div class="payment-details">
-                                            <p style="color: var(--text-secondary); margin: 0;">Use your saved payment methods from Google.</p>
+                                            <p style="color: var(--text-secondary); margin: 0;">Use your saved payment
+                                                methods from Google.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -778,7 +802,8 @@
                                 </h2>
                                 <div class="form-group">
                                     <label class="form-label">Special Instructions</label>
-                                    <textarea class="form-input" id="orderNotes" rows="4" placeholder="Any special delivery instructions or notes about your order..."></textarea>
+                                    <textarea class="form-input" id="orderNotes" rows="4"
+                                        placeholder="Any special delivery instructions or notes about your order..."></textarea>
                                 </div>
                             </div>
                         </form>
@@ -787,11 +812,11 @@
                     <!-- Order Summary -->
                     <div class="order-summary">
                         <h2 class="summary-title">Order Summary</h2>
-                        
+
                         <div class="order-items" id="order-items">
                             <!-- Order items will be loaded dynamically -->
                         </div>
-                        
+
                         <div class="summary-totals">
                             <div class="summary-row">
                                 <span>Subtotal:</span>
@@ -814,12 +839,12 @@
                                 <span id="total">$0.00</span>
                             </div>
                         </div>
-                        
+
                         <button type="submit" class="place-order-btn" id="place-order-btn" form="checkout-form">
                             <i class="fas fa-lock"></i>
                             Place Order
                         </button>
-                        
+
                         <div class="security-info">
                             <i class="fas fa-shield-alt"></i>
                             <span>Your payment information is secure and encrypted</span>
@@ -839,7 +864,8 @@
                         <a href="index.html" class="logo">
                             <span class="gamer">Gamer</span><span class="tech">Tech</span>
                         </a>
-                        <p>Premium gaming gear and PC components for enthusiasts who demand the best performance and quality.</p>
+                        <p>Premium gaming gear and PC components for enthusiasts who demand the best performance and
+                            quality.</p>
                         <div class="social-links">
                             <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                             <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
@@ -849,7 +875,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
@@ -860,7 +886,7 @@
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Categories</h3>
                     <ul class="footer-links">
@@ -871,7 +897,7 @@
                         <li><a href="catalog.html?category=accessories">Accessories</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Support</h3>
                     <ul class="footer-links">
@@ -882,7 +908,7 @@
                         <li><a href="faq.html">FAQ</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Contact Info</h3>
                     <div class="contact-info">
@@ -905,7 +931,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
                     <p>&copy; 2024 GamerTech. All rights reserved.</p>
@@ -928,7 +954,7 @@
     <script src="js/main.js"></script>
     <script>
         // Checkout JavaScript
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             initCheckout();
             loadOrderSummary();
             updateCartCount();
@@ -940,10 +966,10 @@
                     method.addEventListener('click', () => {
                         // Remove selected class from all methods
                         paymentMethods.forEach(m => m.classList.remove('selected'));
-                        
+
                         // Add selected class to clicked method
                         method.classList.add('selected');
-                        
+
                         // Update radio button
                         const radio = method.querySelector('input[type="radio"]');
                         radio.checked = true;
@@ -953,7 +979,7 @@
                 // Form validation
                 const form = document.getElementById('checkout-form');
                 const inputs = form.querySelectorAll('.form-input[required]');
-                
+
                 inputs.forEach(input => {
                     input.addEventListener('blur', () => validateField(input));
                     input.addEventListener('input', () => {
@@ -1022,7 +1048,7 @@
                 if (input.id === 'cardExpiry' && value) {
                     const expiryRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
                     isValid = expiryRegex.test(value);
-                    
+
                     if (isValid) {
                         const [month, year] = value.split('/');
                         const expiry = new Date(2000 + parseInt(year), parseInt(month) - 1);
@@ -1068,7 +1094,7 @@
 
             function handleFormSubmit(e) {
                 e.preventDefault();
-                
+
                 // Validate all required fields
                 const form = e.target;
                 const inputs = form.querySelectorAll('.form-input[required]');
@@ -1114,7 +1140,7 @@
                 setTimeout(() => {
                     // Generate order ID
                     const orderId = 'GT' + Date.now().toString().slice(-8);
-                    
+
                     // Get order data
                     const orderData = {
                         id: orderId,
@@ -1153,7 +1179,7 @@
             function loadOrderSummary() {
                 const cart = JSON.parse(localStorage.getItem('cart') || '[]');
                 const orderItemsContainer = document.getElementById('order-items');
-                
+
                 if (cart.length === 0) {
                     window.location.href = 'cart.html';
                     return;
@@ -1192,7 +1218,7 @@
             function updateCartCount() {
                 const cart = JSON.parse(localStorage.getItem('cart') || '[]');
                 const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-                
+
                 const cartCountElement = document.getElementById('cart-count');
                 if (cartCountElement) {
                     cartCountElement.textContent = totalItems;
@@ -1294,4 +1320,5 @@
         });
     </script>
 </body>
+
 </html>

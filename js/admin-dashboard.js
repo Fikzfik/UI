@@ -612,15 +612,15 @@ class AdminDashboard {
     tbody.innerHTML = this.salesData.recentOrders
       .map(
         (order) => `
-            <tr>
-                <td>${order.orderId}</td>
-                <td>${order.customer}</td>
-                <td>${order.product}</td>
-                <td>$${order.amount}</td>
-                <td><span class="status-badge status-${order.status}">${order.status}</span></td>
-                <td>${order.date}</td>
-            </tr>
-        `
+                <tr>
+                    <td>${order.orderId}</td>
+                    <td>${order.customer}</td>
+                    <td>${order.product}</td>
+                    <td>$${order.amount.toLocaleString()}</td>
+                    <td><span class="status-badge status-${order.status}">${order.status}</span></td>
+                    <td>${order.date}</td>
+                </tr>
+            `
       )
       .join("");
   }
@@ -682,428 +682,584 @@ class AdminDashboard {
 // Articles Manager
 class ArticlesManager {
   constructor() {
-    this.articles = this.generateMockArticles();
-    this.currentPage = 1;
-    this.itemsPerPage = 12;
+    this.articles = [
+      {
+        id: 1,
+        title: "Top 10 Gaming Trends in 2025",
+        category: "gaming",
+        excerpt: "Explore the latest trends shaping the gaming industry this year.",
+        content: "The gaming industry in 2025 is booming with innovations like VR integration, AI-driven NPCs, and cross-platform play. This article dives into the top 10 trends you need to know.",
+        status: "published",
+        tags: ["gaming", "trends", "2025"],
+        image: "https://via.placeholder.com/150/FF5733",
+        author: "Admin",
+        publishDate: "2025-06-01",
+        views: 150
+      },
+      {
+        id: 2,
+        title: "Best GPUs for Gaming PCs",
+        category: "hardware",
+        excerpt: "A guide to choosing the best graphics card for your gaming setup.",
+        content: "This article compares the latest GPUs from NVIDIA, AMD, and Intel, highlighting performance, price, and features for gamers.",
+        status: "published",
+        tags: ["hardware", "GPU", "gaming"],
+        image: "https://via.placeholder.com/150/33FF57",
+        author: "TechGuru",
+        publishDate: "2025-05-20",
+        views: 230
+      },
+      {
+        id: 3,
+        title: "How to Build a Budget Gaming PC",
+        category: "tutorial",
+        excerpt: "Step-by-step guide to building a gaming PC on a budget.",
+        content: "Learn how to select components, assemble your PC, and optimize performance without breaking the bank.",
+        status: "draft",
+        tags: ["tutorial", "PC build", "budget"],
+        image: "https://via.placeholder.com/150/5733FF",
+        author: "DIYMaster",
+        publishDate: "2025-06-10",
+        views: 50
+      },
+      {
+        id: 4,
+        title: "Review: Cyberpunk 2077 Next-Gen Update",
+        category: "review",
+        excerpt: "Is the next-gen update for Cyberpunk 2077 worth your time?",
+        content: "We dive into the improvements, new features, and performance of the Cyberpunk 2077 next-gen update on modern consoles and PCs.",
+        status: "published",
+        tags: ["review", "cyberpunk", "gaming"],
+        image: "https://via.placeholder.com/150/FF33A1",
+        author: "GameCritic",
+        publishDate: "2025-04-15",
+        views: 320
+      },
+      {
+        id: 5,
+        title: "The Rise of Esports in Asia",
+        category: "gaming",
+        excerpt: "How Asia is becoming the global hub for competitive gaming.",
+        content: "From South Korea to China, esports is exploding in Asia. This article explores the key players, events, and trends driving the scene.",
+        status: "published",
+        tags: ["esports", "gaming", "asia"],
+        image: "https://via.placeholder.com/150/33FFA1",
+        author: "Admin",
+        publishDate: "2025-06-05",
+        views: 180
+      },
+      {
+        id: 6,
+        title: "Overclocking Your CPU Safely",
+        category: "tutorial",
+        excerpt: "Learn how to boost your CPU performance with safe overclocking.",
+        content: "This tutorial covers the basics of overclocking, including tools, settings, and safety tips to avoid damaging your hardware.",
+        status: "archived",
+        tags: ["tutorial", "overclocking", "hardware"],
+        image: "https://via.placeholder.com/150/A133FF",
+        author: "TechGuru",
+        publishDate: "2025-03-01",
+        views: 90
+      },
+      {
+        id: 7,
+        title: "Review: Razer DeathAdder V3 Pro",
+        category: "review",
+        excerpt: "A detailed look at Razer's latest gaming mouse.",
+        content: "The Razer DeathAdder V3 Pro promises precision and comfort. We test its performance in gaming and productivity tasks.",
+        status: "published",
+        tags: ["review", "gaming mouse", "razer"],
+        image: "https://via.placeholder.com/150/FF5733",
+        author: "GameCritic",
+        publishDate: "2025-05-25",
+        views: 260
+      },
+      {
+        id: 8,
+        title: "The Future of VR Gaming",
+        category: "gaming",
+        excerpt: "What’s next for virtual reality in gaming?",
+        content: "From lightweight headsets to immersive worlds, we explore the advancements driving VR gaming in 2025 and beyond.",
+        status: "draft",
+        tags: ["VR", "gaming", "future"],
+        image: "https://via.placeholder.com/150/33FF57",
+        author: "Admin",
+        publishDate: "2025-06-15",
+        views: 70
+      },
+      {
+        id: 9,
+        title: "Upgrading Your RAM: What You Need to Know",
+        category: "hardware",
+        excerpt: "A guide to choosing and installing RAM for your PC.",
+        content: "This article explains how to select the right RAM, install it, and optimize your system for better performance.",
+        status: "published",
+        tags: ["hardware", "RAM", "upgrade"],
+        image: "https://via.placeholder.com/150/5733FF",
+        author: "DIYMaster",
+        publishDate: "2025-04-10",
+        views: 200
+      },
+      {
+        id: 10,
+        title: "Review: Elden Ring DLC",
+        category: "review",
+        excerpt: "Does the new Elden Ring DLC live up to the hype?",
+        content: "We explore the new areas, bosses, and mechanics in the Elden Ring DLC, comparing it to the base game.",
+        status: "published",
+        tags: ["review", "elden ring", "DLC"],
+        image: "https://via.placeholder.com/150/FF33A1",
+        author: "GameCritic",
+        publishDate: "2025-06-20",
+        views: 400
+      },
+      {
+        id: 11,
+        title: "Optimizing Your Gaming Setup",
+        category: "tutorial",
+        excerpt: "Tips to enhance your gaming experience with the right setup.",
+        content: "From monitor placement to cable management, this guide helps you create the ultimate gaming environment.",
+        status: "published",
+        tags: ["tutorial", "gaming setup", "optimization"],
+        image: "https://via.placeholder.com/150/33FFA1",
+        author: "Admin",
+        publishDate: "2025-05-30",
+        views: 140
+      },
+      {
+        id: 12,
+        title: "The Evolution of Gaming Consoles",
+        category: "gaming",
+        excerpt: "A look at how consoles have changed over the decades.",
+        content: "From the Atari 2600 to the latest PlayStation and Xbox, we trace the history and future of gaming consoles.",
+        status: "archived",
+        tags: ["gaming", "consoles", "history"],
+        image: "https://via.placeholder.com/150/A133FF",
+        author: "TechGuru",
+        publishDate: "2025-02-15",
+        views: 110
+      }
+    ]
     this.filteredArticles = [...this.articles];
-    this.init();
-  }
-
-  init() {
+    this.currentPage = 1;
+    this.itemsPerPage = 6;
+    this.editingId = null;
     this.setupEventListeners();
     this.renderArticles();
     this.renderPagination();
   }
 
   setupEventListeners() {
-    const searchInput = document.getElementById("articleSearch");
-    searchInput?.addEventListener("input", () => this.filterArticles());
+    try {
+      const searchInput = document.getElementById("articleSearch");
+      const categoryFilter = document.getElementById("categoryFilter");
+      const statusFilter = document.getElementById("statusFilter");
+      const addBtn = document.getElementById("addArticleBtn");
+      const modal = document.getElementById("articleModal");
+      const closeBtn = document.getElementById("closeModalBtn");
+      const cancelBtn = document.getElementById("cancelBtnArticles");
+      const form = document.getElementById("modalForm");
+      const imageInput = document.getElementById("imageInput");
 
-    const categoryFilter = document.getElementById("categoryFilterArticles");
-    const statusFilter = document.getElementById("statusFilterArticles");
-
-    categoryFilter?.addEventListener("change", () => this.filterArticles());
-    statusFilter?.addEventListener("change", () => this.filterArticles());
-
-    const addBtn = document.getElementById("addArticleBtn");
-    addBtn?.addEventListener("click", () => this.openModal());
-
-    const modal = document.getElementById("articleModal");
-    const closeBtn = document.getElementById("closeModalArticles");
-    const cancelBtn = document.getElementById("cancelBtnArticles");
-    const form = document.getElementById("articleForm");
-
-    closeBtn?.addEventListener("click", () => this.closeModal());
-    cancelBtn?.addEventListener("click", () => this.closeModal());
-    form?.addEventListener("submit", (e) => this.handleSubmit(e));
-
-    const imageInput = document.getElementById("articleImage");
-    imageInput?.addEventListener("change", (e) => this.previewImage(e));
-  }
-
-  generateMockArticles() {
-    const categories = ["gaming", "hardware", "review", "tutorial"];
-    const statuses = ["published", "draft", "archived"];
-    const titles = [
-      "Review Gaming Mouse RGB Pro Terbaru",
-      "Tutorial Setup Gaming PC untuk Pemula",
-      "Hardware Terbaik untuk Gaming 2024",
-      "Tips Memilih Keyboard Mechanical",
-      "Review Graphics Card RTX 4080",
-      "Panduan Overclock CPU untuk Gaming",
-      "Gaming Monitor 4K vs 1440p",
-      "Setup Streaming yang Optimal",
-      "Review Gaming Chair Ergonomis",
-      "Tips Maintenance PC Gaming",
-      "Perbandingan SSD vs HDD untuk Gaming",
-      "Gaming Headset dengan Audio Terbaik",
-    ];
-
-    return titles.map((title, index) => ({
-      id: index + 1,
-      title,
-      category: categories[Math.floor(Math.random() * categories.length)],
-      excerpt:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      content: "Full article content would be here...",
-      image: `/placeholder.svg?height=200&width=320&text=Article+${index + 1}`,
-      status: statuses[Math.floor(Math.random() * statuses.length)],
-      author: "Admin User",
-      publishDate: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toLocaleDateString(),
-      views: Math.floor(Math.random() * 5000) + 100,
-      tags: ["gaming", "tech", "review"].slice(0, Math.floor(Math.random() * 3) + 1),
-    }));
-  }
-
-  filterArticles() {
-    const searchTerm = document.getElementById("articleSearch")?.value.toLowerCase() || "";
-    const categoryFilter = document.getElementById("categoryFilterArticles")?.value || "";
-    const statusFilter = document.getElementById("statusFilterArticles")?.value || "";
-
-    this.filteredArticles = this.articles.filter((article) => {
-      const matchesSearch =
-        article.title.toLowerCase().includes(searchTerm) || article.excerpt.toLowerCase().includes(searchTerm);
-      const matchesCategory = !categoryFilter || article.category === categoryFilter;
-      const matchesStatus = !statusFilter || article.status === statusFilter;
-
-      return matchesSearch && matchesCategory && matchesStatus;
-    });
-
-    this.currentPage = 1;
-    this.renderArticles();
-    this.renderPagination();
-  }
-
-  renderArticles() {
-    const grid = document.getElementById("articlesGrid");
-    if (!grid) return;
-
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    const articlesToShow = this.filteredArticles.slice(startIndex, endIndex);
-
-    grid.innerHTML = articlesToShow
-      .map(
-        (article) => `
-      <div class="article-card" data-id="${article.id}">
-        <div class="card-image">
-          <img src="${article.image}" alt="${article.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-          <div style="display: none; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--bg-glass);">
-            <i class="fas fa-newspaper" style="font-size: 3rem; color: var(--text-secondary);"></i>
-          </div>
-        </div>
-        <div class="card-content">
-          <div class="card-meta">
-            <span class="card-category">${article.category}</span>
-            <span class="card-status status-${article.status}">${article.status}</span>
-          </div>
-          <h3 class="card-title">${article.title}</h3>
-          <p class="card-excerpt">${article.excerpt}</p>
-          <div class="card-footer">
-            <div class="card-info">
-              <span class="card-author">By ${article.author}</span>
-              <span class="card-date">${article.publishDate}</span>
-              <span class="card-views">${article.views} views</span>
-            </div>
-            <div class="card-actions">
-              <button class="action-btn edit" onclick="articlesManager.editArticle(${article.id})" title="Edit">
-                <i class="fas fa-edit"></i>
-              </button>
-              <button class="action-btn delete" onclick="articlesManager.deleteArticle(${article.id})" title="Delete">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    `
-      )
-      .join("");
-  }
-
-  renderPagination() {
-    const pagination = document.getElementById("articlesPagination");
-    if (!pagination) return;
-
-    const totalPages = Math.ceil(this.filteredArticles.length / this.itemsPerPage);
-
-    if (totalPages <= 1) {
-      pagination.innerHTML = "";
-      return;
-    }
-
-    let paginationHTML = `
-      <button class="pagination-btn" ${this.currentPage === 1 ? "disabled" : ""} 
-              onclick="articlesManager.goToPage(${this.currentPage - 1})">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-    `;
-
-    for (let i = 1; i <= totalPages; i++) {
-      if (i === 1 || i === totalPages || (i >= this.currentPage - 2 && i <= this.currentPage + 2)) {
-        paginationHTML += `
-          <button class="pagination-btn ${i === this.currentPage ? "active" : ""}" 
-                  onclick="articlesManager.goToPage(${i})">
-            ${i}
-          </button>
-        `;
-      } else if (i === this.currentPage - 3 || i === this.currentPage + 3) {
-        paginationHTML += '<span class="pagination-ellipsis">...</span>';
+      if (!modal || !form || !closeBtn || !cancelBtn) {
+        console.error("Required modal elements not found");
+        return;
       }
+
+      searchInput?.addEventListener("input", () => this.filterArticles());
+      categoryFilter?.addEventListener("change", () => this.filterArticles());
+      statusFilter?.addEventListener("change", () => this.filterArticles());
+      addBtn?.addEventListener("click", () => this.openModal());
+      closeBtn?.addEventListener("click", () => this.closeModal());
+      cancelBtn?.addEventListener("click", () => this.closeModal());
+      form?.addEventListener("submit", (e) => this.handleSubmit(e));
+      imageInput?.addEventListener("change", (e) => this.previewImage(e));
+    } catch (error) {
+      console.error("Error setting up event listeners:", error);
     }
-
-    paginationHTML += `
-      <button class="pagination-btn" ${this.currentPage === totalPages ? "disabled" : ""} 
-              onclick="articlesManager.goToPage(${this.currentPage + 1})">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-    `;
-
-    pagination.innerHTML = paginationHTML;
-  }
-
-  goToPage(page) {
-    this.currentPage = page;
-    this.renderArticles();
-    this.renderPagination();
   }
 
   openModal(article = null) {
-    const modal = document.getElementById("articleModal");
-    const modalTitle = document.getElementById("modalTitleArticles");
-    const form = document.getElementById("articleForm");
+    try {
+      const modal = document.getElementById("articleModal");
+      const modalTitle = document.getElementById("modalTitleArticles");
+      const form = document.getElementById("modalForm");
 
-    if (article) {
-      modalTitle.textContent = "Edit Artikel";
-      this.populateForm(article);
-    } else {
-      modalTitle.textContent = "Tambah Artikel";
-      form.reset();
-      document.getElementById("imagePreview").innerHTML = `
-        <i class="fas fa-image"></i>
-        <span>Upload Gambar</span>
-      `;
+      if (!modal || !modalTitle || !form) {
+        console.error("Modal elements not found");
+        return;
+      }
+
+      modal.classList.add("active");
+      modalTitle.textContent = article ? "Edit Artikel" : "Tambah Artikel";
+      this.editingId = article ? article.id : null;
+
+      // Populate form if editing
+      document.getElementById("nameInput").value = article?.title || "";
+      document.getElementById("categoryInput").value = article?.category || "gaming";
+      document.getElementById("excerptInput").value = article?.excerpt || "";
+      document.getElementById("contentInput").value = article?.content || "";
+      document.getElementById("statusSelect").value = article?.status || "published";
+      document.getElementById("tagsInput").value = article?.tags?.join(", ") || "";
+      document.getElementById("imagePreview").innerHTML = article?.image
+        ? `<img src="${article.image}" alt="Preview" style="max-width: 100px;">`
+        : "";
+    } catch (error) {
+      console.error("Error opening modal:", error);
     }
-
-    modal.classList.add("active");
   }
 
   closeModal() {
-    const modal = document.getElementById("articleModal");
-    modal.classList.remove("active");
-  }
+    try {
+      const modal = document.getElementById("articleModal");
+      const form = document.getElementById("modalForm");
 
-  populateForm(article) {
-    document.getElementById("articleTitle").value = article.title;
-    document.getElementById("articleCategory").value = article.category;
-    document.getElementById("articleExcerpt").value = article.excerpt;
-    document.getElementById("articleContent").value = article.content;
-    document.getElementById("articleStatus").value = article.status;
-    document.getElementById("articleTags").value = article.tags.join(", ");
-  }
+      if (!modal || !form) return;
 
-  handleSubmit(e) {
-    e.preventDefault();
-
-    const formData = new FormData(e.target);
-    const articleData = {
-      title: formData.get("title"),
-      category: formData.get("category"),
-      excerpt: formData.get("excerpt"),
-      content: formData.get("content"),
-      status: formData.get("status"),
-      tags: formData
-        .get("tags")
-        .split(",")
-        .map((tag) => tag.trim()),
-      image: "/placeholder.svg?height=200&width=320&text=New+Article",
-      author: "Admin User",
-      publishDate: new Date().toLocaleDateString(),
-      views: 0,
-    };
-
-    const existingIndex = this.articles.findIndex((a) => a.id === this.editingId);
-    if (existingIndex >= 0) {
-      this.articles[existingIndex] = { ...this.articles[existingIndex], ...articleData };
-    } else {
-      articleData.id = this.articles.length + 1;
-      this.articles.push(articleData);
+      modal.classList.remove("active");
+      form.reset();
+      document.getElementById("imagePreview").innerHTML = "";
+      this.editingId = null;
+    } catch (error) {
+      console.error("Error closing modal:", error);
     }
+  }
 
-    this.filterArticles();
-    this.closeModal();
-    this.showNotification("Artikel berhasil disimpan!", "success");
+  previewImage(event) {
+    try {
+      const file = event.target.files[0];
+      const preview = document.getElementById("imagePreview");
+
+      if (!preview) return;
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          preview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width: 100px;">`;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        preview.innerHTML = "";
+      }
+    } catch (error) {
+      console.error("Error previewing image:", error);
+    }
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    try {
+      const formData = new FormData(event.target);
+      const article = {
+        id: this.editingId || Date.now(),
+        title: formData.get("title"),
+        category: formData.get("category"),
+        excerpt: formData.get("excerpt"),
+        content: formData.get("content"),
+        status: formData.get("status"),
+        tags: formData.get("tags").split(",").map(tag => tag.trim()).filter(tag => tag),
+        image: document.getElementById("imagePreview").querySelector("img")?.src || "https://via.placeholder.com/150",
+        author: "Admin",
+        publishDate: new Date().toISOString().split("T")[0],
+        views: this.editingId ? this.articles.find(a => a.id === this.editingId)?.views || 0 : 0
+      };
+
+      if (this.editingId) {
+        const index = this.articles.findIndex(a => a.id === this.editingId);
+        if (index !== -1) {
+          this.articles[index] = article;
+        }
+      } else {
+        this.articles.push(article);
+      }
+
+      this.filteredArticles = [...this.articles];
+      this.renderArticles();
+      this.renderPagination();
+      this.closeModal();
+      this.showNotification(`Artikel ${this.editingId ? "diperbarui" : "ditambahkan"}!`, "success");
+    } catch (error) {
+      console.error("Error handling form submission:", error);
+      this.showNotification("Gagal menyimpan artikel!", "error");
+    }
   }
 
   editArticle(id) {
-    const article = this.articles.find((a) => a.id === id);
+    const article = this.articles.find(a => a.id === id);
     if (article) {
-      this.editingId = id;
       this.openModal(article);
     }
   }
 
   deleteArticle(id) {
-    if (confirm("Apakah Anda yakin ingin menghapus artikel ini?")) {
-      this.articles = this.articles.filter((a) => a.id !== id);
-      this.filterArticles();
-      this.showNotification("Artikel berhasil dihapus!", "success");
+    if (confirm("Yakin ingin menghapus artikel ini?")) {
+      try {
+        this.articles = this.articles.filter(a => a.id !== id);
+        this.filteredArticles = [...this.articles];
+        this.renderArticles();
+        this.renderPagination();
+        this.showNotification("Artikel dihapus!", "success");
+      } catch (error) {
+        console.error("Error deleting article:", error);
+        this.showNotification("Gagal menghapus artikel!", "error");
+      }
     }
   }
 
-  previewImage(e) {
-    const file = e.target.files[0];
-    const preview = document.getElementById("imagePreview");
+  filterArticles() {
+    try {
+      const searchTerm = document.getElementById("articleSearch")?.value.toLowerCase() || "";
+      const category = document.getElementById("categoryFilter")?.value || "";
+      const status = document.getElementById("statusFilter")?.value || "";
 
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        preview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
-      };
-      reader.readAsDataURL(file);
+      this.filteredArticles = this.articles.filter(article => {
+        const matchesSearch = article.title.toLowerCase().includes(searchTerm);
+        const matchesCategory = !category || article.category === category;
+        const matchesStatus = !status || article.status === status;
+        return matchesSearch && matchesCategory && matchesStatus;
+      });
+
+      this.currentPage = 1;
+      this.renderArticles();
+      this.renderPagination();
+    } catch (error) {
+      console.error("Error filtering articles:", error);
     }
   }
 
-  showNotification(message, type = "info") {
+  renderArticles() {
+    try {
+      const grid = document.getElementById("articlesGrid");
+      if (!grid) {
+        console.error("Articles grid element not found");
+        return;
+      }
+
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      const articlesToShow = this.filteredArticles.slice(startIndex, endIndex);
+
+      grid.innerHTML = articlesToShow
+        .map(
+          (article) => `
+                        <div class="article-card" data-id="${article.id}">
+                            <div class="card-image">
+                                <img src="${article.image}" alt="${article.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <div style="display: none; align-items: center; justify-content: center; width: 100%; height: 100%; background: var(--bg-glass);">
+                                    <i class="fas fa-newspaper" style="font-size: 3rem; color: var(--text-secondary);"></i>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-meta">
+                                    <span class="card-category">${article.category}</span>
+                                    <span class="card-status status-${article.status}">${article.status}</span>
+                                </div>
+                                <h3 class="card-title">${article.title}</h3>
+                                <p class="card-excerpt">${article.excerpt}</p>
+                                <div class="card-footer">
+                                    <div class="card-info">
+                                        <span class="card-author">By ${article.author}</span>
+                                        <span class="card-date">${article.publishDate}</span>
+                                        <span class="card-views">${article.views} views</span>
+                                    </div>
+                                    <div class="card-actions">
+                                        <button class="action-btn edit" onclick="window.articlesManager.editArticle(${article.id})" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="action-btn delete" onclick="window.articlesManager.deleteArticle(${article.id})" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+        )
+        .join("") || "<p>Tidak ada artikel ditemukan.</p>";
+    } catch (error) {
+      console.error("Error rendering articles:", error);
+    }
+  }
+
+  renderPagination() {
+    try {
+      const pagination = document.getElementById("articlesPagination");
+      if (!pagination) {
+        console.error("Pagination element not found");
+        return;
+      }
+
+      const pageCount = Math.ceil(this.filteredArticles.length / this.itemsPerPage);
+      let paginationHTML = "";
+
+      if (pageCount <= 1) {
+        pagination.innerHTML = "";
+        return;
+      }
+
+      paginationHTML += `<button class="pagination-btn" ${this.currentPage === 1 ? "disabled" : ""} onclick="window.articlesManager.changePage(${this.currentPage - 1})">Previous</button>`;
+
+      for (let i = 1; i <= pageCount; i++) {
+        if (pageCount > 7 && (i > 3 && i < pageCount - 2 && Math.abs(i - this.currentPage) > 1)) {
+          if (i === 4) paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+          continue;
+        }
+        paginationHTML += `<button class="pagination-btn ${i === this.currentPage ? "active" : ""}" onclick="window.articlesManager.changePage(${i})">${i}</button>`;
+      }
+
+      paginationHTML += `<button class="pagination-btn" ${this.currentPage === pageCount ? "disabled" : ""} onclick="window.articlesManager.changePage(${this.currentPage + 1})">Next</button>`;
+
+      pagination.innerHTML = paginationHTML;
+    } catch (error) {
+      console.error("Error rendering pagination:", error);
+    }
+  }
+
+  changePage(page) {
+    this.currentPage = page;
+    this.renderArticles();
+    this.renderPagination();
+  }
+
+  showNotification(message, type = "success") {
     const notification = document.createElement("div");
     notification.className = `notification notification-${type}`;
-    notification.innerHTML = `
-      <i class="fas fa-${type === "success" ? "check" : "info"}-circle"></i>
-      <span>${message}</span>
-    `;
+    notification.textContent = message;
     document.body.appendChild(notification);
-    setTimeout(() => notification.classList.add("show"), 100);
+
     setTimeout(() => {
-      notification.classList.remove("show");
-      setTimeout(() => notification.remove(), 300);
-    }, 3000);
+      notification.classList.add("show");
+      setTimeout(() => {
+        notification.classList.remove("show");
+        setTimeout(() => notification.remove(), 300);
+      }, 3000);
+    }, 100);
   }
 }
 
-// Products Manager
 class ProductsManager {
-    constructor() {
-        this.products = this.generateMockProducts();
-        this.currentPage = 1;
-        this.itemsPerPage = 12;
-        this.filteredProducts = [...this.products];
-        this.init();
-    }
+  constructor() {
+    this.products = this.generateMockProducts();
+    this.currentPage = 1;
+    this.itemsPerPage = 12;
+    this.filteredProducts = [...this.products];
+    this.init();
+  }
 
-    init() {
-        this.setupEventListeners();
-        this.renderProducts();
-        this.renderPagination();
-    }
+  init() {
+    this.setupEventListeners();
+    this.renderProducts();
+    this.renderPagination();
+  }
 
-    generateMockProducts() {
-        const categories = [
-            "gaming-peripherals",
-            "pc-components",
-            "gaming-furniture",
-            "accessories",
-        ];
-        const statuses = ["active", "inactive", "discontinued"];
-        const products = [
-            { name: "Gaming Mouse RGB Pro", brand: "TechGear", price: 750000 },
-            { name: "Mechanical Keyboard Cherry MX", brand: "KeyMaster", price: 1200000 },
-            { name: "Gaming Headset 7.1 Surround", brand: "AudioMax", price: 850000 },
-            { name: "Graphics Card RTX 4080", brand: "NVIDIA", price: 15000000 },
-            { name: 'Gaming Monitor 27" 144Hz', brand: "ViewPro", price: 4500000 },
-            { name: "Gaming Chair Ergonomic", brand: "ComfortZone", price: 2800000 },
-            { name: "SSD 1TB NVMe", brand: "SpeedDrive", price: 1500000 },
-            { name: "RAM 32GB DDR5", brand: "MemoryMax", price: 3200000 },
-            { name: "CPU Cooler RGB", brand: "CoolTech", price: 650000 },
-            { name: "Power Supply 850W", brand: "PowerCore", price: 1800000 },
-            { name: "Wireless Gaming Controller", brand: "GamePad", price: 950000 },
-            { name: "RGB LED Strip Kit", brand: "LightTech", price: 350000 },
-        ];
+  generateMockProducts() {
+    const categories = [
+      "gaming-peripherals",
+      "pc-components",
+      "gaming-furniture",
+      "accessories",
+    ];
+    const statuses = ["active", "inactive", "discontinued"];
+    const products = [
+      { name: "Gaming Mouse RGB Pro", brand: "TechGear", price: 750000 },
+      { name: "Mechanical Keyboard Cherry MX", brand: "KeyMaster", price: 1200000 },
+      { name: "Gaming Headset 7.1 Surround", brand: "AudioMax", price: 850000 },
+      { name: "Graphics Card RTX 4080", brand: "NVIDIA", price: 15000000 },
+      { name: 'Gaming Monitor 27" 144Hz', brand: "ViewPro", price: 4500000 },
+      { name: "Gaming Chair Ergonomic", brand: "ComfortZone", price: 2800000 },
+      { name: "SSD 1TB NVMe", brand: "SpeedDrive", price: 1500000 },
+      { name: "RAM 32GB DDR5", brand: "MemoryMax", price: 3200000 },
+      { name: "CPU Cooler RGB", brand: "CoolTech", price: 650000 },
+      { name: "Power Supply 850W", brand: "PowerCore", price: 1800000 },
+      { name: "Wireless Gaming Controller", brand: "GamePad", price: 950000 },
+      { name: "RGB LED Strip Kit", brand: "LightTech", price: 350000 },
+    ];
 
-        return products.map((product, index) => ({
-            id: index + 1,
-            name: product.name,
-            category: categories[Math.floor(Math.random() * categories.length)],
-            description: `High-quality ${product.name.toLowerCase()} designed for professional gaming and productivity.`,
-            price: product.price,
-            stock: Math.floor(Math.random() * 100) + 10,
-            sku: `SKU-${String(index + 1).padStart(3, "0")}`,
-            brand: product.brand,
-            weight: (Math.random() * 5 + 0.5).toFixed(1),
-            status: statuses[Math.floor(Math.random() * statuses.length)],
-            images: [
-                `/placeholder.svg?height=200&width=320&text=${encodeURIComponent(product.name)}`,
-            ],
-            specifications: `Technical specifications for ${product.name} include high-performance features tailored for gaming.`,
-            createdDate: new Date(Date.now() - Math.random() * 90 * 24 * 60 * 60 * 1000).toLocaleDateString(),
-            sales: Math.floor(Math.random() * 200) + 20,
-        }));
-    }
+    return products.map((product, index) => ({
+      id: index + 1,
+      name: product.name,
+      category: categories[Math.floor(Math.random() * categories.length)],
+      description: `High-quality ${product.name.toLowerCase()} designed for professional gaming and productivity.`,
+      price: product.price,
+      stock: Math.floor(Math.random() * 100) + 10,
+      sku: `SKU-${String(index + 1).padStart(3, "0")}`,
+      brand: product.brand,
+      weight: (Math.random() * 5 + 0.5).toFixed(1),
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      images: [
+        `https://via.placeholder.com/320x200?text=${encodeURIComponent(product.name)}`, // Reliable placeholder
+      ],
+      specifications: `Technical specifications for ${product.name} include high-performance features tailored for gaming.`,
+      createdDate: new Date(Date.now() - Math.random() * 90 * 24 * 60 * 60 * 1000).toLocaleDateString(),
+      sales: Math.floor(Math.random() * 200) + 20,
+    }));
+  }
 
-    setupEventListeners() {
-        const searchInput = document.getElementById("productSearch");
-        searchInput?.addEventListener("input", () => this.filterProducts());
+  setupEventListeners() {
+    const searchInput = document.getElementById("productSearch");
+    searchInput?.addEventListener("input", () => this.filterProducts());
 
-        const categoryFilter = document.getElementById("categoryFilterProducts");
-        const stockFilter = document.getElementById("stockFilter");
+    const categoryFilter = document.getElementById("productCategoryFilter"); // Fixed ID
+    const stockFilter = document.getElementById("stockFilter");
 
-        categoryFilter?.addEventListener("change", () => this.filterProducts());
-        stockFilter?.addEventListener("change", () => this.filterProducts());
+    categoryFilter?.addEventListener("change", () => this.filterProducts());
+    stockFilter?.addEventListener("change", () => this.filterProducts());
 
-        const addBtn = document.getElementById("addProductBtn");
-        addBtn?.addEventListener("click", () => this.openModal());
+    const addBtn = document.getElementById("addProductBtn");
+    addBtn?.addEventListener("click", () => this.openModal());
 
-        const modal = document.getElementById("productModal");
-        const closeBtn = document.getElementById("closeModalProducts");
-        const cancelBtn = document.getElementById("cancelBtnProducts");
-        const form = document.getElementById("productForm");
+    const modal = document.getElementById("productModal");
+    const closeBtn = document.getElementById("closeModalProducts");
+    const cancelBtn = document.getElementById("cancelBtnProducts");
+    const form = document.getElementById("productForm");
 
-        closeBtn?.addEventListener("click", () => this.closeModal());
-        cancelBtn?.addEventListener("click", () => this.closeModal());
-        form?.addEventListener("submit", (e) => this.handleSubmit(e));
+    closeBtn?.addEventListener("click", () => this.closeModal());
+    cancelBtn?.addEventListener("click", () => this.closeModal());
+    form?.addEventListener("submit", (e) => this.handleSubmit(e));
 
-        const imagesInput = document.getElementById("productImages");
-        imagesInput?.addEventListener("change", (e) => this.previewImages(e));
-    }
+    const imagesInput = document.getElementById("productImages");
+    imagesInput?.addEventListener("change", (e) => this.previewImages(e));
+  }
 
-    filterProducts() {
-        const searchTerm = document.getElementById("productSearch")?.value.toLowerCase() || "";
-        const categoryFilter = document.getElementById("categoryFilterProducts")?.value || "";
-        const stockFilter = document.getElementById("stockFilter")?.value || "";
+  filterProducts() {
+    const searchTerm = document.getElementById("productSearch")?.value.toLowerCase() || "";
+    const categoryFilter = document.getElementById("categoryFilterProducts")?.value || "";
+    const stockFilter = document.getElementById("stockFilter")?.value || "";
 
-        this.filteredProducts = this.products.filter((product) => {
-            const matchesSearch = product.name.toLowerCase().includes(searchTerm) ||
-                product.brand.toLowerCase().includes(searchTerm) ||
-                product.sku.toLowerCase().includes(searchTerm);
-            const matchesCategory = !categoryFilter || product.category === categoryFilter;
-            const matchesStock = !stockFilter || this.getStockStatus(product) === stockFilter;
+    this.filteredProducts = this.products.filter((product) => {
+      const matchesSearch = product.name.toLowerCase().includes(searchTerm) ||
+        product.brand.toLowerCase().includes(searchTerm) ||
+        product.sku.toLowerCase().includes(searchTerm);
+      const matchesCategory = !categoryFilter || product.category === categoryFilter;
+      const matchesStock = !stockFilter || this.getStockStatus(product) === stockFilter;
 
-            return matchesSearch && matchesCategory && matchesStock;
-        });
+      return matchesSearch && matchesCategory && matchesStock;
+    });
 
-        this.currentPage = 1;
-        this.renderProducts();
-        this.renderPagination();
-    }
+    this.currentPage = 1;
+    this.renderProducts();
+    this.renderPagination();
+  }
 
-    getStockStatus(product) {
-        if (product.stock === 0) return "out-of-stock";
-        if (product.stock < 10) return "low-stock";
-        return "in-stock";
-    }
+  getStockStatus(product) {
+    if (product.stock === 0) return "out-of-stock";
+    if (product.stock < 10) return "low-stock";
+    return "in-stock";
+  }
 
-    renderProducts() {
-        const grid = document.getElementById("productsGrid");
-        if (!grid) return;
+  renderProducts() {
+    const grid = document.getElementById("productsGrid");
+    if (!grid) return;
 
-        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-        const endIndex = startIndex + this.itemsPerPage;
-        const productsToShow = this.filteredProducts.slice(startIndex, endIndex);
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    const productsToShow = this.filteredProducts.slice(startIndex, endIndex);
 
-        grid.innerHTML = productsToShow
-            .map((product) => `
+    grid.innerHTML = productsToShow
+      .map((product) => `
                 <div class="product-card" data-id="${product.id}">
                     <div class="card-image">
-                        <img src="${product.images[0]}" alt="${product.name}" onerror="this.src='/placeholder.png';" />
+                        <img src="${product.images[0]}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/320x200?text=${encodeURIComponent(product.name)}';">
                     </div>
                     <div class="card-content">
                         <div class="card-meta">
@@ -1127,295 +1283,309 @@ class ProductsManager {
                     </div>
                 </div>
             `)
-            .join("");
+      .join("");
+  }
+
+  renderPagination() {
+    const pagination = document.getElementById("productsPagination");
+    if (!pagination) return;
+
+    const totalPages = Math.ceil(this.filteredProducts.length / this.itemsPerPage);
+
+    if (totalPages <= 1) {
+      pagination.innerHTML = "";
+      return;
     }
 
-    renderPagination() {
-        const pagination = document.getElementById("productsPagination");
-        if (!pagination) return;
-
-        const totalPages = Math.ceil(this.filteredProducts.length / this.itemsPerPage);
-
-        if (totalPages <= 1) {
-            pagination.innerHTML = "";
-            return;
-        }
-
-        let paginationHTML = `
+    let paginationHTML = `
             <button class="pagination-btn" ${this.currentPage === 1 ? "disabled" : ""} 
                     onclick="productsManager.goToPage(${this.currentPage - 1})">
                 <i class="fas fa-chevron-left"></i>
             </button>
         `;
 
-        for (let i = 1; i <= totalPages; i++) {
-            if (i === 1 || i === totalPages || (i >= this.currentPage - 2 && i <= this.currentPage + 2)) {
-                paginationHTML += `
+    for (let i = 1; i <= totalPages; i++) {
+      if (i === 1 || i === totalPages || (i >= this.currentPage - 2 && i <= this.currentPage + 2)) {
+        paginationHTML += `
                     <button class="pagination-btn ${i === this.currentPage ? "active" : ""}" 
                             onclick="productsManager.goToPage(${i})">
                         ${i}
                     </button>
                 `;
-            } else if (i === this.currentPage - 3 || i === this.currentPage + 3) {
-                paginationHTML += '<span class="pagination-ellipsis">...</span>';
-            }
-        }
+      } else if (i === this.currentPage - 3 || i === this.currentPage + 3) {
+        paginationHTML += '<span class="pagination-ellipsis">...</span>';
+      }
+    }
 
-        paginationHTML += `
+    paginationHTML += `
             <button class="pagination-btn" ${this.currentPage === totalPages ? "disabled" : ""} 
                     onclick="productsManager.goToPage(${this.currentPage + 1})">
                 <i class="fas fa-chevron-right"></i>
             </button>
         `;
 
-        pagination.innerHTML = paginationHTML;
-    }
+    pagination.innerHTML = paginationHTML;
+  }
 
-    goToPage(page) {
-        this.currentPage = page;
-        this.renderProducts();
-        this.renderPagination();
-    }
+  goToPage(page) {
+    this.currentPage = page;
+    this.renderProducts();
+    this.renderPagination();
+  }
 
-    openModal(product = null) {
-        const modal = document.getElementById("productModal");
-        const modalTitle = document.getElementById("modalTitleProducts");
-        const form = document.getElementById("productForm");
+  openModal(product = null) {
+    const modal = document.getElementById("productModal");
+    const modalTitle = document.getElementById("modalTitleProducts");
+    const form = document.getElementById("productForm");
 
-        if (product) {
-            modalTitle.textContent = "Edit Produk";
-            this.populateForm(product);
-        } else {
-            modalTitle.textContent = "Tambah Produk";
-            form.reset();
-            document.getElementById("imagesPreview").innerHTML = `
+    if (product) {
+      modalTitle.textContent = "Edit Produk";
+      this.populateForm(product);
+    } else {
+      modalTitle.textContent = "Tambah Produk";
+      form.reset();
+      document.getElementById("imagesPreview").innerHTML = `
                 <div class="upload-placeholder">
                     <i class="fas fa-images"></i>
                     <span>Upload Gambar (Max 5)</span>
                 </div>
             `;
-        }
-
-        modal.classList.add("active");
     }
 
-    closeModal() {
-        const modal = document.getElementById("productModal");
-        modal.classList.remove("active");
+    modal.classList.add("active");
+  }
+
+  closeModal() {
+    const modal = document.getElementById("productModal");
+    modal.classList.remove("active");
+  }
+
+  populateForm(product) {
+    document.getElementById("productName").value = product.name;
+    document.getElementById("productCategory").value = product.category;
+    document.getElementById("productDescription").value = product.description;
+    document.getElementById("productPrice").value = product.price;
+    document.getElementById("productStock").value = product.stock;
+    document.getElementById("productSKU").value = product.sku;
+    document.getElementById("productBrand").value = product.brand;
+    document.getElementById("productWeight").value = product.weight;
+    document.getElementById("productStatus").value = product.status;
+    document.getElementById("productSpecs").value = product.specifications;
+    // Show existing images in preview
+    const preview = document.getElementById("imagesPreview");
+    preview.innerHTML = product.images
+      .map((img) => `
+                <img src="${img}" alt="${product.name}" style="width: 100px; height: 100px; object-fit: cover; margin: 5px; border-radius: 8px;">
+            `)
+      .join("");
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const imagesPreview = document.getElementById("imagesPreview");
+    const productData = {
+      name: formData.get("name"),
+      category: formData.get("category"),
+      description: formData.get("description"),
+      price: Number.parseInt(formData.get("price")),
+      stock: Number.parseInt(formData.get("stock")),
+      sku: formData.get("sku"),
+      brand: formData.get("brand"),
+      weight: Number.parseFloat(formData.get("weight")),
+      status: formData.get("status"),
+      specifications: formData.get("specifications"),
+      images: Array.from(imagesPreview.querySelectorAll("img"))
+        .map((img) => img.src)
+        .length > 0
+        ? Array.from(imagesPreview.querySelectorAll("img")).map((img) => img.src)
+        : [`https://via.placeholder.com/320x200?text=${encodeURIComponent(formData.get("name"))}`],
+      createdDate: new Date().toLocaleDateString(),
+      sales: 0,
+    };
+
+    const existingIndex = this.products.findIndex((p) => p.id === this.editingId);
+    if (existingIndex >= 0) {
+      this.products[existingIndex] = {
+        ...this.products[existingIndex],
+        ...productData,
+      };
+    } else {
+      productData.id = this.products.length + 1;
+      this.products.push(productData);
     }
 
-    populateForm(product) {
-        document.getElementById("productName").value = product.name;
-        document.getElementById("productCategory").value = product.category;
-        document.getElementById("productDescription").value = product.description;
-        document.getElementById("productPrice").value = product.price;
-        document.getElementById("productStock").value = product.stock;
-        document.getElementById("productSKU").value = product.sku;
-        document.getElementById("productBrand").value = product.brand;
-        document.getElementById("productWeight").value = product.weight;
-        document.getElementById("productStatus").value = product.status;
-        document.getElementById("productSpecs").value = product.specifications;
+    this.filteredProducts = [...this.products]; // Update filteredProducts
+    this.renderProducts();
+    this.renderPagination();
+    this.closeModal();
+    this.showNotification("Produk berhasil disimpan!", "success");
+  }
+
+  editProduct(id) {
+    const product = this.products.find((p) => p.id === id);
+    if (product) {
+      this.editingId = id;
+      this.openModal(product);
     }
+  }
 
-    handleSubmit(e) {
-        e.preventDefault();
+  deleteProduct(id) {
+    if (confirm("Apakah Anda yakin ingin menghapus produk ini?")) {
+      this.products = this.products.filter((p) => p.id !== id);
+      this.filterProducts();
+      this.showNotification("Produk berhasil dihapus!", "success");
+    }
+  }
 
-        const formData = new FormData(e.target);
-        const productData = {
-            name: formData.get("name"),
-            category: formData.get("category"),
-            description: formData.get("description"),
-            price: Number.parseInt(formData.get("price")),
-            stock: Number.parseInt(formData.get("stock")),
-            sku: formData.get("sku"),
-            brand: formData.get("brand"),
-            weight: Number.parseFloat(formData.get("weight")),
-            status: formData.get("status"),
-            specifications: formData.get("specifications"),
-            images: ["/placeholder.svg?height=200&width=320&text=New+Product"],
-            createdDate: new Date().toLocaleDateString(),
-            sales: 0,
+  previewImages(e) {
+    const files = e.target.files;
+    const preview = document.getElementById("imagesPreview");
+
+    preview.innerHTML = "";
+    Array.from(files)
+      .slice(0, 5)
+      .forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = document.createElement("img");
+          img.src = e.target.result;
+          img.style.width = "100px";
+          img.style.height = "100px";
+          img.style.objectFit = "cover";
+          img.style.margin = "5px";
+          img.style.borderRadius = "8px";
+          preview.appendChild(img);
         };
+        reader.readAsDataURL(file);
+      });
+  }
 
-        const existingIndex = this.products.findIndex((p) => p.id === this.editingId);
-        if (existingIndex >= 0) {
-            this.products[existingIndex] = {
-                ...this.products[existingIndex],
-                ...productData,
-            };
-        } else {
-            productData.id = this.products.length + 1;
-            this.products.push(productData);
-        }
-
-        this.filterProducts();
-        this.closeModal();
-        this.showNotification("Produk berhasil disimpan!", "success");
-    }
-
-    editProduct(id) {
-        const product = this.products.find((p) => p.id === id);
-        if (product) {
-            this.editingId = id;
-            this.openModal(product);
-        }
-    }
-
-    deleteProduct(id) {
-        if (confirm("Apakah Anda yakin ingin menghapus produk ini?")) {
-            this.products = this.products.filter((p) => p.id !== id);
-            this.filterProducts();
-            this.showNotification("Produk berhasil dihapus!", "success");
-        }
-    }
-
-    previewImages(e) {
-        const files = e.target.files;
-        const preview = document.getElementById("imagesPreview");
-
-        preview.innerHTML = "";
-        Array.from(files)
-            .slice(0, 5)
-            .forEach((file) => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const img = document.createElement("img");
-                    img.src = e.target.result;
-                    img.style.width = "100px";
-                    img.style.height = "100px";
-                    img.style.objectFit = "cover";
-                    img.style.margin = "5px";
-                    img.style.borderRadius = "8px";
-                    preview.appendChild(img);
-                };
-                reader.readAsDataURL(file);
-            });
-    }
-
-    showNotification(message, type = "info") {
-        const notification = document.createElement("div");
-        notification.className = `notification notification-${type}`;
-        notification.innerHTML = `
+  showNotification(message, type = "info") {
+    const notification = document.createElement("div");
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
             <i class="fas fa-${type === "success" ? "check" : "info"}-circle"></i>
             <span>${message}</span>
         `;
-        document.body.appendChild(notification);
-        setTimeout(() => notification.classList.add("show"), 100);
-        setTimeout(() => {
-            notification.classList.remove("show");
-            setTimeout(() => notification.remove(), 300);
-        }, 3000);
-    }
+    document.body.appendChild(notification);
+    setTimeout(() => notification.classList.add("show"), 100);
+    setTimeout(() => {
+      notification.classList.remove("show");
+      setTimeout(() => notification.remove(), 300);
+    }, 3000);
+  }
 }
 
 // Users Manager
 class UsersManager {
-    constructor() {
-        this.users = this.generateMockUsers();
-        this.currentPage = 1;
-        this.itemsPerPage = 10;
-        this.filteredUsers = [...this.users];
-        this.init();
-    }
+  constructor() {
+    this.users = this.generateMockUsers();
+    this.currentPage = 1;
+    this.itemsPerPage = 10;
+    this.filteredUsers = [...this.users];
+    this.init();
+  }
 
-    init() {
-        this.setupEventListeners();
-        this.renderUsers();
-        this.renderPagination();
-    }
+  init() {
+    this.setupEventListeners();
+    this.renderUsers();
+    this.renderPagination();
+  }
 
-    generateMockUsers() {
-        const roles = ["admin", "customer", "moderator"];
-        const statuses = ["active", "inactive", "banned"];
-        const names = [
-            "John Doe",
-            "Jane Smith",
-            "Mike Johnson",
-            "Sarah Wilson",
-            "David Brown",
-            "Lisa Davis",
-            "Tom Anderson",
-            "Emily Taylor",
-            "Chris Martin",
-            "Anna Lee",
-            "Robert Clark",
-            "Megan White",
-        ];
+  generateMockUsers() {
+    const roles = ["admin", "customer", "moderator"];
+    const statuses = ["active", "inactive", "banned"];
+    const names = [
+      "John Doe",
+      "Jane Smith",
+      "Mike Johnson",
+      "Sarah Wilson",
+      "David Brown",
+      "Lisa Davis",
+      "Tom Anderson",
+      "Emily Taylor",
+      "Chris Martin",
+      "Anna Lee",
+      "Robert Clark",
+      "Megan White",
+    ];
 
-        return names.map((name, index) => ({
-            id: index + 1,
-            firstName: name.split(" ")[0],
-            lastName: name.split(" ")[1] || "",
-            email: `${name.toLowerCase().replace(" ", ".")}@example.com`,
-            phone: `+62${Math.floor(800000000 + Math.random() * 99999999)}`,
-            role: roles[Math.floor(Math.random() * roles.length)],
-            status: statuses[Math.floor(Math.random() * statuses.length)],
-            address: `${Math.floor(Math.random() * 100)} Jalan Example, Jakarta`,
-            avatar: `/placeholder.svg?height=40&width=40&text=${name[0]}`,
-            joinDate: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toLocaleDateString(),
-            lastLogin: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toLocaleString(),
-        }));
-    }
+    return names.map((name, index) => ({
+      id: index + 1,
+      firstName: name.split(" ")[0],
+      lastName: name.split(" ")[1] || "",
+      email: `${name.toLowerCase().replace(" ", ".")}@example.com`,
+      phone: `+62${Math.floor(800000000 + Math.random() * 99999999)}`,
+      role: roles[Math.floor(Math.random() * roles.length)],
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      address: `${Math.floor(Math.random() * 100)} Jalan Example, Jakarta`,
+      avatar: `/placeholder.svg?height=40&width=40&text=${name[0]}`,
+      joinDate: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toLocaleDateString(),
+      lastLogin: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toLocaleString(),
+    }));
+  }
 
-    setupEventListeners() {
-        const searchInput = document.getElementById("userSearch");
-        searchInput?.addEventListener("input", () => this.filterUsers());
+  setupEventListeners() {
+    const searchInput = document.getElementById("userSearch");
+    searchInput?.addEventListener("input", () => this.filterUsers());
 
-        const roleFilter = document.getElementById("roleFilter");
-        const statusFilter = document.getElementById("statusFilterUsers");
+    const roleFilter = document.getElementById("roleFilter");
+    const statusFilter = document.getElementById("statusFilterUsers");
 
-        roleFilter?.addEventListener("change", () => this.filterUsers());
-        statusFilter?.addEventListener("change", () => this.filterUsers());
+    roleFilter?.addEventListener("change", () => this.filterUsers());
+    statusFilter?.addEventListener("change", () => this.filterUsers());
 
-        const addBtn = document.getElementById("addUserBtn");
-        addBtn?.addEventListener("click", () => this.openModal());
+    const addBtn = document.getElementById("addUserBtn");
+    addBtn?.addEventListener("click", () => this.openModal());
 
-        const modal = document.getElementById("userModal");
-        const closeBtn = document.getElementById("closeModalUsers");
-        const cancelBtn = document.getElementById("cancelBtnUsers");
-        const form = document.getElementById("userForm");
+    const modal = document.getElementById("userModal");
+    const closeBtn = document.getElementById("closeModalUsers");
+    const cancelBtn = document.getElementById("cancelBtnUsers");
+    const form = document.getElementById("userForm");
 
-        closeBtn?.addEventListener("click", () => this.closeModal());
-        cancelBtn?.addEventListener("click", () => this.closeModal());
-        form?.addEventListener("submit", (e) => this.handleSubmit(e));
+    closeBtn?.addEventListener("click", () => this.closeModal());
+    cancelBtn?.addEventListener("click", () => this.closeModal());
+    form?.addEventListener("submit", (e) => this.handleSubmit(e));
 
-        const avatarInput = document.getElementById("userAvatar");
-        avatarInput?.addEventListener("change", (e) => this.previewAvatar(e));
+    const avatarInput = document.getElementById("userAvatar");
+    avatarInput?.addEventListener("change", (e) => this.previewAvatar(e));
 
-        const selectAll = document.getElementById("selectAll");
-        selectAll?.addEventListener("change", (e) => this.toggleSelectAll(e.target.checked));
-    }
+    const selectAll = document.getElementById("selectAll");
+    selectAll?.addEventListener("change", (e) => this.toggleSelectAll(e.target.checked));
+  }
 
-    filterUsers() {
-        const searchTerm = document.getElementById("userSearch")?.value.toLowerCase() || "";
-        const roleFilter = document.getElementById("roleFilter")?.value || "";
-        const statusFilter = document.getElementById("statusFilterUsers")?.value || "";
+  filterUsers() {
+    const searchTerm = document.getElementById("userSearch")?.value.toLowerCase() || "";
+    const roleFilter = document.getElementById("roleFilter")?.value || "";
+    const statusFilter = document.getElementById("statusFilterUsers")?.value || "";
 
-        this.filteredUsers = this.users.filter((user) => {
-            const matchesSearch = user.firstName.toLowerCase().includes(searchTerm) ||
-                user.lastName.toLowerCase().includes(searchTerm) ||
-                user.email.toLowerCase().includes(searchTerm);
-            const matchesRole = !roleFilter || user.role === roleFilter;
-            const matchesStatus = !statusFilter || user.status === statusFilter;
+    this.filteredUsers = this.users.filter((user) => {
+      const matchesSearch = user.firstName.toLowerCase().includes(searchTerm) ||
+        user.lastName.toLowerCase().includes(searchTerm) ||
+        user.email.toLowerCase().includes(searchTerm);
+      const matchesRole = !roleFilter || user.role === roleFilter;
+      const matchesStatus = !statusFilter || user.status === statusFilter;
 
-            return matchesSearch && matchesRole && matchesStatus;
-        });
+      return matchesSearch && matchesRole && matchesStatus;
+    });
 
-        this.currentPage = 1;
-        this.renderUsers();
-        this.renderPagination();
-    }
+    this.currentPage = 1;
+    this.renderUsers();
+    this.renderPagination();
+  }
 
-    renderUsers() {
-        const tbody = document.getElementById("usersTableBody");
-        if (!tbody) return;
+  renderUsers() {
+    const tbody = document.getElementById("usersTableBody");
+    if (!tbody) return;
 
-        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-        const endIndex = startIndex + this.itemsPerPage;
-        const usersToShow = this.filteredUsers.slice(startIndex, endIndex);
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    const usersToShow = this.filteredUsers.slice(startIndex, endIndex);
 
-        tbody.innerHTML = usersToShow
-            .map((user) => `
+    tbody.innerHTML = usersToShow
+      .map((user) => `
                 <tr>
                     <td><input type="checkbox" class="user-checkbox" data-id="${user.id}"></td>
                     <td><img src="${user.avatar}" alt="${user.firstName}" class="avatar-img" onerror="this.src='/placeholder.png';"></td>
@@ -1431,300 +1601,300 @@ class UsersManager {
                     </td>
                 </tr>
             `)
-            .join("");
+      .join("");
+  }
+
+  renderPagination() {
+    const pagination = document.getElementById("usersPagination");
+    if (!pagination) return;
+
+    const totalPages = Math.ceil(this.filteredUsers.length / this.itemsPerPage);
+
+    if (totalPages <= 1) {
+      pagination.innerHTML = "";
+      return;
     }
 
-    renderPagination() {
-        const pagination = document.getElementById("usersPagination");
-        if (!pagination) return;
-
-        const totalPages = Math.ceil(this.filteredUsers.length / this.itemsPerPage);
-
-        if (totalPages <= 1) {
-            pagination.innerHTML = "";
-            return;
-        }
-
-        let paginationHTML = `
+    let paginationHTML = `
             <button class="pagination-btn" ${this.currentPage === 1 ? "disabled" : ""} 
                     onclick="usersManager.goToPage(${this.currentPage - 1})">
                 <i class="fas fa-chevron-left"></i>
             </button>
         `;
 
-        for (let i = 1; i <= totalPages; i++) {
-            if (i === 1 || i === totalPages || (i >= this.currentPage - 2 && i <= this.currentPage + 2)) {
-                paginationHTML += `
+    for (let i = 1; i <= totalPages; i++) {
+      if (i === 1 || i === totalPages || (i >= this.currentPage - 2 && i <= this.currentPage + 2)) {
+        paginationHTML += `
                     <button class="pagination-btn ${i === this.currentPage ? "active" : ""}" 
                             onclick="usersManager.goToPage(${i})">
                         ${i}
                     </button>
                 `;
-            } else if (i === this.currentPage - 3 || i === this.currentPage + 3) {
-                paginationHTML += '<span class="pagination-ellipsis">...</span>';
-            }
-        }
+      } else if (i === this.currentPage - 3 || i === this.currentPage + 3) {
+        paginationHTML += '<span class="pagination-ellipsis">...</span>';
+      }
+    }
 
-        paginationHTML += `
+    paginationHTML += `
             <button class="pagination-btn" ${this.currentPage === totalPages ? "disabled" : ""} 
                     onclick="usersManager.goToPage(${this.currentPage + 1})">
                 <i class="fas fa-chevron-right"></i>
             </button>
         `;
 
-        pagination.innerHTML = paginationHTML;
-    }
+    pagination.innerHTML = paginationHTML;
+  }
 
-    goToPage(page) {
-        this.currentPage = page;
-        this.renderUsers();
-        this.renderPagination();
-    }
+  goToPage(page) {
+    this.currentPage = page;
+    this.renderUsers();
+    this.renderPagination();
+  }
 
-    toggleSelectAll(checked) {
-        const checkboxes = document.querySelectorAll(".user-checkbox");
-        checkboxes.forEach((checkbox) => (checkbox.checked = checked));
-    }
+  toggleSelectAll(checked) {
+    const checkboxes = document.querySelectorAll(".user-checkbox");
+    checkboxes.forEach((checkbox) => (checkbox.checked = checked));
+  }
 
-    openModal(user = null) {
-        const modal = document.getElementById("userModal");
-        const modalTitle = document.getElementById("modalTitleUsers");
-        const form = document.getElementById("userForm");
+  openModal(user = null) {
+    const modal = document.getElementById("userModal");
+    const modalTitle = document.getElementById("modalTitleUsers");
+    const form = document.getElementById("userForm");
 
-        if (user) {
-            modalTitle.textContent = "Edit Pengguna";
-            this.populateForm(user);
-        } else {
-            modalTitle.textContent = "Tambah Pengguna";
-            form?.reset();
-            document.getElementById("avatarPreview").innerHTML = `
+    if (user) {
+      modalTitle.textContent = "Edit Pengguna";
+      this.populateForm(user);
+    } else {
+      modalTitle.textContent = "Tambah Pengguna";
+      form?.reset();
+      document.getElementById("avatarPreview").innerHTML = `
                 <i class="fas fa-user"></i>
             `;
-        }
-
-        modal.classList.add("active");
     }
 
-    closeModal() {
-        const modal = document.getElementById("userModal");
-        modal.classList.remove("active");
+    modal.classList.add("active");
+  }
+
+  closeModal() {
+    const modal = document.getElementById("userModal");
+    modal.classList.remove("active");
+  }
+
+  populateForm(user) {
+    document.getElementById("userFirstName").value = user.firstName;
+    document.getElementById("userLastName").value = user.lastName;
+    document.getElementById("userEmail").value = user.email;
+    document.getElementById("userPhone").value = user.phone;
+    document.getElementById("userRole").value = user.role;
+    document.getElementById("userAddress").value = user.address;
+    document.getElementById("userStatus").value = user.status;
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const userData = {
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      role: formData.get("role"),
+      address: formData.get("address"),
+      status: formData.get("status"),
+      avatar: "/placeholder.svg?height=100&width=40&text=New+Avatar",
+      joinDate: new Date().toLocaleDateString(),
+      lastLogin: new Date().toLocaleString(),
+    };
+
+    const existingIndex = this.users.findIndex((u) => u.id === this.editingId);
+    if (existingIndex >= 0) {
+      this.users[existingIndex] = {
+        ...this.users[existingIndex],
+        ...userData,
+      };
+    } else {
+      userData.id = this.users.length + 1;
+      this.users.push(userData);
     }
 
-    populateForm(user) {
-        document.getElementById("userFirstName").value = user.firstName;
-        document.getElementById("userLastName").value = user.lastName;
-        document.getElementById("userEmail").value = user.email;
-        document.getElementById("userPhone").value = user.phone;
-        document.getElementById("userRole").value = user.role;
-        document.getElementById("userAddress").value = user.address;
-        document.getElementById("userStatus").value = user.status;
+    this.filterUsers();
+    this.closeModal();
+    this.showNotification("Pengguna berhasil disimpan!", "success");
+  }
+
+  editUser(id) {
+    const user = this.users.find((u) => u.id === id);
+    if (user) {
+      this.editingId = id;
+      this.openModal(user);
     }
+  }
 
-    handleSubmit(e) {
-        e.preventDefault();
-
-        const formData = new FormData(e.target);
-        const userData = {
-            firstName: formData.get("firstName"),
-            lastName: formData.get("lastName"),
-            email: formData.get("email"),
-            phone: formData.get("phone"),
-            role: formData.get("role"),
-            address: formData.get("address"),
-            status: formData.get("status"),
-            avatar: "/placeholder.svg?height=100&width=40&text=New+Avatar",
-            joinDate: new Date().toLocaleDateString(),
-            lastLogin: new Date().toLocaleString(),
-        };
-
-        const existingIndex = this.users.findIndex((u) => u.id === this.editingId);
-        if (existingIndex >= 0) {
-            this.users[existingIndex] = {
-                ...this.users[existingIndex],
-                ...userData,
-            };
-        } else {
-            userData.id = this.users.length + 1;
-            this.users.push(userData);
-        }
-
-        this.filterUsers();
-        this.closeModal();
-        this.showNotification("Pengguna berhasil disimpan!", "success");
+  deleteUser(id) {
+    if (confirm("Apakah Anda yakin ingin menghapus pengguna ini?")) {
+      this.users = this.users.filter((u) => u.id !== id);
+      this.filterUsers();
+      this.showNotification("Pengguna berhasil dihapus!", "success");
     }
+  }
 
-    editUser(id) {
-        const user = this.users.find((u) => u.id === id);
-        if (user) {
-            this.editingId = id;
-            this.openModal(user);
-        }
+  previewAvatar(e) {
+    const file = e.target.files[0];
+    const preview = document.getElementById("avatarPreview");
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        preview.innerHTML = `<img src="${e.target.result}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
+      };
+      reader.readAsDataURL(file);
     }
+  }
 
-    deleteUser(id) {
-        if (confirm("Apakah Anda yakin ingin menghapus pengguna ini?")) {
-            this.users = this.users.filter((u) => u.id !== id);
-            this.filterUsers();
-            this.showNotification("Pengguna berhasil dihapus!", "success");
-        }
-    }
-
-    previewAvatar(e) {
-        const file = e.target.files[0];
-        const preview = document.getElementById("avatarPreview");
-
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                preview.innerHTML = `<img src="${e.target.result}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-
-    showNotification(message, type = "info") {
-        const notification = document.createElement("div");
-        notification.className = `notification notification-${type}`;
-        notification.innerHTML = `
+  showNotification(message, type = "info") {
+    const notification = document.createElement("div");
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
             <i class="fas fa-${type === "success" ? "check" : "info"}-circle"></i>
             <span>${message}</span>
         `;
-        document.body.appendChild(notification);
-        setTimeout(() => notification.classList.add("show"), 100);
-        setTimeout(() => {
-            notification.classList.remove("show");
-            setTimeout(() => notification.remove(), 300);
-        }, 3000);
-    }
+    document.body.appendChild(notification);
+    setTimeout(() => notification.classList.add("show"), 100);
+    setTimeout(() => {
+      notification.classList.remove("show");
+      setTimeout(() => notification.remove(), 300);
+    }, 3000);
+  }
 }
 
 // Transactions Manager
 class TransactionsManager {
-    constructor() {
-        this.transactions = this.generateMockTransactions();
-        this.currentPage = 1;
-        this.itemsPerPage = 10;
-        this.filteredTransactions = [...this.transactions];
-        this.init();
+  constructor() {
+    this.transactions = this.generateMockTransactions();
+    this.currentPage = 1;
+    this.itemsPerPage = 10;
+    this.filteredTransactions = [...this.transactions];
+    this.init();
+  }
+
+  init() {
+    this.setupEventListeners();
+    this.renderTransactions();
+    this.renderPagination();
+  }
+
+  generateMockTransactions() {
+    const statuses = ["pending", "processing", "completed", "cancelled", "refunded"];
+    const payments = ["credit-card", "bank-transfer", "e-wallet", "cod"];
+    const customers = [
+      "John Doe",
+      "Jane Smith",
+      "Mike Johnson",
+      "Sarah Wilson",
+      "David Brown",
+    ];
+    const products = [
+      "Gaming Mouse RGB Pro",
+      "Mechanical Keyboard",
+      "Gaming Headset",
+      "Graphics Card RTX 4080",
+      'Gaming Monitor 27"',
+    ];
+
+    const transactions = [];
+    for (let i = 0; i < 50; i++) {
+      const orderId = `TXN-${String(i + 1).padStart(4, "0")}`;
+      const customer = customers[Math.floor(Math.random() * customers.length)];
+      const product = products[Math.floor(Math.random() * products.length)];
+      const total = Math.floor(Math.random() * 5000000) + 100000;
+      const status = statuses[Math.floor(Math.random() * statuses.length)];
+      const payment = payments[Math.floor(Math.random() * payments.length)];
+      const date = new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000);
+
+      transactions.push({
+        id: i + 1,
+        orderId,
+        customer,
+        product,
+        total,
+        payment,
+        status,
+        date: date.toLocaleDateString(),
+        dateRaw: date,
+      });
     }
 
-    init() {
-        this.setupEventListeners();
-        this.renderTransactions();
-        this.renderPagination();
-    }
+    return transactions;
+  }
 
-    generateMockTransactions() {
-        const statuses = ["pending", "processing", "completed", "cancelled", "refunded"];
-        const payments = ["credit-card", "bank-transfer", "e-wallet", "cod"];
-        const customers = [
-            "John Doe",
-            "Jane Smith",
-            "Mike Johnson",
-            "Sarah Wilson",
-            "David Brown",
-        ];
-        const products = [
-            "Gaming Mouse RGB Pro",
-            "Mechanical Keyboard",
-            "Gaming Headset",
-            "Graphics Card RTX 4080",
-            'Gaming Monitor 27"',
-        ];
+  setupEventListeners() {
+    const searchInput = document.getElementById("transactionSearch");
+    searchInput?.addEventListener("input", () => this.filterTransactions());
 
-        const transactions = [];
-        for (let i = 0; i < 50; i++) {
-            const orderId = `TXN-${String(i + 1).padStart(4, "0")}`;
-            const customer = customers[Math.floor(Math.random() * customers.length)];
-            const product = products[Math.floor(Math.random() * products.length)];
-            const total = Math.floor(Math.random() * 5000000) + 100000;
-            const status = statuses[Math.floor(Math.random() * statuses.length)];
-            const payment = payments[Math.floor(Math.random() * payments.length)];
-            const date = new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000);
+    const statusFilter = document.getElementById("transactionStatus");
+    const paymentFilter = document.getElementById("paymentFilter");
+    const dateFilter = document.getElementById("transactionDate");
 
-            transactions.push({
-                id: i + 1,
-                orderId,
-                customer,
-                product,
-                total,
-                payment,
-                status,
-                date: date.toLocaleDateString(),
-                dateRaw: date,
-            });
-        }
+    statusFilter?.addEventListener("change", () => this.filterTransactions());
+    paymentFilter?.addEventListener("change", () => this.filterTransactions());
+    dateFilter?.addEventListener("change", () => this.filterTransactions());
 
-        return transactions;
-    }
+    const detailModal = document.getElementById("transactionModal");
+    const detailCloseBtn = document.getElementById("closeModalTransactions");
+    const detailCancelBtn = document.getElementById("cancelBtnTransactions");
 
-    setupEventListeners() {
-        const searchInput = document.getElementById("transactionSearch");
-        searchInput?.addEventListener("input", () => this.filterTransactions());
+    detailCloseBtn?.addEventListener("click", () => this.closeDetailModal());
+    detailCancelBtn?.addEventListener("click", () => this.closeDetailModal());
 
-        const statusFilter = document.getElementById("transactionStatus");
-        const paymentFilter = document.getElementById("paymentFilter");
-        const dateFilter = document.getElementById("transactionDate");
+    const statusModal = document.getElementById("statusModal");
+    const statusCloseBtn = document.getElementById("closeStatusModal");
+    const statusCancelBtn = document.getElementById("cancelStatusBtn");
+    const statusForm = document.getElementById("statusForm");
 
-        statusFilter?.addEventListener("change", () => this.filterTransactions());
-        paymentFilter?.addEventListener("change", () => this.filterTransactions());
-        dateFilter?.addEventListener("change", () => this.filterTransactions());
+    statusCloseBtn?.addEventListener("click", () => this.closeStatusModal());
+    statusCancelBtn?.addEventListener("click", () => this.closeStatusModal());
+    statusForm?.addEventListener("submit", (e) => this.handleStatusUpdate(e));
 
-        const detailModal = document.getElementById("transactionModal");
-        const detailCloseBtn = document.getElementById("closeModalTransactions");
-        const detailCancelBtn = document.getElementById("cancelBtnTransactions");
+    const updateStatusBtn = document.getElementById("updateStatusBtn");
+    updateStatusBtn?.addEventListener("click", () => this.openStatusModal());
 
-        detailCloseBtn?.addEventListener("click", () => this.closeDetailModal());
-        detailCancelBtn?.addEventListener("click", () => this.closeDetailModal());
+    const printInvoiceBtn = document.getElementById("printInvoiceBtn");
+    printInvoiceBtn?.addEventListener("click", () => this.printInvoice());
+  }
 
-        const statusModal = document.getElementById("statusModal");
-        const statusCloseBtn = document.getElementById("closeStatusModal");
-        const statusCancelBtn = document.getElementById("cancelStatusBtn");
-        const statusForm = document.getElementById("statusForm");
+  filterTransactions() {
+    const searchTerm = document.getElementById("transactionSearch")?.value.toLowerCase() || "";
+    const statusFilter = document.getElementById("transactionStatus")?.value || "";
+    const paymentFilter = document.getElementById("paymentFilter")?.value || "";
+    const dateFilter = document.getElementById("transactionDate")?.value || "";
 
-        statusCloseBtn?.addEventListener("click", () => this.closeStatusModal());
-        statusCancelBtn?.addEventListener("click", () => this.closeStatusModal());
-        statusForm?.addEventListener("submit", (e) => this.handleStatusUpdate(e));
+    this.filteredTransactions = this.transactions.filter((transaction) => {
+      const matchesSearch = transaction.orderId.toLowerCase().includes(searchTerm) ||
+        transaction.customer.toLowerCase().includes(searchTerm) ||
+        transaction.product.toLowerCase().includes(searchTerm);
+      const matchesStatus = !statusFilter || transaction.status === statusFilter;
+      const matchesPayment = !paymentFilter || transaction.payment === paymentFilter;
+      const matchesDate = !dateFilter || transaction.dateRaw.toISOString().split("T")[0] === dateFilter;
 
-        const updateStatusBtn = document.getElementById("updateStatusBtn");
-        updateStatusBtn?.addEventListener("click", () => this.openStatusModal());
+      return matchesSearch && matchesStatus && matchesPayment && matchesDate;
+    });
 
-        const printInvoiceBtn = document.getElementById("printInvoiceBtn");
-        printInvoiceBtn?.addEventListener("click", () => this.printInvoice());
-    }
+    this.currentPage = 1;
+    this.renderTransactions();
+    this.renderPagination();
+  }
 
-    filterTransactions() {
-        const searchTerm = document.getElementById("transactionSearch")?.value.toLowerCase() || "";
-        const statusFilter = document.getElementById("transactionStatus")?.value || "";
-        const paymentFilter = document.getElementById("paymentFilter")?.value || "";
-        const dateFilter = document.getElementById("transactionDate")?.value || "";
+  renderTransactions() {
+    const tbody = document.getElementById("transactionsTableBody");
+    if (!tbody) return;
 
-        this.filteredTransactions = this.transactions.filter((transaction) => {
-            const matchesSearch = transaction.orderId.toLowerCase().includes(searchTerm) ||
-                transaction.customer.toLowerCase().includes(searchTerm) ||
-                transaction.product.toLowerCase().includes(searchTerm);
-            const matchesStatus = !statusFilter || transaction.status === statusFilter;
-            const matchesPayment = !paymentFilter || transaction.payment === paymentFilter;
-            const matchesDate = !dateFilter || transaction.dateRaw.toISOString().split("T")[0] === dateFilter;
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    const transactionsToShow = this.filteredTransactions.slice(startIndex, endIndex);
 
-            return matchesSearch && matchesStatus && matchesPayment && matchesDate;
-        });
-
-        this.currentPage = 1;
-        this.renderTransactions();
-        this.renderPagination();
-    }
-
-    renderTransactions() {
-        const tbody = document.getElementById("transactionsTableBody");
-        if (!tbody) return;
-
-        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-        const endIndex = startIndex + this.itemsPerPage;
-        const transactionsToShow = this.filteredTransactions.slice(startIndex, endIndex);
-
-        tbody.innerHTML = transactionsToShow
-            .map((transaction) => `
+    tbody.innerHTML = transactionsToShow
+      .map((transaction) => `
                 <tr>
                     <td>${transaction.orderId}</td>
                     <td>${transaction.customer}</td>
@@ -1738,62 +1908,62 @@ class TransactionsManager {
                     </td>
                 </tr>
             `)
-            .join("");
+      .join("");
+  }
+
+  renderPagination() {
+    const pagination = document.getElementById("transactionsPagination");
+    if (!pagination) return;
+
+    const totalPages = Math.ceil(this.filteredTransactions.length / this.itemsPerPage);
+
+    if (totalPages <= 1) {
+      pagination.innerHTML = "";
+      return;
     }
 
-    renderPagination() {
-        const pagination = document.getElementById("transactionsPagination");
-        if (!pagination) return;
-
-        const totalPages = Math.ceil(this.filteredTransactions.length / this.itemsPerPage);
-
-        if (totalPages <= 1) {
-            pagination.innerHTML = "";
-            return;
-        }
-
-        let paginationHTML = `
+    let paginationHTML = `
             <button class="pagination-btn" ${this.currentPage === 1 ? "disabled" : ""} 
                     onclick="transactionsManager.goToPage(${this.currentPage - 1})">
                 <i class="fas fa-chevron-left"></i>
             </button>
         `;
 
-        for (let i = 1; i <= totalPages; i++) {
-            if (i === 1 || i === totalPages || (i >= this.currentPage - 2 && i <= this.currentPage + 2)) {
-                paginationHTML += `
+    for (let i = 1; i <= totalPages; i++) {
+      if (i === 1 || i === totalPages || (i >= this.currentPage - 2 && i <= this.currentPage + 2)) {
+        paginationHTML += `
                     <button class="pagination-btn ${i === this.currentPage ? "active" : ""}" 
                             onclick="transactionsManager.goToPage(${i})">
                         ${i}
                     </button>
                 `;
-            } else if (i === this.currentPage - 3 || i === this.currentPage + 3) {
-                paginationHTML += '<span class="pagination-ellipsis">...</span>';
-            }
-        }
+      } else if (i === this.currentPage - 3 || i === this.currentPage + 3) {
+        paginationHTML += '<span class="pagination-ellipsis">...</span>';
+      }
+    }
 
-        paginationHTML += `
+    paginationHTML += `
             <button class="pagination-btn" ${this.currentPage === totalPages ? "disabled" : ""} 
                     onclick="transactionsManager.goToPage(${this.currentPage + 1})">
                 <i class="fas fa-chevron-right"></i>
             </button>
         `;
 
-        pagination.innerHTML = paginationHTML;
-    }
+    pagination.innerHTML = paginationHTML;
+  }
 
-    goToPage(page) {
-        this.currentPage = page;
-        this.renderTransactions();
-        this.renderPagination();
-    }
+  goToPage(page) {
+    this.currentPage = page;
+    this.renderTransactions();
+    this.renderPagination();
+  }
 
-    viewDetails(id) {
-        const transaction = this.transactions.find((t) => t.id === id);
-        if (transaction) {
-            this.currentTransactionId = id;
-            const detailContainer = document.getElementById("transactionDetail");
-            detailContainer.innerHTML = `
+  viewDetails(id) {
+    const transaction = this.transactions.find((t) => t.id === id);
+    if (transaction) {
+      this.currentTransactionId = id;
+      const detailContainer = document.getElementById("transactionDetail");
+      detailContainer.innerHTML = `
                 <div class="transaction-detail-row">
                     <span class="detail-label">Order ID:</span>
                     <span class="detail-value">${transaction.orderId}</span>
@@ -1823,48 +1993,48 @@ class TransactionsManager {
                     <span class="detail-value">${transaction.date}</span>
                 </div>
             `;
-            const modal = document.getElementById("transactionModal");
-            modal.classList.add("active");
-        }
+      const modal = document.getElementById("transactionModal");
+      modal.classList.add("active");
     }
+  }
 
-    closeDetailModal() {
-        const modal = document.getElementById("transactionModal");
-        modal.classList.remove("active");
+  closeDetailModal() {
+    const modal = document.getElementById("transactionModal");
+    modal.classList.remove("active");
+  }
+
+  openStatusModal() {
+    const modal = document.getElementById("statusModal");
+    modal.classList.add("active");
+  }
+
+  closeStatusModal() {
+    const modal = document.getElementById("statusModal");
+    modal.classList.remove("active");
+  }
+
+  handleStatusUpdate(e) {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const newStatus = formData.get("status");
+    const note = formData.get("note");
+
+    const transactionIndex = this.transactions.findIndex((t) => t.id === this.currentTransactionId);
+    if (transactionIndex >= 0) {
+      this.transactions[transactionIndex].status = newStatus;
+      this.filterTransactions();
+      this.closeStatusModal();
+      this.closeDetailModal();
+      this.showNotification(`Status transaksi diperbarui menjadi ${newStatus}!`, "success");
     }
+  }
 
-    openStatusModal() {
-        const modal = document.getElementById("statusModal");
-        modal.classList.add("active");
-    }
-
-    closeStatusModal() {
-        const modal = document.getElementById("statusModal");
-        modal.classList.remove("active");
-    }
-
-    handleStatusUpdate(e) {
-        e.preventDefault();
-
-        const formData = new FormData(e.target);
-        const newStatus = formData.get("status");
-        const note = formData.get("note");
-
-        const transactionIndex = this.transactions.findIndex((t) => t.id === this.currentTransactionId);
-        if (transactionIndex >= 0) {
-            this.transactions[transactionIndex].status = newStatus;
-            this.filterTransactions();
-            this.closeStatusModal();
-            this.closeDetailModal();
-            this.showNotification(`Status transaksi diperbarui menjadi ${newStatus}!`, "success");
-        }
-    }
-
-    printInvoice() {
-        const transaction = this.transactions.find((t) => t.id === this.currentTransactionId);
-        if (transaction) {
-            const invoiceWindow = window.open("", "_blank");
-            invoiceWindow.document.write(`
+  printInvoice() {
+    const transaction = this.transactions.find((t) => t.id === this.currentTransactionId);
+    if (transaction) {
+      const invoiceWindow = window.open("", "_blank");
+      invoiceWindow.document.write(`
                 <html>
                     <head>
                         <title>Invoice ${transaction.orderId}</title>
@@ -1921,26 +2091,27 @@ class TransactionsManager {
                     </body>
                 </html>
             `);
-            invoiceWindow.document.close();
-        }
+      invoiceWindow.document.close();
     }
+  }
 
-    showNotification(message, type = "info") {
-        const notification = document.createElement("div");
-        notification.className = `notification notification-${type}`;
-        notification.innerHTML = `
+  showNotification(message, type = "info") {
+    const notification = document.createElement("div");
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
             <i class="fas fa-${type === "success" ? "check" : "info"}-circle"></i>
             <span>${message}</span>
         `;
-        document.body.appendChild(notification);
-        setTimeout(() => notification.classList.add("show"), 100);
-        setTimeout(() => {
-            notification.classList.remove("show");
-            setTimeout(() => notification.remove(), 300);
-        }, 3000);
-    }
+    document.body.appendChild(notification);
+    setTimeout(() => notification.classList.add("show"), 100);
+    setTimeout(() => {
+      notification.classList.remove("show");
+      setTimeout(() => notification.remove(), 300);
+    }, 3000);
+  }
 }
 
+// Initialize Dashboard
 // Initialize Dashboard
 const dashboard = new AdminDashboard();
 
@@ -1949,3 +2120,29 @@ window.articlesManager = dashboard.sectionManagers.articles || new ArticlesManag
 window.productsManager = dashboard.sectionManagers.products || new ProductsManager();
 window.usersManager = dashboard.sectionManagers.users || new UsersManager();
 window.transactionsManager = dashboard.sectionManagers.transactions || new TransactionsManager();
+
+// Ensure managers are updated when sections are initialized
+dashboard.initializeSection = function (section) {
+  if (!this.sectionManagers[section]) {
+    switch (section) {
+      case "articles":
+        this.sectionManagers.articles = new ArticlesManager();
+        window.articlesManager = this.sectionManagers.articles;
+        break;
+      case "products":
+        this.sectionManagers.products = new ProductsManager();
+        window.productsManager = this.sectionManagers.products;
+        break;
+      case "users":
+        this.sectionManagers.users = new UsersManager();
+        window.usersManager = this.sectionManagers.users;
+        break;
+      case "transactions":
+        this.sectionManagers.transactions = new TransactionsManager();
+        window.transactionsManager = this.sectionManagers.transactions;
+        break;
+      default:
+        console.log(`No manager for section: ${section}`);
+    }
+  }
+};

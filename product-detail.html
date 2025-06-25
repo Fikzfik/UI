@@ -1,63 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaming Mouse Pro X - Product Detail - GamerTech</title>
-    <meta name="description" content="High-precision gaming mouse with customizable RGB lighting and programmable buttons">
-    
+    <meta name="description"
+        content="High-precision gaming mouse with customizable RGB lighting and programmable buttons">
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
     <style>
         /* Product Detail Specific Styles */
-        .main-content { padding-top: 70px; }
-        
+        .main-content {
+            padding-top: 70px;
+        }
+
         .breadcrumb {
             background: var(--bg-secondary);
             padding: var(--spacing-md) 0;
             border-bottom: 1px solid var(--border-primary);
         }
-        
+
         .breadcrumb-nav {
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
             font-size: 0.9rem;
         }
-        
+
         .breadcrumb-nav a {
             color: var(--text-secondary);
             text-decoration: none;
             transition: color var(--transition-fast);
         }
-        
-        .breadcrumb-nav a:hover { color: var(--primary-color); }
-        .breadcrumb-nav i { color: var(--text-muted); font-size: 0.8rem; }
-        .breadcrumb-nav span { color: var(--text-primary); }
-        
+
+        .breadcrumb-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .breadcrumb-nav i {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .breadcrumb-nav span {
+            color: var(--text-primary);
+        }
+
         .product-detail {
             padding: var(--spacing-2xl) 0;
         }
-        
+
         .product-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: var(--spacing-2xl);
             margin-bottom: var(--spacing-2xl);
         }
-        
+
         .product-gallery {
             position: sticky;
             top: 90px;
             height: fit-content;
         }
-        
+
         .main-image {
             width: 100%;
             height: 500px;
@@ -66,19 +81,19 @@
             margin-bottom: var(--spacing-lg);
             border: 1px solid var(--border-primary);
         }
-        
+
         .main-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
+
         .thumbnail-gallery {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: var(--spacing-sm);
         }
-        
+
         .thumbnail {
             height: 100px;
             border-radius: var(--radius-md);
@@ -87,65 +102,65 @@
             cursor: pointer;
             transition: all var(--transition-fast);
         }
-        
+
         .thumbnail.active,
         .thumbnail:hover {
             border-color: var(--primary-color);
         }
-        
+
         .thumbnail img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
+
         .product-info h1 {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: var(--spacing-md);
             color: var(--text-primary);
         }
-        
+
         .product-rating {
             display: flex;
             align-items: center;
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-lg);
         }
-        
+
         .rating-stars {
             display: flex;
             gap: 2px;
         }
-        
+
         .rating-stars i {
             color: var(--star-color);
             font-size: 1.1rem;
         }
-        
+
         .rating-text {
             color: var(--text-secondary);
         }
-        
+
         .product-price {
             display: flex;
             align-items: center;
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-lg);
         }
-        
+
         .current-price {
             font-size: 2rem;
             font-weight: 700;
             color: var(--primary-color);
         }
-        
+
         .original-price {
             font-size: 1.2rem;
             color: var(--text-muted);
             text-decoration: line-through;
         }
-        
+
         .discount-badge {
             background: var(--error-color);
             color: white;
@@ -154,34 +169,34 @@
             font-size: 0.9rem;
             font-weight: 600;
         }
-        
+
         .product-description {
             color: var(--text-secondary);
             line-height: 1.6;
             margin-bottom: var(--spacing-xl);
         }
-        
+
         .product-options {
             margin-bottom: var(--spacing-xl);
         }
-        
+
         .option-group {
             margin-bottom: var(--spacing-lg);
         }
-        
+
         .option-label {
             display: block;
             font-weight: 600;
             margin-bottom: var(--spacing-sm);
             color: var(--text-primary);
         }
-        
+
         .option-values {
             display: flex;
             gap: var(--spacing-sm);
             flex-wrap: wrap;
         }
-        
+
         .option-value {
             padding: var(--spacing-sm) var(--spacing-md);
             border: 1px solid var(--border-primary);
@@ -191,26 +206,26 @@
             cursor: pointer;
             transition: all var(--transition-fast);
         }
-        
+
         .option-value:hover,
         .option-value.active {
             background: var(--primary-color);
             color: var(--text-primary);
             border-color: var(--primary-color);
         }
-        
+
         .quantity-selector {
             display: flex;
             align-items: center;
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-xl);
         }
-        
+
         .quantity-label {
             font-weight: 600;
             color: var(--text-primary);
         }
-        
+
         .quantity-controls {
             display: flex;
             align-items: center;
@@ -218,7 +233,7 @@
             border-radius: var(--radius-md);
             overflow: hidden;
         }
-        
+
         .quantity-btn {
             width: 40px;
             height: 40px;
@@ -228,12 +243,12 @@
             cursor: pointer;
             transition: all var(--transition-fast);
         }
-        
+
         .quantity-btn:hover {
             background: var(--primary-color);
             color: var(--text-primary);
         }
-        
+
         .quantity-input {
             width: 60px;
             height: 40px;
@@ -242,13 +257,13 @@
             background: var(--bg-card);
             color: var(--text-primary);
         }
-        
+
         .product-actions {
             display: flex;
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-xl);
         }
-        
+
         .btn-add-cart {
             flex: 1;
             background: var(--primary-color);
@@ -265,12 +280,12 @@
             justify-content: center;
             gap: var(--spacing-sm);
         }
-        
+
         .btn-add-cart:hover {
             background: var(--primary-color-dark);
             transform: translateY(-2px);
         }
-        
+
         .btn-wishlist,
         .btn-compare {
             width: 50px;
@@ -285,43 +300,43 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .btn-wishlist:hover,
         .btn-compare:hover {
             background: var(--primary-color);
             color: var(--text-primary);
             border-color: var(--primary-color);
         }
-        
+
         .product-meta {
             border-top: 1px solid var(--border-primary);
             padding-top: var(--spacing-lg);
         }
-        
+
         .meta-item {
             display: flex;
             justify-content: space-between;
             margin-bottom: var(--spacing-sm);
         }
-        
+
         .meta-label {
             color: var(--text-muted);
         }
-        
+
         .meta-value {
             color: var(--text-primary);
         }
-        
+
         .product-tabs {
             margin-top: var(--spacing-2xl);
         }
-        
+
         .tab-nav {
             display: flex;
             border-bottom: 1px solid var(--border-primary);
             margin-bottom: var(--spacing-xl);
         }
-        
+
         .tab-btn {
             padding: var(--spacing-md) var(--spacing-lg);
             background: none;
@@ -331,113 +346,113 @@
             transition: all var(--transition-fast);
             border-bottom: 2px solid transparent;
         }
-        
+
         .tab-btn.active,
         .tab-btn:hover {
             color: var(--primary-color);
             border-bottom-color: var(--primary-color);
         }
-        
+
         .tab-content {
             display: none;
         }
-        
+
         .tab-content.active {
             display: block;
         }
-        
+
         .specifications-table {
             width: 100%;
             border-collapse: collapse;
         }
-        
+
         .specifications-table th,
         .specifications-table td {
             padding: var(--spacing-md);
             text-align: left;
             border-bottom: 1px solid var(--border-primary);
         }
-        
+
         .specifications-table th {
             background: var(--bg-tertiary);
             color: var(--text-primary);
             font-weight: 600;
         }
-        
+
         .specifications-table td {
             color: var(--text-secondary);
         }
-        
+
         .review-item {
             padding: var(--spacing-lg);
             border: 1px solid var(--border-primary);
             border-radius: var(--radius-lg);
             margin-bottom: var(--spacing-lg);
         }
-        
+
         .review-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: var(--spacing-md);
         }
-        
+
         .reviewer-info {
             display: flex;
             align-items: center;
             gap: var(--spacing-md);
         }
-        
+
         .reviewer-avatar {
             width: 50px;
             height: 50px;
             border-radius: var(--radius-full);
             object-fit: cover;
         }
-        
+
         .reviewer-name {
             font-weight: 600;
             color: var(--text-primary);
         }
-        
+
         .review-date {
             color: var(--text-muted);
             font-size: 0.9rem;
         }
-        
+
         .review-content {
             color: var(--text-secondary);
             line-height: 1.6;
         }
-        
+
         .related-products {
             margin-top: var(--spacing-2xl);
         }
-        
+
         .related-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: var(--spacing-lg);
         }
-        
+
         @media (max-width: 768px) {
             .product-layout {
                 grid-template-columns: 1fr;
                 gap: var(--spacing-lg);
             }
-            
+
             .product-gallery {
                 position: static;
             }
-            
+
             .product-info h1 {
                 font-size: 2rem;
             }
-            
+
             .product-actions {
                 flex-direction: column;
             }
-            
+
             .btn-wishlist,
             .btn-compare {
                 width: 100%;
@@ -446,6 +461,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
@@ -455,7 +471,7 @@
                     <span class="gamer">Gamer</span><span class="tech">Tech</span>
                 </a>
             </div>
-            
+
             <div class="nav-menu" id="nav-menu">
                 <ul class="nav-list">
                     <li class="nav-item">
@@ -476,12 +492,10 @@
                             <span>Blog</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="about.html" class="nav-link">
-                            <i class="fas fa-info-circle"></i>
-                            <span>About</span>
-                        </a>
-                    </li>
+                    <a href="history.html" class="nav-link">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                    </a>
                 </ul>
             </div>
 
@@ -489,20 +503,20 @@
                 <button class="search-btn" id="search-btn">
                     <i class="fas fa-search"></i>
                 </button>
-                
+
                 <div class="cart-container">
                     <button class="cart-btn" id="cart-btn" onclick="window.location.href='cart.html'">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count" id="cart-count">0</span>
                     </button>
                 </div>
-                
+
                 <div class="user-menu">
                     <button class="user-btn" id="user-btn">
                         <i class="fas fa-user"></i>
                     </button>
                 </div>
-                
+
                 <button class="mobile-toggle" id="mobile-toggle">
                     <span></span>
                     <span></span>
@@ -536,7 +550,8 @@
                     <!-- Product Gallery -->
                     <div class="product-gallery">
                         <div class="main-image" id="main-image">
-                            <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46" alt="Gaming Mouse Pro X">
+                            <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46"
+                                alt="Gaming Mouse Pro X">
                         </div>
                         <div class="thumbnail-gallery" id="thumbnail-gallery">
                             <div class="thumbnail active">
@@ -557,7 +572,7 @@
                     <!-- Product Info -->
                     <div class="product-info">
                         <h1 id="product-title">Gaming Mouse Pro X</h1>
-                        
+
                         <div class="product-rating">
                             <div class="rating-stars" id="product-rating">
                                 <i class="fas fa-star"></i>
@@ -576,7 +591,9 @@
                         </div>
 
                         <div class="product-description" id="product-description">
-                            <p>Experience precision gaming with the Gaming Mouse Pro X. Featuring advanced optical sensor technology, customizable RGB lighting, and programmable buttons, this mouse is designed for competitive gamers who demand the best performance.</p>
+                            <p>Experience precision gaming with the Gaming Mouse Pro X. Featuring advanced optical
+                                sensor technology, customizable RGB lighting, and programmable buttons, this mouse is
+                                designed for competitive gamers who demand the best performance.</p>
                         </div>
 
                         <!-- Product Options -->
@@ -589,7 +606,7 @@
                                     <div class="option-value" data-value="red">Red</div>
                                 </div>
                             </div>
-                            
+
                             <div class="option-group">
                                 <label class="option-label">DPI:</label>
                                 <div class="option-values" id="dpi-options">
@@ -662,13 +679,18 @@
                     <!-- Description Tab -->
                     <div class="tab-content active" id="description-tab">
                         <h3>Product Description</h3>
-                        <p>The Gaming Mouse Pro X represents the pinnacle of gaming precision and performance. Engineered for competitive gamers, this mouse features an advanced optical sensor with up to 25,600 DPI, ensuring pixel-perfect accuracy in every movement.</p>
-                        
+                        <p>The Gaming Mouse Pro X represents the pinnacle of gaming precision and performance.
+                            Engineered for competitive gamers, this mouse features an advanced optical sensor with up to
+                            25,600 DPI, ensuring pixel-perfect accuracy in every movement.</p>
+
                         <h4>Key Features:</h4>
                         <ul>
-                            <li><strong>Advanced Optical Sensor:</strong> Up to 25,600 DPI with zero smoothing, filtering, or acceleration</li>
-                            <li><strong>Customizable RGB Lighting:</strong> 16.8 million colors with multiple lighting effects</li>
-                            <li><strong>Programmable Buttons:</strong> 11 programmable buttons for custom macros and commands</li>
+                            <li><strong>Advanced Optical Sensor:</strong> Up to 25,600 DPI with zero smoothing,
+                                filtering, or acceleration</li>
+                            <li><strong>Customizable RGB Lighting:</strong> 16.8 million colors with multiple lighting
+                                effects</li>
+                            <li><strong>Programmable Buttons:</strong> 11 programmable buttons for custom macros and
+                                commands</li>
                             <li><strong>Ergonomic Design:</strong> Comfortable grip for extended gaming sessions</li>
                             <li><strong>Durable Construction:</strong> Built to withstand over 50 million clicks</li>
                             <li><strong>Gaming Software:</strong> Advanced customization software included</li>
@@ -744,9 +766,11 @@
 
                     <!-- Reviews Tab -->
                     <div class="tab-content" id="reviews-tab">
-                        <div class="reviews-summary" style="margin-bottom: var(--spacing-xl); padding: var(--spacing-lg); background: var(--bg-tertiary); border-radius: var(--radius-lg);">
+                        <div class="reviews-summary"
+                            style="margin-bottom: var(--spacing-xl); padding: var(--spacing-lg); background: var(--bg-tertiary); border-radius: var(--radius-lg);">
                             <h3>Customer Reviews</h3>
-                            <div style="display: flex; align-items: center; gap: var(--spacing-lg); margin-bottom: var(--spacing-md);">
+                            <div
+                                style="display: flex; align-items: center; gap: var(--spacing-lg); margin-bottom: var(--spacing-md);">
                                 <div style="font-size: 2rem; font-weight: 700; color: var(--primary-color);">4.8</div>
                                 <div>
                                     <div class="rating-stars" style="margin-bottom: var(--spacing-xs);">
@@ -764,7 +788,8 @@
                         <div class="review-item">
                             <div class="review-header">
                                 <div class="reviewer-info">
-                                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde" alt="John D." class="reviewer-avatar">
+                                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde"
+                                        alt="John D." class="reviewer-avatar">
                                     <div>
                                         <div class="reviewer-name">John D.</div>
                                         <div class="rating-stars">
@@ -779,14 +804,17 @@
                                 <div class="review-date">December 10, 2024</div>
                             </div>
                             <div class="review-content">
-                                <p>Excellent gaming mouse! The precision is incredible and the RGB lighting looks amazing. I've been using it for competitive gaming and it's made a noticeable difference in my performance. Highly recommended!</p>
+                                <p>Excellent gaming mouse! The precision is incredible and the RGB lighting looks
+                                    amazing. I've been using it for competitive gaming and it's made a noticeable
+                                    difference in my performance. Highly recommended!</p>
                             </div>
                         </div>
 
                         <div class="review-item">
                             <div class="review-header">
                                 <div class="reviewer-info">
-                                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786" alt="Sarah M." class="reviewer-avatar">
+                                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786"
+                                        alt="Sarah M." class="reviewer-avatar">
                                     <div>
                                         <div class="reviewer-name">Sarah M.</div>
                                         <div class="rating-stars">
@@ -801,14 +829,17 @@
                                 <div class="review-date">December 8, 2024</div>
                             </div>
                             <div class="review-content">
-                                <p>Great mouse overall. The build quality is solid and it feels comfortable during long gaming sessions. The only minor issue is that the software could be more intuitive, but once you figure it out, it's very customizable.</p>
+                                <p>Great mouse overall. The build quality is solid and it feels comfortable during long
+                                    gaming sessions. The only minor issue is that the software could be more intuitive,
+                                    but once you figure it out, it's very customizable.</p>
                             </div>
                         </div>
 
                         <div class="review-item">
                             <div class="review-header">
                                 <div class="reviewer-info">
-                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Mike R." class="reviewer-avatar">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
+                                        alt="Mike R." class="reviewer-avatar">
                                     <div>
                                         <div class="reviewer-name">Mike R.</div>
                                         <div class="rating-stars">
@@ -823,7 +854,8 @@
                                 <div class="review-date">December 5, 2024</div>
                             </div>
                             <div class="review-content">
-                                <p>Perfect for FPS games! The sensor is incredibly accurate and responsive. The programmable buttons are a game-changer for MMOs too. Worth every penny!</p>
+                                <p>Perfect for FPS games! The sensor is incredibly accurate and responsive. The
+                                    programmable buttons are a game-changer for MMOs too. Worth every penny!</p>
                             </div>
                         </div>
                     </div>
@@ -834,7 +866,8 @@
                         <div style="margin-bottom: var(--spacing-lg);">
                             <h4>Shipping Options:</h4>
                             <ul>
-                                <li><strong>Standard Shipping (5-7 business days):</strong> Free on orders over $50, otherwise $5.99</li>
+                                <li><strong>Standard Shipping (5-7 business days):</strong> Free on orders over $50,
+                                    otherwise $5.99</li>
                                 <li><strong>Express Shipping (2-3 business days):</strong> $12.99</li>
                                 <li><strong>Overnight Shipping (1 business day):</strong> $24.99</li>
                             </ul>
@@ -852,7 +885,8 @@
                         </div>
 
                         <h3>Warranty</h3>
-                        <p>This product comes with a 2-year limited warranty covering manufacturing defects. Warranty does not cover damage from misuse, accidents, or normal wear and tear.</p>
+                        <p>This product comes with a 2-year limited warranty covering manufacturing defects. Warranty
+                            does not cover damage from misuse, accidents, or normal wear and tear.</p>
                     </div>
                 </div>
 
@@ -876,7 +910,8 @@
                         <a href="index.html" class="logo">
                             <span class="gamer">Gamer</span><span class="tech">Tech</span>
                         </a>
-                        <p>Premium gaming gear and PC components for enthusiasts who demand the best performance and quality.</p>
+                        <p>Premium gaming gear and PC components for enthusiasts who demand the best performance and
+                            quality.</p>
                         <div class="social-links">
                             <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                             <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
@@ -886,7 +921,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
@@ -897,7 +932,7 @@
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Categories</h3>
                     <ul class="footer-links">
@@ -908,7 +943,7 @@
                         <li><a href="catalog.html?category=accessories">Accessories</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Support</h3>
                     <ul class="footer-links">
@@ -919,7 +954,7 @@
                         <li><a href="faq.html">FAQ</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Contact Info</h3>
                     <div class="contact-info">
@@ -942,7 +977,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
                     <p>&copy; 2024 GamerTech. All rights reserved.</p>
@@ -965,7 +1000,7 @@
     <script src="js/main.js"></script>
     <script>
         // Product Detail JavaScript
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Sample related products data
             const relatedProducts = [
                 {
@@ -1012,11 +1047,11 @@
                 tabButtons.forEach(button => {
                     button.addEventListener('click', () => {
                         const tabId = button.dataset.tab;
-                        
+
                         // Remove active class from all tabs
                         tabButtons.forEach(btn => btn.classList.remove('active'));
                         tabContents.forEach(content => content.classList.remove('active'));
-                        
+
                         // Add active class to clicked tab
                         button.classList.add('active');
                         document.getElementById(tabId + '-tab').classList.add('active');
@@ -1031,10 +1066,10 @@
                     thumbnail.addEventListener('click', () => {
                         // Remove active class from all thumbnails
                         thumbnails.forEach(thumb => thumb.classList.remove('active'));
-                        
+
                         // Add active class to clicked thumbnail
                         thumbnail.classList.add('active');
-                        
+
                         // Update main image
                         const newImageSrc = thumbnail.querySelector('img').src;
                         mainImage.src = newImageSrc;
@@ -1048,7 +1083,7 @@
                         // Remove active class from siblings
                         const siblings = option.parentElement.querySelectorAll('.option-value');
                         siblings.forEach(sibling => sibling.classList.remove('active'));
-                        
+
                         // Add active class to clicked option
                         option.classList.add('active');
                     });
@@ -1080,7 +1115,7 @@
                     const quantity = parseInt(quantityInput.value);
                     const selectedColor = document.querySelector('#color-options .option-value.active').dataset.value;
                     const selectedDPI = document.querySelector('#dpi-options .option-value.active').dataset.value;
-                    
+
                     addToCart(1, quantity, { color: selectedColor, dpi: selectedDPI });
                 });
 
@@ -1102,9 +1137,9 @@
                 if (!relatedGrid) return;
 
                 relatedGrid.innerHTML = relatedProducts.map(product => {
-                    const discount = product.originalPrice ? 
+                    const discount = product.originalPrice ?
                         Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) : 0;
-                    
+
                     return `
                         <div class="product-card" onclick="window.location.href='product-detail.html?id=${product.id}'" style="cursor: pointer; background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: var(--radius-lg); overflow: hidden; transition: all var(--transition-normal);">
                             <div style="height: 200px; overflow: hidden;">
@@ -1149,7 +1184,7 @@
 
             function addToCart(productId, quantity = 1, options = {}) {
                 let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-                
+
                 const product = {
                     id: productId,
                     name: "Gaming Mouse Pro X",
@@ -1159,8 +1194,8 @@
                     options: options
                 };
 
-                const existingItem = cart.find(item => 
-                    item.id === productId && 
+                const existingItem = cart.find(item =>
+                    item.id === productId &&
                     JSON.stringify(item.options) === JSON.stringify(options)
                 );
 
@@ -1178,7 +1213,7 @@
             function toggleWishlist(productId) {
                 let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
                 const index = wishlist.indexOf(productId);
-                
+
                 if (index > -1) {
                     wishlist.splice(index, 1);
                     showNotification('Removed from wishlist', 'info');
@@ -1186,18 +1221,18 @@
                     wishlist.push(productId);
                     showNotification('Added to wishlist!', 'success');
                 }
-                
+
                 localStorage.setItem('wishlist', JSON.stringify(wishlist));
             }
 
             function addToCompare(productId) {
                 let compare = JSON.parse(localStorage.getItem('compare') || '[]');
-                
+
                 if (compare.length >= 4) {
                     showNotification('You can only compare up to 4 products', 'warning');
                     return;
                 }
-                
+
                 if (!compare.includes(productId)) {
                     compare.push(productId);
                     localStorage.setItem('compare', JSON.stringify(compare));
@@ -1210,7 +1245,7 @@
             function updateCartCount() {
                 const cart = JSON.parse(localStorage.getItem('cart') || '[]');
                 const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-                
+
                 const cartCountElement = document.getElementById('cart-count');
                 if (cartCountElement) {
                     cartCountElement.textContent = totalItems;
@@ -1312,4 +1347,5 @@
         });
     </script>
 </body>
+
 </html>
